@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS tournaments CASCADE;
+
+CREATE TABLE tournaments (
+  id SERIAL PRIMARY KEY NOT NULL,
+  organizer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  start_date DATE NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  description VARCHAR,
+  private BOOLEAN NOT NULL
+);
