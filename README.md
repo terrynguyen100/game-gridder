@@ -5,3 +5,4 @@ A tournament bracket creator app.
 * React
 * Material UI
 * Axios
+* SASS
