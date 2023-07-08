@@ -6,5 +6,5 @@ INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins)
 INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('EmilyDavis', 'emilydavis@example.com', 'password91011', '1991-12-12', 'https://example.com/profile6.jpg', 11);
 INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('DanielWilson', 'danielwilson@example.com', 'password121314', '1993-03-25', 'https://example.com/profile7.jpg', 14);
 INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('OliviaAnderson', 'oliviaanderson@example.com', 'password151617', '1989-06-08', 'https://example.com/profile8.jpg', 7);
-INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('MatthewMartinez', 'matthewmartinez@example.com', 'password181920', '1996-08-17', 'https://example.com/profile9.jpg', 10);
-INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('SophiaThompson', 'sophiathompson@example.com', 'password212223', '1997-04-30', 'https://example.com/profile10.jpg', 13);
+-- INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('MatthewMartinez', 'matthewmartinez@example.com', 'password181920', '1996-08-17', 'https://example.com/profile9.jpg', 10);
+-- INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('SophiaThompson', 'sophiathompson@example.com', 'password212223', '1997-04-30', 'https://example.com/profile10.jpg', 13);
