@@ -1,0 +1,10 @@
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 1, 'John Doe', '10-8');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (2, 1, 'Jane Smith', '6-4');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (3, 2, 'David Johnson', '3-6');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (4, 2, 'Sarah Williams', '2-6');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 3, 'Michael Brown', '6-2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (6, 3, 'Emily Davis', '6-1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (7, 4, 'Daniel Wilson', '7-6');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (8, 4, 'Olivia Anderson', '6-4');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 5, 'Matthew Martinez', '2-6');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (10, 5, 'Sophia Thompson', '6-1');

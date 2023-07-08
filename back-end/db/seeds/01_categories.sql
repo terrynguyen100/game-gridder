@@ -1,0 +1,10 @@
+INSERT INTO categories (name, image_url) VALUES ('Card Game', 'https://example.com/electronics.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Chess', 'https://example.com/clothing.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Video Game', 'https://example.com/home_decor.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Video Game', 'https://example.com/books.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Sports', 'https://example.com/sports_equipment.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Spots', 'https://example.com/beauty.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Chess', 'https://example.com/toys_games.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Card Game', 'https://example.com/automotive.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Chess', 'https://example.com/health_fitness.jpg');
+INSERT INTO categories (name, image_url) VALUES ('Video Game', 'https://example.com/food_beverages.jpg');
