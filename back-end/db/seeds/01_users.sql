@@ -1,0 +1,10 @@
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('JohnDoe', 'johndoe@example.com', 'password123', '1990-05-15', 'https://example.com/profile1.jpg', 12);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('JaneSmith', 'janesmith@example.com', 'password456', '1988-09-20', 'https://example.com/profile2.jpg', 8);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('DavidJohnson', 'davidjohnson@example.com', 'password789', '1995-02-10', 'https://example.com/profile3.jpg', 15);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('SarahWilliams', 'sarahwilliams@example.com', 'password1234', '1992-07-03', 'https://example.com/profile4.jpg', 6);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('MichaelBrown', 'michaelbrown@example.com', 'password5678', '1994-11-28', 'https://example.com/profile5.jpg', 9);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('EmilyDavis', 'emilydavis@example.com', 'password91011', '1991-12-12', 'https://example.com/profile6.jpg', 11);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('DanielWilson', 'danielwilson@example.com', 'password121314', '1993-03-25', 'https://example.com/profile7.jpg', 14);
+INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('OliviaAnderson', 'oliviaanderson@example.com', 'password151617', '1989-06-08', 'https://example.com/profile8.jpg', 7);
+-- INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('MatthewMartinez', 'matthewmartinez@example.com', 'password181920', '1996-08-17', 'https://example.com/profile9.jpg', 10);
+-- INSERT INTO users (user_name, email, password, date_of_birth, profile_img, wins) VALUES ('SophiaThompson', 'sophiathompson@example.com', 'password212223', '1997-04-30', 'https://example.com/profile10.jpg', 13);
