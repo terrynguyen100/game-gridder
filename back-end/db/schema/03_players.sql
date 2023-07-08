@@ -1,9 +1,0 @@
-DROP TABLE IF EXISTS players CASCADE;
-
-CREATE TABLE players (
-  id SERIAL PRIMARY KEY NOT NULL
-  user_id REFERENCES users(id) ON DELETE CASCADE
-  match_id REFERENCES matches(id) ON DELETE CASCADE
-  player_name VARCHAR(50)
-  score VARCHAR(50)
-);
