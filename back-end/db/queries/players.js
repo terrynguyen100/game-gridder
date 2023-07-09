@@ -4,7 +4,7 @@ const db = require('../connection');
 //Get all players associated with a match. Requires matchId => returns player rows.
 const getPlayersByMatchId = (matchId) => {
   const query = `SELECT * FROM players 
-    WHERE match_id = $1`;
+    WHERE match_id = $1;`;
 
   return db.query(query, [matchId])
     .then(data => data.rows)
@@ -13,7 +13,7 @@ const getPlayersByMatchId = (matchId) => {
 
 const getPlayerByUserId = (userId) => {
   const query = `SELECT * FROM players 
-    WHERE user_id = $1`;
+    WHERE user_id = $1;`;
 
   return db.query(query, [userId])
     .then(data => data.rows)
@@ -26,7 +26,7 @@ const getPlayerByUserId = (userId) => {
 const addplayer = (player) => {
   const query = `INSERT INTO 
   players (user_id, match_id, player_name, score)
-  VALUES ($1, $2, $3, $4)`;
+  VALUES ($1, $2, $3, $4);`;
 
   return db.query(query, [player.userId, player.matchId, player.playerName, player.score])
     .then(() => console.log("Player added"))
@@ -38,7 +38,7 @@ const addplayer = (player) => {
 // Update a player.
 // Requires a match object with any of the following values {user_id, match_id, player_name, score}.
 const updatePlayer = (player) => {
-  const query = `UPDATE matches 
+  const query = `UPDATE players 
     SET user_id = $2, match_id = $3, player_name = $4, score = $5
     WHERE id = $1 RETURNING *;`;
 
@@ -50,7 +50,7 @@ const updatePlayer = (player) => {
 //---------------------------------------------DELETE QUERIES---------------------------------------
 // Delete a player from an id. Requires an id.
 const deletePlayer = (playerId) => {
-  const query = `DELETE FROM players WHERE id = $1`;
+  const query = `DELETE FROM players WHERE id = $1;`;
 
   return db.query(query, [playerId])
     .then(() => console.log('player deleted'))
