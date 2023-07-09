@@ -59,10 +59,11 @@ const getTournamentsByNameOrCategory = (tournament) => {
 const addTournament = (tournament) => {
   const query = `INSERT INTO 
     tournaments (organizer_id, category_id, name, start_date, status, description, private) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *;`;
 
   return db.query(query, [tournament.organizerId, tournament.categoryId, tournament.name, tournament.startDate, tournament.status, tournament.description, tournament.private])
-    .then(data => data.rows)
+    .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
 
