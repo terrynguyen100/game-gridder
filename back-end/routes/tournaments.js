@@ -5,9 +5,9 @@ const router = express.Router();
 // SQL imports
 const { getTournaments,
         getTournamentById,
-        getTournamentByCategory,
-        getTournamentByName,
-        getTournamentByNameOrCategory,
+        getTournamentsByCategory,
+        getTournamentsByName,
+        getTournamentsByNameOrCategory,
         addTournament,
         updateTournament,
         deleteTournament,
@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
 router.get('/category/:categoryId', (req, res) => {
   const categoryId = req.params.categoryId;
 
-  getTournamentByCategory(categoryId)
+  getTournamentsByCategory(categoryId)
     .then(tournaments => {
       res.json(tournaments);
     })

@@ -23,12 +23,6 @@ const usersRoutes = require("./routes/users.js");
 app.use("/tournaments", tournamentsRoutes);
 app.use("/users", usersRoutes);
 
-// Define a catch-all route that will server the React app's index.html file for any other routes
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../front-end/public/index.html'));
-// });
-
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
