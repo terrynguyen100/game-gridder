@@ -36,7 +36,7 @@ const addMatch = (match) => {
 
 //---------------------------------------------Update QUERIES---------------------------------------
 // Update a match.
-//Requires a match object with any of the following values {tournament_id, start_time, start_date, location, notes}
+// Requires a match object with any of the following values {tournament_id, start_time, start_date, location, notes}
 const updateMatch = (match) => {
   const query = `UPDATE matches 
     SET tournament_id = $2, start_time = $3, start_date = $4, location = $5, notes = $6 
@@ -51,7 +51,7 @@ const updateMatch = (match) => {
 //---------------------------------------------DELETE QUERIES---------------------------------------
 // Delete a match from an id. Requires an id.
 const deleteMatch = (matchId) => {
-  const query = `DELETE FROM matches WHERE id = $1`;
+  const query = `DELETE FROM matches WHERE id = $1;`;
 
   return db.query(query, [matchId])
     .then(() => console.log('Match deleted'))
