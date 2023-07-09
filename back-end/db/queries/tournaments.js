@@ -21,7 +21,7 @@ const getTournamentById = (tournamentId) => {
 };
 
 //Get all tournaments that match a category. Requires tournamentCategory => return tournament row.
-const getTournamentByCategory = (tournamentCategory) => {
+const getTournamentsByCategory = (tournamentCategory) => {
   const query = `SELECT tournaments.* FROM tournaments 
     JOIN categories ON categories.id = tournaments.category_id 
     WHERE lower(categories.name) = lower('$1');`;
@@ -32,7 +32,7 @@ const getTournamentByCategory = (tournamentCategory) => {
 };
 
 //Get all tournaments that are like a name. Requires tournamentName => return tournament row.
-const getTournamentByName = (tournamentName) => {
+const getTournamentsByName = (tournamentName) => {
   const query = `SELECT * FROM tournaments 
     WHERE lower(name) Like lower('%$1%');`;
 
@@ -43,7 +43,7 @@ const getTournamentByName = (tournamentName) => {
 
 //Get all tournaments that are like a name OR category. Requires tournament object => returns tournaments rows.
 // Requires a tournament object {name, category}
-const getTournamentByNameOrCategory = (tournament) => {
+const getTournamentsByNameOrCategory = (tournament) => {
   const query = `SELECT tournaments.*, categories.name AS category_name FROM tournaments 
     JOIN categories ON categories.id = tournaments.category_id 
     WHERE lower(tournaments.name) LIKE lower('%$1%') OR lower(categories.name) LIKE lower('%$2%');`;
@@ -92,9 +92,9 @@ const deleteTournament = (tournamentId) => {
 module.exports = {
   getTournaments,
   getTournamentById,
-  getTournamentByCategory,
-  getTournamentByName,
-  getTournamentByNameOrCategory,
+  getTournamentsByCategory,
+  getTournamentsByName,
+  getTournamentsByNameOrCategory,
   addTournament,
   updateTournament,
   deleteTournament,
