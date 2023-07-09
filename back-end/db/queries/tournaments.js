@@ -55,7 +55,7 @@ const getTournamentByNameOrCategory = (tournament) => {
 
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new tournament.
-// Requires a tournament object {organizerId, categoryId, name, startDate, status, description, private}
+// Requires a tournament object {organizer_id, category_id, name, start_date, status, description, private}
 const addTournament = (tournament) => {
   const query = `INSERT INTO 
     tournaments (organizer_id, category_id, name, start_date, status, description, private) 
