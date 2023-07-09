@@ -13,6 +13,12 @@ const { getTournaments,
         deleteTournament,
       } = require('../db/queries/tournaments.js');
 
+const { getMatchesByTournamentId,
+        addMatch
+      } = require('../db/queries/matches.js');
+const { getPlayersByMatchId,
+        addPlayer
+      } = require('../db/queries/players.js');
 
 // ---- Routes -----
 
@@ -42,28 +48,50 @@ router.get('/category', (req, res) => {
     });
 });
 
-
 // GET 1 tournament by its id
 router.get('/:id', (req, res) => {
   const tournamentId = req.params.id;
   
-  getTournamentById(tournamentId)
-    .then(tournament => {
-      if (tournament) {
-        res.json(tournament);
+  // Get tournament and matches in parallel
+  Promise.all([
+    getTournamentById(tournamentId),
+    getMatchesByTournamentId(tournamentId)
+  ])
+    .then(([tournament, matches]) => { // Destructure the results into two variables
+      if (tournament) { 
+        tournament.matches = []; // Inside `tournament`, initialize an empty array for matches
+
+        // Using map, create an array of promises that will each resolve to an array of players
+        // (since there are 2 players each match)
+        const playerPromises = matches.map(match => {
+          const matchId = match.id;
+          return getPlayersByMatchId(matchId);
+        });
+
+        // Execute all player queries in parallel
+        return Promise.all(playerPromises)
+          .then(playersResults => {
+            // Add `players` into their respective matches, inside the tournament object
+            tournament.matches = matches.map((match, index) => {
+              match.players = playersResults[index];
+              return match;
+            });
+
+            res.json(tournament);
+          });
       } else {
         res.status(404).json({ error: "Tournament not found" });
       }
     })
     .catch(error => {
-      console.error("Error fetching tournament:", error);
+      console.error("Error fetching tournament, matches, and players:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
 
 
 // PATCH a tournament by its id
-router.patch('/tournaments/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   const updatedFields = req.body;
 
   updateTournament(updatedFields)
@@ -81,9 +109,10 @@ router.patch('/tournaments/:id', (req, res) => {
 });
 
 // DELETE a tournament by its id
-router.delete('/tournaments/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const tournamentId = req.params.id;
 
+  // This also delete all matches and players associated with the tournament through ON DELETE CASCADE
   deleteTournament(tournamentId)
     .then(deletedTournament => {
       if (deletedTournament) {
@@ -99,19 +128,41 @@ router.delete('/tournaments/:id', (req, res) => {
 });
 
 // ADD/POST a new tournament
-router.post('/tournaments', (req, res) => {
+router.post('/', (req, res) => {
   const newTournament = req.body;
+  const newMatches = req.body.matches;
 
   addTournament(newTournament)
     .then(createdTournament => {
-      res.status(201).json(createdTournament); 
+      const matchPromises = newMatches.map(match => {
+        // Add the newly created tournament_id to each match
+        match.tournamentId = createdTournament.id; // ERROR: IT NEEDS TO BE tournament_id
+        return addMatch(match)
+          .then(createdMatch => {
+            const playerPromises = match.players.map(player => {
+              // Add the newly created match_id to each player
+              player.matchId = createdMatch.id; // ERROR: IT NEEDS TO BE match_id
+              return addPlayer(player);
+            });
+            return Promise.all(playerPromises)
+              .then(playersResults => {
+                createdMatch.players = playersResults; // Add players to the created match object
+                return createdMatch;
+              });
+          });
+      });
+
+      return Promise.all(matchPromises)
+        .then(matchesResults => {
+          createdTournament.matches = matchesResults; // Add matches to the created tournament object
+          res.status(201).json(createdTournament); // Return the updated tournament object with matches and players
+        });
     })
     .catch(error => {
       console.error("Error creating tournament:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
-
 
 
 
