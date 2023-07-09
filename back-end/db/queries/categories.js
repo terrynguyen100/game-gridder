@@ -13,7 +13,7 @@ const getCategoriesByCategoryId = (categoryId) => {
 
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new category.
-// Requires a category object {user_id, title, url, description, category}
+// Requires a category object {name, image_url}
 const addCategory = (category) => {
   const query = `INSERT INTO 
     categories (name, image_url) 
@@ -21,6 +21,19 @@ const addCategory = (category) => {
 
   return db.query = (query, [category.name, category.imageUrl])
     .then(() => console.log("Category has been added."))
+    .catch(err => console.log(err.message));
+};
+
+//---------------------------------------------Update QUERIES---------------------------------------
+// Update a category.
+// Requires a category object {name, image_url}
+const updateCategory = (category) => {
+  const query = `UPDATE categories 
+  SET name = $2, image_url = $3 
+  WHERE id = $1 RETURNING *;`;
+
+  return db.query(query, [category.name, category.imageUrl])
+    .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
 
@@ -36,5 +49,6 @@ const deleteCategory = (categoryId) => {
 module.exports = {
   getCategoriesByCategoryId,
   addCategory,
+  updateCategory,
   deleteCategory
 };
