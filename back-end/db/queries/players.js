@@ -23,7 +23,7 @@ const getPlayerByUserId = (userId) => {
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new player.
 // Requires a player object {user_id, match_id, player_name, score}
-const addplayer = (player) => {
+const addPlayer = (player) => {
   const query = `INSERT INTO 
   players (user_id, match_id, player_name, score)
   VALUES ($1, $2, $3, $4);`;
@@ -61,7 +61,7 @@ const deletePlayer = (playerId) => {
 module.exports = {
   getPlayersByMatchId,
   getPlayerByUserId,
-  addplayer,
+  addPlayer,
   updatePlayer,
   deletePlayer
 };
