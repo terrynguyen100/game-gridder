@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import './sass/app.scss'
-import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
+  const [login, setLogin] = useState(false);
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar login={login}/>
       <Home />
     </div>
   );
