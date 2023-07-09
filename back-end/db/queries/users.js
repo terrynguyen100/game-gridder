@@ -32,7 +32,7 @@ const getUserByLogin = (userLogin) => {
 
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new user.
-// Requires a user object {userName, email, password, dateOfBirth, profileImg, wins}
+// Requires a user object {user_name, email, password, date_of_birth, profile_img, wins}
 const addUser = (user) => {
   const query = `INSERT INTO 
     users (user_name, email, password, date_of_birth, profile_img, wins) 
@@ -43,10 +43,24 @@ const addUser = (user) => {
     .catch(err => console.log(err.message));
 };
 
+//---------------------------------------------Update QUERIES---------------------------------------
+// Update a user.
+// Requires a user object {user_name, email, password, date_of_birth, profile_img, wins}
+const updateUser = (user) => {
+  const query = `UPDATE tournaments 
+  SET user_name = $2, email = $3, password = $4, date_of_birth = $5, profile_img = $6, wins = $7 
+  WHERE id = $1 RETURNING *;`;
+
+  return db.query(query, [user.id, user.userName, user.email, user.password, user.dateOfBirth, user.profileImg, user.wins,])
+    .then(data => data.rows[0])
+    .catch(err => console.log(err.message));
+};
+
+
 //---------------------------------------------DELETE QUERIES---------------------------------------
 // Delete a user from an id. Requires an id.
 const deleteUser = (userId) => {
-  const query = `DELETE FROM users WHERE id = $1`;
+  const query = `DELETE FROM users WHERE id = $1;`;
 
   return db.query(query, [userId])
     .then(() => console.log('User deleted'))
@@ -58,5 +72,6 @@ module.exports = {
   getUserById,
   getUserByLogin,
   addUser,
+  updateUser,
   deleteUser
 };
