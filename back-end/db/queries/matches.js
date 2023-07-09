@@ -2,7 +2,7 @@ const db = require('../connection');
 
 //---------------------------------------------SELECT QUERIES---------------------------------------
 //Get all matches associated with a tournament. Requires tournamentId => return match rows.
-const getMatchesByTournament = (tournamentId) => {
+const getMatchesByTournamentId = (tournamentId) => {
   const query = `SELECT * FROM matches 
     WHERE tournament_id = $1;`;
 
@@ -59,7 +59,7 @@ const deleteMatch = (matchId) => {
 };
 
 module.exports = {
-  getMatchesByTournament,
+  getMatchesByTournamentId,
   getMatchById,
   addMatch,
   updateMatch,
