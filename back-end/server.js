@@ -15,13 +15,23 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 // SERVING A STATIC FILE FOR HOME-PAGE
 app.use(express.static('../front-end/public'));
 
+
+// --------------------------------------------------------------------------
 // Routes for each Resource
 const tournamentsRoutes = require("./routes/tournaments.js");
 const usersRoutes = require("./routes/users.js");
+const playersRoutes = require("./routes/players.js");
+const matchesRoutes = require("./routes/matches.js");
+const categoriesRoutes = require("./routes/categories.js");
 
 // Mount all resource routes
 app.use("/tournaments", tournamentsRoutes);
 app.use("/users", usersRoutes);
+app.use("/players", playersRoutes);
+app.use("/matches", matchesRoutes);
+app.use("/categories", categoriesRoutes);
+
+// --------------------------------------------------------------------------
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
