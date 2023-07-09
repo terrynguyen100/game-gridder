@@ -82,7 +82,7 @@ const updateTournament = (tournament) => {
 //---------------------------------------------DELETE QUERIES---------------------------------------
 // Delete a tournament from an id. Requires an id.
 const deleteTournament = (tournamentId) => {
-  const query = `DELETE FROM tournaments WHERE id = $1`;
+  const query = `DELETE FROM tournaments WHERE id = $1;`;
 
   return db.query(query, [tournamentId])
     .then(() => console.log('Tournament deleted'))
