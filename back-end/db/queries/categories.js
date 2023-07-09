@@ -1,8 +1,17 @@
 const db = require('../connection');
 
 //---------------------------------------------SELECT QUERIES---------------------------------------
+// Get all categories.
+const getCategories = () => {
+  const query = `SELECT * FROM categories;`;
+
+  return db.query(query)
+    .then(data => data.rows)
+    .catch(err => console.log(err.message));
+};
+
 // Get a category from an id. Requires an id => return category row.
-const getCategoriesByCategoryId = (categoryId) => {
+const getCategoryByCategoryId = (categoryId) => {
   const query = `SELECT * FROM categories 
     WHERE id = $1;`;
 
@@ -47,7 +56,8 @@ const deleteCategory = (categoryId) => {
 };
 
 module.exports = {
-  getCategoriesByCategoryId,
+  getCategories,
+  getCategoryByCategoryId,
   addCategory,
   updateCategory,
   deleteCategory
