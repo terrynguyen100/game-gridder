@@ -27,10 +27,11 @@ const getMatchById = (matchId) => {
 const addMatch = (match) => {
   const query = `INSERT INTO 
     matches (tournament_id, start_time, start_date, location, notes) 
-    VALUES ($1, $2, $3, $4, $5);`;
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;`;
 
   return db.query(query, [match.tournamentId, match.startTime, match.startDate, match.location, match.notes])
-    .then(() => console.log('Match added'))
+    .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
 
