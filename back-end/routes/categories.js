@@ -9,6 +9,7 @@ const {
   deleteCategory
 } = require('../db/queries/categories.js');
 
+
 // ---- Routes -----
 
 // GET a category by its id

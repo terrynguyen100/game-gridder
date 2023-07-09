@@ -20,6 +20,7 @@ const { getTournaments,
 router.get("/", (req, res) => {
   getTournaments()
     .then(tournaments => {
+      // send the 'tournaments' back as JSON to the client
       res.json(tournaments); 
     })
     .catch(error => {
@@ -27,6 +28,20 @@ router.get("/", (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
+
+// GET all tournaments by categoryName
+router.get('/category', (req, res) => {
+  const categoryName = req.body.categoryName;
+  getTournamentsByCategory(categoryName)
+    .then(tournaments => {
+      res.json(tournaments);
+    })
+    .catch(error => {
+      console.error("Error fetching tournaments by category:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
 
 // GET 1 tournament by its id
 router.get('/:id', (req, res) => {
@@ -42,34 +57,6 @@ router.get('/:id', (req, res) => {
     })
     .catch(error => {
       console.error("Error fetching tournament:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
-});
-
-// GET all tournaments by categoryId
-router.get('/category/:categoryId', (req, res) => {
-  const categoryId = req.params.categoryId;
-
-  getTournamentsByCategory(categoryId)
-    .then(tournaments => {
-      res.json(tournaments);
-    })
-    .catch(error => {
-      console.error("Error fetching tournaments by category:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
-});
-
-// ADD/POST a new tournament
-router.post('/tournaments', (req, res) => {
-  const newTournament = req.body;
-
-  addTournament(newTournament)
-    .then(createdTournament => {
-      res.status(201).json(createdTournament); 
-    })
-    .catch(error => {
-      console.error("Error creating tournament:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
@@ -107,6 +94,20 @@ router.delete('/tournaments/:id', (req, res) => {
     })
     .catch(error => {
       console.error("Error deleting tournament:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+// ADD/POST a new tournament
+router.post('/tournaments', (req, res) => {
+  const newTournament = req.body;
+
+  addTournament(newTournament)
+    .then(createdTournament => {
+      res.status(201).json(createdTournament); 
+    })
+    .catch(error => {
+      console.error("Error creating tournament:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
 });

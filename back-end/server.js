@@ -20,16 +20,18 @@ app.use(express.static('../front-end/public'));
 // Routes for each Resource
 const tournamentsRoutes = require("./routes/tournaments.js");
 const usersRoutes = require("./routes/users.js");
+const categoriesRoutes = require("./routes/categories.js");
+
 const playersRoutes = require("./routes/players.js");
 const matchesRoutes = require("./routes/matches.js");
-const categoriesRoutes = require("./routes/categories.js");
 
 // Mount all resource routes
 app.use("/tournaments", tournamentsRoutes);
 app.use("/users", usersRoutes);
+app.use("/categories", categoriesRoutes);
+// questionable
 app.use("/players", playersRoutes);
 app.use("/matches", matchesRoutes);
-app.use("/categories", categoriesRoutes);
 
 // --------------------------------------------------------------------------
 

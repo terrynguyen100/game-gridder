@@ -12,19 +12,19 @@ const {
 
 // ---- Routes -----
 
-// GET matches by tournament
-router.get('/tournament/:tournamentId', (req, res) => {
-  const tournamentId = req.params.tournamentId;
+// // GET matches by tournament
+// router.get('/tournament/:tournamentId', (req, res) => {
+//   const tournamentId = req.params.tournamentId;
 
-  getMatchesByTournament(tournamentId)
-    .then(matches => {
-      res.json(matches);
-    })
-    .catch(error => {
-      console.error("Error fetching matches by tournament:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
-});
+//   getMatchesByTournament(tournamentId)
+//     .then(matches => {
+//       res.json(matches);
+//     })
+//     .catch(error => {
+//       console.error("Error fetching matches by tournament:", error);
+//       res.status(500).json({ error: "Internal Server Error" });
+//     });
+// });
 
 // GET match by ID
 router.get('/:matchId', (req, res) => {
@@ -45,7 +45,7 @@ router.get('/:matchId', (req, res) => {
 });
 
 // ADD/POST a new match
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   const newMatch = req.body;
 
   addMatch(newMatch)

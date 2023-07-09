@@ -24,7 +24,7 @@ const getTournamentById = (tournamentId) => {
 const getTournamentsByCategory = (tournamentCategory) => {
   const query = `SELECT tournaments.* FROM tournaments 
     JOIN categories ON categories.id = tournaments.category_id 
-    WHERE lower(categories.name) = lower('$1');`;
+    WHERE lower(categories.name) = lower($1);`;
 
   return db.query(query, [tournamentCategory])
     .then(data => data.rows[0])
