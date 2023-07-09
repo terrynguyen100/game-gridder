@@ -27,7 +27,7 @@ const getTournamentsByCategory = (tournamentCategory) => {
     WHERE lower(categories.name) = lower($1);`;
 
   return db.query(query, [tournamentCategory])
-    .then(data => data.rows[0])
+    .then(data => data.rows)
     .catch(err => console.log(err.message));
 };
 
