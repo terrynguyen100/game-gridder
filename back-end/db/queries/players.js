@@ -26,10 +26,11 @@ const getPlayerByUserId = (userId) => {
 const addPlayer = (player) => {
   const query = `INSERT INTO 
   players (user_id, match_id, player_name, score)
-  VALUES ($1, $2, $3, $4);`;
+  VALUES ($1, $2, $3, $4)
+  RETURNING *;`;
 
   return db.query(query, [player.userId, player.matchId, player.playerName, player.score])
-    .then(() => console.log("Player added"))
+    .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 
 };
