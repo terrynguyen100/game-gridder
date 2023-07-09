@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 //---------------------------------------------SELECT QUERIES---------------------------------------
-// Get a category from an id. Requires category_id => return category row.
+// Get a category from an id. Requires an id => return category row.
 const getCategoriesByCategoryId = (categoryId) => {
   const query = `SELECT * FROM categories 
     WHERE id = $1;`;
