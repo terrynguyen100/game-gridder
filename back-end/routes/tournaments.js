@@ -6,11 +6,13 @@ const router = express.Router();
 const { getTournaments,
         getTournamentById,
         getTournamentsByCategory,
+        getTournamentsByOrganizerId,
         getTournamentsByName,
         getTournamentsByNameOrCategory,
         addTournament,
         updateTournament,
         deleteTournament,
+        getCompleteTournamentById,
       } = require('../db/queries/tournaments.js');
 
 const { getMatchesByTournamentId,
@@ -39,6 +41,20 @@ router.get("/", (req, res) => {
 router.get('/category', (req, res) => {
   const categoryName = req.body.categoryName;
   getTournamentsByCategory(categoryName)
+    .then(tournaments => {
+      res.json(tournaments);
+    })
+    .catch(error => {
+      console.error("Error fetching tournaments by category:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+// GET all tournaments by organizerId
+router.get('/users/:id', (req, res) => {
+  const organizerId = req.params.id;
+
+  getTournamentsByOrganizerId(organizerId)
     .then(tournaments => {
       res.json(tournaments);
     })
@@ -89,24 +105,27 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
 // PATCH a tournament by its id
-router.patch('/:id', (req, res) => {
-  const updatedFields = req.body;
+// router.patch('/:id', (req, res) => {
+//   const tournament = req.body;
+//   const matches = req.body.matches;
+  
 
-  updateTournament(updatedFields)
-  .then(updatedTournament => {
-    if (updatedTournament) {
-      res.json(updatedTournament);
-    } else {
-      res.status(404).json({ error: "Tournament not found" });
-    }
-  })
-  .catch(error => {
-    console.error("Error updating tournament:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  });
-});
+//   const updatedFields = req.body;
+
+//   updateTournament(updatedFields)
+//   .then(updatedTournament => {
+//     if (updatedTournament) {
+//       res.json(updatedTournament);
+//     } else {
+//       res.status(404).json({ error: "Tournament not found" });
+//     }
+//   })
+//   .catch(error => {
+//     console.error("Error updating tournament:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   });
+// });
 
 // DELETE a tournament by its id
 router.delete('/:id', (req, res) => {
@@ -136,12 +155,12 @@ router.post('/create', (req, res) => {
     .then(createdTournament => {
       const matchPromises = newMatches.map(match => {
         // Add the newly created tournament_id to each match
-        match.tournamentId = createdTournament.id; // ERROR: IT NEEDS TO BE tournament_id
+        match.tournament_id = createdTournament.id;
         return addMatch(match)
           .then(createdMatch => {
             const playerPromises = match.players.map(player => {
               // Add the newly created match_id to each player
-              player.matchId = createdMatch.id; // ERROR: IT NEEDS TO BE match_id
+              player.match_id = createdMatch.id; 
               return addPlayer(player);
             });
             return Promise.all(playerPromises)
