@@ -128,7 +128,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // ADD/POST a new tournament
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   const newTournament = req.body;
   const newMatches = req.body.matches;
 
@@ -163,7 +163,5 @@ router.post('/', (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
-
-
 
 module.exports = router;
