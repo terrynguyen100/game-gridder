@@ -53,6 +53,16 @@ const getTournamentsByNameOrCategory = (tournament) => {
     .catch(err => console.log(err.message));
 };
 
+//Get all tournaments that match the organizer id. Requires organizer_id => returns tournament rows.
+const getTournamentsByOrganizerId = (organizer_id) => {
+  const query = `SELECT * FROM tournaments 
+  WHERE organizer_id = $1;`;
+
+  return db.query(query, [organizer_id])
+    .then(data => data.rows)
+    .catch(err => console.log(err.message));
+};
+
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new tournament.
 // Requires a tournament object {organizer_id, category_id, name, start_date, status, description, private}
@@ -62,7 +72,7 @@ const addTournament = (tournament) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *;`;
 
-  return db.query(query, [tournament.organizerId, tournament.categoryId, tournament.name, tournament.startDate, tournament.status, tournament.description, tournament.private])
+  return db.query(query, [tournament.organizer_id, tournament.category_id, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
@@ -72,9 +82,10 @@ const addTournament = (tournament) => {
 const updateTournament = (tournament) => {
   const query = `UPDATE tournaments 
     SET organizer_id = $2, category_id = $3, name = $4, start_date = $5, status = $6, description = $7, private = $8
-    WHERE id = $1 RETURNING *;`;
+    WHERE id = $1 
+    RETURNING *;`;
 
-  return db.query(query, [tournament.id, tournament.organizerId, tournament.categoryId, tournament.name, tournament.startDate, tournament.status, tournament.description, tournament.private])
+  return db.query(query, [tournament.id, tournament.organizer_id, tournament.category_id, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
@@ -82,13 +93,11 @@ const updateTournament = (tournament) => {
 
 //---------------------------------------------DELETE QUERIES---------------------------------------
 // Delete a tournament from an id. Requires an id.
-const deleteTournament = (tournamentId) => {
+const deleteTournament = (tournament_id) => {
   const query = `DELETE FROM tournaments WHERE id = $1;`;
 
-  return db.query(query, [tournamentId])
-    .then(() => {
-      return 'Tournament deleted';
-    })
+  return db.query(query, [tournament_id])
+    .then(() => 'Tournament deleted')
     .catch(err => console.log(err.message));
 };
 
@@ -98,6 +107,7 @@ module.exports = {
   getTournamentsByCategory,
   getTournamentsByName,
   getTournamentsByNameOrCategory,
+  getTournamentsByOrganizerId,
   addTournament,
   updateTournament,
   deleteTournament,

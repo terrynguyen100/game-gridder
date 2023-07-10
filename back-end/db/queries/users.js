@@ -36,9 +36,10 @@ const getUserByLogin = (userLogin) => {
 const addUser = (user) => {
   const query = `INSERT INTO 
     users (user_name, email, password, date_of_birth, profile_img, wins) 
-    VALUES ($1, $2, $3, $4, $5, $6);`;
+    VALUES ($1, $2, $3, $4, $5, $6) 
+    RETURNING *;`;
 
-  return db.query(query, [user.userName, user.email, user.password, user.dateOfBirth, user.profileImg, user.wins])
+  return db.query(query, [user.user_name, user.email, user.password, user.date_of_birth, user.profile_img, user.wins])
     .then(() => console.log('User has been added'))
     .catch(err => console.log(err.message));
 };
@@ -49,9 +50,10 @@ const addUser = (user) => {
 const updateUser = (user) => {
   const query = `UPDATE tournaments 
   SET user_name = $2, email = $3, password = $4, date_of_birth = $5, profile_img = $6, wins = $7 
-  WHERE id = $1 RETURNING *;`;
+  WHERE id = $1 
+  RETURNING *;`;
 
-  return db.query(query, [user.id, user.userName, user.email, user.password, user.dateOfBirth, user.profileImg, user.wins,])
+  return db.query(query, [user.id, user.user_name, user.email, user.password, user.date_of_birth, user.profile_img, user.wins,])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
@@ -63,7 +65,7 @@ const deleteUser = (userId) => {
   const query = `DELETE FROM users WHERE id = $1;`;
 
   return db.query(query, [userId])
-    .then(() => console.log('User deleted'))
+    .then((() => 'User deleted')
     .catch((err) => console.log(err.message));
 };
 
