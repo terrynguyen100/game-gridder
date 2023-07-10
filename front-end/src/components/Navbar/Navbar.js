@@ -13,17 +13,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
-const pages = ['Tournaments'];
+const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navbar(props) {
-  const { login } = props;
+function Navbar({ login }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElTournament, setAnchorElTournament] = useState(null);
 
-
+  // Open MaterialUI drop-down menus
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -34,6 +33,7 @@ function Navbar(props) {
     setAnchorElTournament(event.currentTarget);
   };
 
+  // Close MaterialUI drop-down menus
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
