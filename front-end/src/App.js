@@ -3,6 +3,7 @@ import './sass/app.scss'
 import Home from './components/Home';
 import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login';
+import Register from './components/Register';
 import UserProfile from './components/UserProfile';
 import { RouteContext } from './providers/RouteProvider';
 
@@ -15,6 +16,7 @@ function App() {
         <Navbar login={login} />
         {(route === '/') && <Home />}
         {(route === '/login') && <Login />}
+        {(route === '/register') && <Register />}
     </div>
   );
 }
