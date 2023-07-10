@@ -125,9 +125,8 @@ function Navbar({ login }) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <>
+              <div key={page}>
                 <Button
-                  key={page}
                   onClick={handleOpenTournamentMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
@@ -155,7 +154,7 @@ function Navbar({ login }) {
                     </MenuItem>
                   ))}
                 </Menu>
-              </>
+              </div>
             ))}
           </Box>
 
