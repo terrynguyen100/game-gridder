@@ -65,7 +65,7 @@ const deleteUser = (userId) => {
   const query = `DELETE FROM users WHERE id = $1;`;
 
   return db.query(query, [userId])
-    .then((() => 'User deleted')
+    .then(() => 'User deleted')
     .catch((err) => console.log(err.message));
 };
 
