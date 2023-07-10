@@ -128,7 +128,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // ADD/POST a new tournament
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   const newTournament = req.body;
   const newMatches = req.body.matches;
 
