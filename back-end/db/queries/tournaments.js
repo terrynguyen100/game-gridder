@@ -86,7 +86,9 @@ const deleteTournament = (tournamentId) => {
   const query = `DELETE FROM tournaments WHERE id = $1;`;
 
   return db.query(query, [tournamentId])
-    .then(() => console.log('Tournament deleted'))
+    .then(() => {
+      return 'Tournament deleted';
+    })
     .catch(err => console.log(err.message));
 };
 
