@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './sass/app.scss'
 import Home from './components/Home';
 import Navbar from './components/Navbar/Navbar';
+import Login from './components/Login';
 import UserProfile from './components/UserProfile';
+import { RouteContext } from './providers/RouteProvider';
 
 function App() {
+  const { route } = useContext(RouteContext);
   const [login, setLogin] = useState(false);
-  const [route, setRoute] = useState('/');
 
   return (
     <div className="App">
-      <Navbar login={login} />
-      {(route === '/') && <Home />}
-      {route === '/user' ? (login && <UserProfile />) : null}
+        <Navbar login={login} />
+        {(route === '/') && <Home />}
+        {(route === '/login') && <Login />}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,12 +12,15 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { RouteContext } from '../../providers/RouteProvider';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar({ login }) {
+  const { changeRoute } = useContext(RouteContext);
+ 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElTournament, setAnchorElTournament] = useState(null);
@@ -189,10 +192,10 @@ function Navbar({ login }) {
               </Menu>
             </Box> : 
             <Box sx={{ flexGrow: 0 }}>
-              <Button href="/login" sx={{ my: 2, color: 'white', display: 'inline' }}>
+              <Button onClick={() => changeRoute('/login')} sx={{ my: 2, color: 'white', display: 'inline' }}>
                 Login
               </Button>
-              <Button href="/register" sx={{ my: 2, color: 'white', display: 'inline' }}>
+              <Button onClick={() => changeRoute('/register')} sx={{ my: 2, color: 'white', display: 'inline' }}>
                 Sign Up
               </Button>
             </Box>}
