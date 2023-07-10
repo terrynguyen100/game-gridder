@@ -1,0 +1,57 @@
+@use './utilities/variables' as v;
+
+#card-container {
+  color: #FFFFFF;
+  margin: 32px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-rows: auto;
+  column-gap: 12px;
+  row-gap: 16px;
+
+  div{
+    div{
+      div{
+        color: #9F9EA8
+      }
+      p{
+        color: #9F9EA8
+      }
+    }
+  }
+}
+
+#search-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 24px;
+
+  #filters {
+    font-family: v.$secondary-font;
+    color: #9F9EA8;
+    display: flex;
+    gap: 2px;
+
+    .filter-box {
+      min-height: 50px;
+      min-width: 90px;
+      background-color: #2B303D;
+    }
+  }
+
+  div {
+    button {
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+    }
+  }
+}
+
+#t-title {
+  font-family: v.$main-font;
+  color: #FFFFFF;
+  margin-top: 110px;
+  margin-left: 24px;
+}
