@@ -8,13 +8,24 @@ import UserProfile from './components/UserProfile';
 import CreateTournament from './components/CreateTournament/CreateTournament';
 import { RouteContext } from './providers/RouteProvider';
 
+import Tournaments from './components/Tournaments/Tournaments';
+import Tournament from './components/Tournament/Tournament';
+
 function App() {
-  const { route } = useContext(RouteContext);
+  const { route, changeRoute } = useContext(RouteContext);
   const [login, setLogin] = useState(false);
+  const [t, setT] = useState({})
+
+  const handleRoute = ({ tournament, numOfPlayers}) => {
+    changeRoute(`/tournament/${tournament.id}`);
+    setT({tournament, numOfPlayers})
+  }
 
   return (
     <div className="App">
         <Navbar login={login} />
+        {t.tournament && ((route === `/tournament/${t.tournament.id}`) && <Tournament tournament={t.tournament} numOfPlayers={t.numOfPlayers}/>)}
+        <Tournaments handleRoute={handleRoute}/> 
         {(route === '/') && <Home />}
         {(route === '/login') && <Login />}
         {(route === '/register') && <Register />}

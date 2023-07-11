@@ -6,9 +6,7 @@ const RouteProvider = (props) => {
   const [route, setRoute] = useState('/');
 
   const changeRoute = (newRoute) => {
-    console.log("Hello!");
     setRoute(newRoute);
-    console.log(route);
   };
 
   const value = { route, changeRoute };
