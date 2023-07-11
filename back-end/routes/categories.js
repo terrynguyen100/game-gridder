@@ -4,6 +4,7 @@ const router = express.Router();
 // SQL imports
 const {
   getCategoryByCategoryId,
+  getCategories,
   addCategory,
   updateCategory,
   deleteCategory
@@ -11,6 +12,19 @@ const {
 
 
 // ---- Routes -----
+
+// GET all categories
+router.get('/', (req, res) => {
+  getCategories()
+    .then((categories) => {
+      res.json(categories);
+    })
+    .catch(error => {
+      console.error("Error adding category:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
 
 // GET a category by its id
 router.get('/:categoryId', (req, res) => {
