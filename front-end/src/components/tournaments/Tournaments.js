@@ -6,17 +6,54 @@ import axios from 'axios';
 
 import "./../../sass/tournaments.scss"
 
-const Tournaments = () => {
+const Tournaments = ({ handleRoute }) => {
   const [tournaments, setTournaments] = useState([]);
   const [game, setGame] = useState('All')
-  const [state, setState] = useState('All')
+  const [tournamentState, setTournamentState] = useState('All')
   const [registration, setRegistration] = useState('All')
 
+  const gameArray = ['Mario Kart', 'Zelda: Tears of the Kingdom']
+  const tournamentStateArray = ['Upcoming', 'Ongoing', 'Completed']
+  const registrationArray = ['All', 'Free', 'Paid']
+
   useEffect(() => {
-    axios.get("tournaments/")
-      .then(res => setTournaments(res.data))
-      .catch(err => console.log(err.message))
+    getData();
   }, [])
+
+  const getData = async () => {
+    const tournamentData = await axios.get("tournaments/")
+    setTournaments(tournamentData.data)
+  }
+
+  const tournamentClick = () => {
+
+  }
+
+  const tournamentGameClick = async (ev) => {
+    await getData()
+    const textClicked = ev.target.innerHTML
+    // const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
+    // setTournaments(filteredTournaments)
+    setTournaments()
+    setGame(textClicked)
+  }
+
+
+  const tournamentStateClick = async (ev) => {
+    await getData()
+    const textClicked = ev.target.innerHTML
+    const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
+    setTournaments(filteredTournaments)
+    setTournamentState(textClicked)
+  }
+
+  const tournamentRegistrationClick = async (ev) => {
+    await getData()
+    const textClicked = ev.target.innerHTML
+    // const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
+    // setTournaments(filteredTournaments)
+    setRegistration(textClicked)
+  }
 
   return(
     <>
@@ -27,19 +64,19 @@ const Tournaments = () => {
         </div>
         <div id="filters">
           <div className="filter-box">
-            <DropBox title="GAME" filter={game}/>
+            <DropBox title="GAME" filter={game} dropDownItems={gameArray} handleClick={tournamentGameClick}/>
           </div>
           <div className="filter-box">
-            <DropBox title="STATE" filter={state}/>
+            <DropBox title="STATE" filter={tournamentState} dropDownItems={tournamentStateArray} handleClick={tournamentStateClick}/>
           </div>
           <div className="filter-box">
-            <DropBox title="REGISTRATION" filter={registration}/>
+            <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
           </div>
         </div>
       </div>
       <div id="card-container">
         {tournaments.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id}/>
+          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
         })}
       </div>
     </>
