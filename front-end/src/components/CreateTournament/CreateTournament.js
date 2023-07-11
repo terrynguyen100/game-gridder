@@ -1,23 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./../../sass/createTournaments.scss";
 import { RouteContext } from '../../providers/RouteProvider';
+import CreateTournamentProvider from "../../providers/CreateTournamentProvider";
+import LeftDrawer from "./LeftDrawer";
 
 const CreateTournament = () => {
   const { changeRoute } = useContext(RouteContext);
 
   return (
-    <div className="create-tournament">
-      <h1>Create Tournament</h1>
-      <form>
-        <div>
-          <label htmlFor="tournamentName">Tournament Name:</label>
-          <input type="text" id="tournamentName" name="tournamentName" />
-        </div>
-
-        <button type="submit">Create</button>
-      </form>
-    </div>
+    <CreateTournamentProvider>
+      <LeftDrawer/>
+    </CreateTournamentProvider>
   );
 };
 
 export default CreateTournament;
+
