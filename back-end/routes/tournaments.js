@@ -105,27 +105,25 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// PATCH a tournament by its id
-// router.patch('/:id', (req, res) => {
-//   const tournament = req.body;
-//   const matches = req.body.matches;
-  
+// PUT a tournament by its id
+router.put('/:id', (req, res) => {
+  const tournament = req.body; 
+  tournament.id = req.params.id;
 
-//   const updatedFields = req.body;
-
-//   updateTournament(updatedFields)
-//   .then(updatedTournament => {
-//     if (updatedTournament) {
-//       res.json(updatedTournament);
-//     } else {
-//       res.status(404).json({ error: "Tournament not found" });
-//     }
-//   })
-//   .catch(error => {
-//     console.error("Error updating tournament:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   });
-// });
+  console.log(tournament);
+  updateTournament(tournament)
+  .then(updatedTournament => {
+    if (updatedTournament) {
+      res.json(updatedTournament);
+    } else {
+      res.status(404).json({ error: "Tournament not found" });
+    }
+  })
+  .catch(error => {
+    console.error("Error updating tournament:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  });
+});
 
 // DELETE a tournament by its id
 router.delete('/:id', (req, res) => {

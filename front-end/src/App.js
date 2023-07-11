@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './components/UserProfile';
+import CreateTournament from './components/CreateTournament/CreateTournament';
 import { RouteContext } from './providers/RouteProvider';
 
 import Tournaments from './components/Tournaments/Tournaments';
@@ -29,6 +30,7 @@ function App() {
         {(route === '/') && <Home />}
         {(route === '/login') && <Login />}
         {(route === '/register') && <Register />}
+        {(route === '/tournaments/create') && <CreateTournament />}
     </div>
   );
 }
