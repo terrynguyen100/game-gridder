@@ -40,7 +40,7 @@ const addUser = (user) => {
     RETURNING *;`;
 
   return db.query(query, [user.user_name, user.email, user.password, user.date_of_birth, user.profile_img, user.wins])
-    .then(() => console.log('User has been added'))
+    .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
 
