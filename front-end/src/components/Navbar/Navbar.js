@@ -13,13 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { RouteContext } from '../../providers/RouteProvider';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navbar({ login }) {
+function Navbar() {
   const { changeRoute } = useContext(RouteContext);
+  const { auth, logout } = useContext(AuthContext);
  
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -40,9 +42,15 @@ function Navbar({ login }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+    if (setting === 'Logout') {
+      logout();
+      changeRoute('/');
+    }
+    if (setting === 'Profile') changeRoute('/user')
   };
+
   const handleCloseTournamentMenu = () => {
     setAnchorElTournament(null);
   };
@@ -161,11 +169,11 @@ function Navbar({ login }) {
             ))}
           </Box>
 
-          { login ? 
+          { auth ? 
             <Box sx={{ flexGrow: 0 }}>  
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -185,7 +193,7 @@ function Navbar({ login }) {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}

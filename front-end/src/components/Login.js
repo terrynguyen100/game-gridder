@@ -7,17 +7,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useContext } from "react";
 import { RouteContext } from "../providers/RouteProvider";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
   const { changeRoute } = useContext(RouteContext);
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const username = data.get("username");
+    const password = data.get("password");
+    login();
+    changeRoute('/');
   };
 
   return (
@@ -43,10 +45,10 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
             color="warning"
             autoFocus
           />
