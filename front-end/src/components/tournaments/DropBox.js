@@ -7,7 +7,7 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 
 import { useState } from 'react'
 
-const DropBox = ({ title, filter }) => {
+const DropBox = ({ title, filter, dropDownItems, handleClick }) => {
   const [anchorElTournament, setAnchorElTournament] = useState(null);
 
   const handleOpenTournamentMenu = (event) => {
@@ -38,7 +38,6 @@ const DropBox = ({ title, filter }) => {
           </Button>
           <Menu
             anchorEl={anchorElTournament}
-           
             keepMounted
             transformOrigin={{
               vertical: 'top',
@@ -49,9 +48,9 @@ const DropBox = ({ title, filter }) => {
             sx={{
               display: { xs: 'none', md: 'block' },
             }}>
-            {['Mario Kart, Zelda: Tears of the Kingdom'].map((option) => (
+            {dropDownItems.map((option) => (
               <MenuItem key={option} onClick={handleCloseTournamentMenu}>
-                <Typography textAlign="center">{option}</Typography>
+                <Typography textAlign="center" onClick={handleClick}>{option}</Typography>
               </MenuItem>
             ))}
           </Menu>
