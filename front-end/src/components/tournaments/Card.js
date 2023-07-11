@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,14 +9,17 @@ import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import joypad from './../../images/joypad.svg'
 import cards from './../../images/cards.png'
+import { RouteContext } from '../../providers/RouteProvider';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 
-export default function ImgCard({tournament}) {
+export default function ImgCard({ tournament, handleRoute }) {
+  const { changeRoute } = useContext(RouteContext);
   const [numOfPlayers, setNumOfPlayers] = useState([])
   const [startDate, setStartDate] = useState('')
   const [cardImage, setCardImage] = useState('')
+  const [tournamentInfo, setTournamentInfo] = useState([])
 
   useEffect(() => {
     getData()
@@ -26,6 +28,7 @@ export default function ImgCard({tournament}) {
 
   const getData = async() => {
     const tournamentData = await axios.get(`tournaments/${tournament.id}`)
+    setTournamentInfo(tournamentData.data)
 
     //Get number of players in a tournament
     if(tournamentData.data.matches.length === 0) setNumOfPlayers([].length)
@@ -51,7 +54,7 @@ export default function ImgCard({tournament}) {
   // }
 
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor: "#2B303D" }}>
+    <Card sx={{ maxWidth: 345, backgroundColor: "#2B303D", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       <CardMedia
         component="img"
         alt="game controller"
@@ -77,8 +80,8 @@ export default function ImgCard({tournament}) {
           <span>{startDate}</span>
         </Typography>
       </CardContent>
-      <CardActions sx={{ justifyContent: "center" }}>
-        <Button sx={{ backgroundColor: "#454d60", width: "90%", color: "#FFF", boxShadow: "0 1px 1px 0 rgba(0,0,0,0.3)" }} size="large">View</Button>
+      <CardActions sx={{ justifyContent: "center"}}>
+        <Button onClick={() => handleRoute({tournamentInfo, numOfPlayers})} sx={{ backgroundColor: "#454d60", width: "90%", color: "#FFF", boxShadow: "0 1px 1px 0 rgba(0,0,0,0.3)" }} size="large">View</Button>
       </CardActions>
     </Card>
   );
