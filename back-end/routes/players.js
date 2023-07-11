@@ -7,7 +7,8 @@ const {
   getPlayerByUserId,
   addPlayer,
   updatePlayer,
-  deletePlayer
+  deletePlayer,
+  updatePlayerScore
 } = require('../db/queries/players.js');
 
 // ---- Routes -----
@@ -58,12 +59,12 @@ router.post('/', (req, res) => {
     });
 });
 
-// PATCH/UPDATE a player
-router.patch('/:playerId', (req, res) => {
-  const playerId = req.params.playerId;
+// PUT: Update all field of a player
+router.put('/:playerId', (req, res) => {
   const updatedPlayer = req.body;
+  updatedPlayer.id = req.params.playerId;
 
-  updatePlayer({ id: playerId, ...updatedPlayer })
+  updatePlayer(updatedPlayer)
     .then(player => {
       if (player) {
         res.json(player);
@@ -76,6 +77,26 @@ router.patch('/:playerId', (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
+
+// PATCH: Update only the score of a player
+router.patch('/:playerId', (req, res) => {
+  const updatedPlayer = req.body;
+  updatedPlayer.id = req.params.playerId;
+
+  updatePlayerScore(updatedPlayer)
+    .then(player => {
+      if (player) {
+        res.json(player);
+      } else {
+        res.status(404).json({ error: "Player not found" });
+      }
+    })
+    .catch(error => {
+      console.error("Error updating player:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
 
 // DELETE a player
 router.delete('/:playerId', (req, res) => {
