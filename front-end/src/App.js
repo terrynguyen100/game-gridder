@@ -15,15 +15,16 @@ function App() {
   const [login, setLogin] = useState(false);
   const [t, setT] = useState({})
 
-  const handleRoute = ({ tournament, numOfPlayers}) => {
-    changeRoute(`/tournament/${tournament.id}`);
-    setT({tournament, numOfPlayers})
+  const handleRoute = ({ tournamentInfo, numOfPlayers}) => {
+    console.log(tournamentInfo)
+    changeRoute(`/tournament/${tournamentInfo.id}`);
+    setT({tournamentInfo, numOfPlayers})
   }
 
   return (
     <div className="App">
         <Navbar login={login} />
-        {t.tournament && ((route === `/tournament/${t.tournament.id}`) && <Tournament tournament={t.tournament} numOfPlayers={t.numOfPlayers}/>)}
+        {t.tournamentInfo && ((route === `/tournament/${t.tournamentInfo.id}`) && <Tournament tournament={t.tournamentInfo} numOfPlayers={t.numOfPlayers}/>)}
         <Tournaments handleRoute={handleRoute}/> 
         {(route === '/') && <Home />}
         {(route === '/login') && <Login />}
