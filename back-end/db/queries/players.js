@@ -44,9 +44,20 @@ const updatePlayer = (player) => {
     WHERE id = $1 
     RETURNING *;`;
 
-  return db.query(query, [player.user_id, player.match_id, player.player_name, player.score])
+  return db.query(query, [player.id, player.user_id, player.match_id, player.player_name, player.score])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
+};
+
+const updatePlayerScore = (player) => {
+  const query = `UPDATE players 
+  SET score = $2
+  WHERE id = $1 
+  RETURNING *;`;
+
+return db.query(query, [player.id, player.score])
+  .then(data => data.rows[0])
+  .catch(err => console.log(err.message));
 };
 
 //---------------------------------------------DELETE QUERIES---------------------------------------
@@ -65,5 +76,6 @@ module.exports = {
   getPlayerByUserId,
   addPlayer,
   updatePlayer,
+  updatePlayerScore,
   deletePlayer
 };
