@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import { AuthContext } from '../providers/AuthProvider';
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
-  const [userId, setUserId] = useState(1);
+  const { userId } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get(`/users/${userId}`)
