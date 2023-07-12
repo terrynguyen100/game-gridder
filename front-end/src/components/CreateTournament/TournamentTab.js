@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { RouteContext } from '../../providers/RouteProvider';
-import { Input, Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
-import axios from "axios";
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const TournamentTab = () => {
   const { changeRoute } = useContext(RouteContext);
@@ -11,17 +11,20 @@ const TournamentTab = () => {
     tourType, setTourType,
     tourCategory, setTourCategory,
     tourDescription, setTourDescription,
+    tourDate, setTourDate,
     categories, setCategories,
   } = useContext(CreateTournamentContext);
 
-  const spacingItems = 3;
+  const spacingItems = 2;
+  const componentColor ="#EDF2F4";
 
   return (
-    <div>
       <Box sx={{
         marginLeft: 2,
         marginRight: 2,
-        marginTop: 15
+        marginTop: 12,
+        textAlign: 'center',
+
       }}
       >
         <TextField
@@ -40,8 +43,8 @@ const TournamentTab = () => {
             label="Type"
             onChange={(event) => { setTourType(event.target.value) }}
           >
-            <MenuItem value={'singleElemination'}>Single Elemination</MenuItem>
-            <MenuItem value={'doubleElemination'}>Double Elemination</MenuItem>
+            <MenuItem value={'singleElemination'}>Single Elimination</MenuItem>
+            <MenuItem value={'doubleElemination'}>Double Elimination</MenuItem>
 
           </Select>
         </FormControl>
@@ -62,8 +65,12 @@ const TournamentTab = () => {
           </Select>
         </FormControl>
         
-        <DatePicker />
-        
+        <DatePicker 
+          sx={{ width: '100%', marginBottom: spacingItems }}
+          value={tourDate}
+          onChange={(newValue) => setTourDate(newValue)}
+        />
+
         <TextField
           id="outlined-multiline-static"
           label="Description"
@@ -74,10 +81,14 @@ const TournamentTab = () => {
           onChange={(event) => { setTourDescription(event.target.value) }}
         />
 
-        <Button variant="contained">Next</Button>
+        <Button 
+          variant="contained"
+          sx={{ 
+            width: '100%',
+            bgcolor: '#BB0C05'
+          }}
+        >Next</Button>
       </Box>
-
-    </div>
   );
 };
 
