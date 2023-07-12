@@ -8,6 +8,7 @@ import "./../../sass/tournaments.scss"
 
 const Tournaments = ({ handleRoute }) => {
   const [tournaments, setTournaments] = useState([]);
+  const [filtered, setFiltered] = useState([])
   const [game, setGame] = useState('All')
   const [tournamentState, setTournamentState] = useState('All')
   const [registration, setRegistration] = useState('All')
@@ -25,35 +26,32 @@ const Tournaments = ({ handleRoute }) => {
     setTournaments(tournamentData.data)
   }
 
-  const tournamentClick = () => {
 
-  }
-
-  const tournamentGameClick = async (ev) => {
-    await getData()
+  const tournamentGameClick = (ev) => {
+    setFiltered(tournaments);
     const textClicked = ev.target.innerHTML
     // const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
     // setTournaments(filteredTournaments)
-    setTournaments()
     setGame(textClicked)
   }
 
-
-  const tournamentStateClick = async (ev) => {
-    await getData()
+  const tournamentStateClick = (ev) => {
+    setFiltered(tournaments);
     const textClicked = ev.target.innerHTML
     const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
-    setTournaments(filteredTournaments)
+    setFiltered(filteredTournaments)
     setTournamentState(textClicked)
   }
 
-  const tournamentRegistrationClick = async (ev) => {
-    await getData()
+  const tournamentRegistrationClick = (ev) => {
+    setFiltered(tournaments);
     const textClicked = ev.target.innerHTML
     // const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
     // setTournaments(filteredTournaments)
     setRegistration(textClicked)
   }
+
+  const resetFiltersClick = async 
 
   return(
     <>
@@ -72,10 +70,20 @@ const Tournaments = ({ handleRoute }) => {
           <div className="filter-box">
             <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
           </div>
+          {filtered.length &&          
+            <div className="filter-box">
+              <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
+            </div>
+          }
         </div>
       </div>
       <div id="card-container">
-        {tournaments.map(tournament => {
+        {
+        filtered.length ? 
+        filtered.map(tournament => {
+          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+        })
+        :tournaments.map(tournament => {
           return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
         })}
       </div>
