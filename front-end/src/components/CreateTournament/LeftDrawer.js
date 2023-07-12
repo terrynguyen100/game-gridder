@@ -22,6 +22,7 @@ import TournamentView from './TournamentView';
 import TournamentTab from './TournamentTab';
 import { CreateTournamentContext } from '../../providers/CreateTournamentProvider';
 import axios from 'axios';
+import ParticipantsTab from './ParticipantsTab';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -44,9 +45,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState(0);
+  const [tabIndex, setTabIndex] = useState(null);
+  const [iconColors, setIconColors] = useState(Array(5).fill('white'));
   const {
-    categories, setCategories,
+    tourName, setTourName,
+    tourType, setTourType,
+    tourCategory, setTourCategory,
+    tourGameName, setTourGameName,
+    tourDescription, setTourDescription,
+    tourDate, setTourDate,
+    
   } = useContext(CreateTournamentContext);
 
   const icons = [
@@ -59,31 +67,36 @@ export default function MiniDrawer() {
 
   const listItems = icons.map(({ icon, index }) => (
     <ListItem disablePadding sx={{ display: 'block' }} key={index}>
-      <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5 }}>
-        <ListItemIcon sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', color: '#EDF2F4'}}> 
-          {React.cloneElement(icon, { onClick: () => handleDrawerOpen(index) })}
+      <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5 }} onClick={() => handleDrawerOpen(index)}>
+        <ListItemIcon
+          sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', color: iconColors[index] }}
+        >
+          {React.cloneElement(icon)}
         </ListItemIcon>
       </ListItemButton>
     </ListItem>
   ));
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const handleDrawerOpen = (index) => {
 
-  const fetchCategories = async () => {
-    const categoriesData = await axios.get("categories/")
-    setCategories(categoriesData.data)
-  }
-
-  const handleDrawerOpen = (tab) => {
-    setTab(tab);
+    setTabIndex(index);
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
+    setTabIndex(null);
     setOpen(false);
   };
+
+  const handleButtonNext = () => {
+    setTabIndex(prev => prev + 1);
+  };
+
+  // This effect is to update the color of the icons when the tab changes
+  useEffect(() => {
+    const updatedColors = iconColors.map((color, i) => (i === tabIndex ? '#BB0C05' : '#EDF2F4'));
+    setIconColors(updatedColors);
+  }, [tabIndex]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -100,11 +113,11 @@ export default function MiniDrawer() {
 
           <Divider />
           <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5, }}>
-              <ListItemIcon sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', }}>
+            <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5, }} onClick={handleDrawerClose}>
+              <ListItemIcon sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', }} >
                 <ChevronLeftIcon
                   fontSize='large'
-                  onClick={handleDrawerClose}
+
                   sx={{ color: '#EDF2F4' }}
                 />
               </ListItemIcon>
@@ -115,15 +128,19 @@ export default function MiniDrawer() {
       </Drawer>
       {(open === true) &&
         <Box sx={{
-          bgcolor: '#8D99AE',
+          bgcolor: '#edf2f4',
           width: '300px',
           height: '100vh',
           borderLeft: '1px solid gray',
           marginLeft: '10px',
         }}>
-          {(tab === 0) && <TournamentTab />}
-          {(tab === 1) && <div>11111111111111111111111</div>}
-          {(tab === 2) && <div>222222222222222222</div>}
+          {(tabIndex === 0) && <TournamentTab
+            handleButtonNext={handleButtonNext}
+          />}
+          {(tabIndex === 1) && <ParticipantsTab
+            handleButtonNext={handleButtonNext}
+          />}
+          {(tabIndex === 2) && <div>222222222222222222</div>}
         </Box>}
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
