@@ -85,15 +85,6 @@ const Login = () => {
             Let's Go!
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link 
-                variant="body2"                 
-                color="white"
-                component="button"
-                underline="hover">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link 
                 color="white"
