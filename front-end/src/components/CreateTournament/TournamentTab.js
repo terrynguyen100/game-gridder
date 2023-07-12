@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { RouteContext } from '../../providers/RouteProvider';
+import { useContext, useEffect } from "react";
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 
 const TournamentTab = (props) => {
-  const { changeRoute } = useContext(RouteContext);
   const {
     tourName, setTourName,
     tourType, setTourType,

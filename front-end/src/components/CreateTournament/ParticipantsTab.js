@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { RouteContext } from '../../providers/RouteProvider';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";

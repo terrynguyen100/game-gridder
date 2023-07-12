@@ -1,18 +1,22 @@
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
-import { useEffect, useState } from "react";
-import axios from 'axios';
-
-import "./../../sass/tournaments.scss"
 import ResetBox from "./ResetBox";
+import "./../../sass/tournaments.scss"
+import { TournamentContext } from "../../providers/TournamentProvider";
 
-const Tournaments = ({ handleRoute }) => {
+const Tournaments = () => {
+  const navigate = useNavigate();
+  const { setT } = useContext(TournamentContext);
   const [tournaments, setTournaments] = useState([]);
   const [filtered, setFiltered] = useState([])
   const [game, setGame] = useState('All')
   const [tournamentState, setTournamentState] = useState('All')
   const [registration, setRegistration] = useState('All')
+  
 
   const gameArray = ['Mario Kart', 'Zelda: Tears of the Kingdom']
   const tournamentStateArray = ['Upcoming', 'Ongoing', 'Completed']
@@ -25,6 +29,12 @@ const Tournaments = ({ handleRoute }) => {
   const getData = async () => {
     const tournamentData = await axios.get("/tournaments")
     setTournaments(tournamentData.data)
+  }
+
+  const handleRoute = ({ tournamentInfo, numOfPlayers}) => {
+    console.log(tournamentInfo)
+    navigate(`/tournament/${tournamentInfo.id}`);
+    setT({tournamentInfo, numOfPlayers})
   }
 
 

@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import RouteProvider from './providers/RouteProvider';
 import AuthProvider from './providers/AuthProvider';
 import ErrorProvider from './providers/ErrorProvider';
+import TournamentProvider from './providers/TournamentProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouteProvider>
+    <TournamentProvider>
       <AuthProvider>
         <ErrorProvider>
           <App />
         </ErrorProvider>
       </AuthProvider>
-    </RouteProvider>
+    </TournamentProvider>
   </React.StrictMode>
 );
 

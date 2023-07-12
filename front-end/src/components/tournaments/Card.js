@@ -9,9 +9,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import joypad from './../../images/joypad.svg'
 import cards from './../../images/cards.png'
-import { RouteContext } from '../../providers/RouteProvider';
 
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios'
 
 export default function ImgCard({ tournament, handleRoute }) {
