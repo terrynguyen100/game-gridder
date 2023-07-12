@@ -43,22 +43,22 @@ router.get('/:id', (req, res) => {
 });
 
 // GET a user by their login
-// router.get('/login/:login', (req, res) => {
-//   const userLogin = req.params.login;
+router.get('/login', (req, res) => {
+  const userLogin = req.body
 
-//   getUserByLogin(userLogin)
-//     .then(user => {
-//       if (user) {
-//         res.json(user);
-//       } else {
-//         res.status(404).json({ error: 'User not found' });
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error fetching user:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     });
-// });
+  getUserByLogin(userLogin)
+    .then(user => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+});
 
 // ADD/POST a new user
 router.post('/create', (req, res) => {
