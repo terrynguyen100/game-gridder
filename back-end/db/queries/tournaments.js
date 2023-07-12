@@ -65,14 +65,14 @@ const getTournamentsByOrganizerId = (organizer_id) => {
 
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new tournament.
-// Requires a tournament object {organizer_id, category_id, name, start_date, status, description, private}
+// Requires a tournament object {organizer_id, category_id, game_name, name, start_date, status, description, private}
 const addTournament = (tournament) => {
   const query = `INSERT INTO 
-    tournaments (organizer_id, category_id, name, start_date, status, description, private) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    tournaments (organizer_id, category_id, game_name, name, start_date, status, description, private) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;`;
 
-  return db.query(query, [tournament.organizer_id, tournament.category_id, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
+  return db.query(query, [tournament.organizer_id, tournament.category_id, tournament.game_name, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
@@ -81,11 +81,11 @@ const addTournament = (tournament) => {
 // Update a tournament.
 const updateTournament = (tournament) => {
   const query = `UPDATE tournaments 
-    SET organizer_id = $2, category_id = $3, name = $4, start_date = $5, status = $6, description = $7, private = $8
+    SET organizer_id = $2, category_id = $3, game_name = $4, name = $5, start_date = $6, status = $7, description = $8, private = $9
     WHERE id = $1 
     RETURNING *;`;
 
-  return db.query(query, [tournament.id, tournament.organizer_id, tournament.category_id, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
+  return db.query(query, [tournament.id, tournament.organizer_id, tournament.category_id, tournament.game_name, tournament.name, tournament.start_date, tournament.status, tournament.description, tournament.private])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };

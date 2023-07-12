@@ -79,7 +79,9 @@ export default function MiniDrawer() {
 
   const handleDrawerOpen = (index) => {
 
-    setTabIndex(index);
+ 
+  const handleDrawerOpen = (tab) => {
+    setTab(tab);
     setOpen(true);
   };
 

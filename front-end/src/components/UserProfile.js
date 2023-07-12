@@ -15,7 +15,7 @@ const UserProfile = () => {
       .catch((error) => { 
         console.log(error);
       });
-    }, [])
+    }, [userId])
 
   return (
     <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', flexDirection: "column", mt: 20 }}>

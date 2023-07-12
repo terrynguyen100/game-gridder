@@ -15,7 +15,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 
 export default function ImgCard({ tournament, handleRoute }) {
-  const { changeRoute } = useContext(RouteContext);
+  const [gamePlayed, setGamePlayed] = useState('')
   const [numOfPlayers, setNumOfPlayers] = useState([])
   const [startDate, setStartDate] = useState('')
   const [cardImage, setCardImage] = useState('')
@@ -23,11 +23,10 @@ export default function ImgCard({ tournament, handleRoute }) {
 
   useEffect(() => {
     getData()
-    // getCategory()
   }, [])
 
   const getData = async() => {
-    const tournamentData = await axios.get(`tournaments/${tournament.id}`)
+    const tournamentData = await axios.get(`/tournaments/${tournament.id}`)
     setTournamentInfo(tournamentData.data)
 
     //Get number of players in a tournament
@@ -46,6 +45,9 @@ export default function ImgCard({ tournament, handleRoute }) {
 
     //Get category & set background image
     // const category = tournamentData.data
+
+    //Get game being played
+    setGamePlayed(tournamentData.data.game_name)
   }
 
   // const getCategory = async() => {
@@ -70,6 +72,7 @@ export default function ImgCard({ tournament, handleRoute }) {
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", mt: 0.5}}>
           <VideogameAssetIcon sx={{mr: 1.5}}/> 
+          <span>{gamePlayed}</span>
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", mt: 0.5}}>
           <PersonIcon sx={{mr: 1.5}}/> 

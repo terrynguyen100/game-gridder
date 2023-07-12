@@ -1,4 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,18 +15,15 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { RouteContext } from '../../providers/RouteProvider';
-import { AuthContext } from '../../providers/AuthProvider';
-import axios from 'axios';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
-  const { changeRoute } = useContext(RouteContext);
   const { auth, logout, userId } = useContext(AuthContext);
- 
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElTournament, setAnchorElTournament] = useState(null);
@@ -31,15 +31,15 @@ function Navbar() {
 
   useEffect(() => {
     if (userId) {
-    axios.get(`/users/${userId}`)
-      .then((response) => {
-        setAvatarURL(response.data.profile_img);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      axios.get(`/users/${userId}`)
+        .then((response) => {
+          setAvatarURL(response.data.profile_img);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [userId])
+  }, [userId]);
 
   // Open MaterialUI drop-down menus
   const handleOpenNavMenu = (event) => {
@@ -58,11 +58,24 @@ function Navbar() {
   };
   const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+
+    if (setting === 'Profile') {
+      navigate(`/users/${userId}/profile`);
+    }
+
+    if (setting === 'Account') {
+      navigate(`/users/${userId}/edit`)
+    }
+
+    if (setting === 'Dashboard') {
+      navigate(`/users/${userId}`)
+    }
+
     if (setting === 'Logout') {
       logout();
-      changeRoute('/');
+      navigate('/');
     }
-    if (setting === 'Profile') changeRoute('/user')
+
   };
 
   const handleCloseTournamentMenu = () => {
@@ -74,11 +87,10 @@ function Navbar() {
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <EmojiEventsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+          <Link to='/'>
+            <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -88,10 +100,10 @@ function Navbar() {
               letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
-            }}
-          >
+            }}>
             GAMEGRIDDER
-          </Typography>
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -130,11 +142,10 @@ function Navbar() {
             </Menu>
           </Box>
           <EmojiEventsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+          <Link to='/'>
+            <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -144,10 +155,10 @@ function Navbar() {
               letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
-            }}
-          >
-            GG
-          </Typography>
+              }}>
+              GG
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <div key={page}>
@@ -175,7 +186,11 @@ function Navbar() {
                   }}>
                   {tournamentOptions.map((option) => (
                     <MenuItem key={option} onClick={handleCloseTournamentMenu}>
-                      <Typography textAlign="center">{option}</Typography>
+                      <Typography textAlign="center">
+                        <Link to={`/tournaments/${option}`}>
+                          {option}
+                        </Link>
+                      </Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -183,8 +198,8 @@ function Navbar() {
             ))}
           </Box>
 
-          { auth ? 
-            <Box sx={{ flexGrow: 0 }}>  
+          {auth ?
+            <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar src={avatarURL} />
@@ -208,17 +223,21 @@ function Navbar() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center" fontFamily='Titillium Web'>{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
-            </Box> : 
+            </Box> :
             <Box sx={{ flexGrow: 0 }}>
-              <Button onClick={() => changeRoute('/login')} sx={{ my: 2, color: 'white', display: 'inline' }}>
-                Login
+              <Button component='p' sx={{ my: 2, color: 'white', display: 'inline' }}>
+                <Link to={'/login'}>
+                  Login
+                </Link>
               </Button>
-              <Button onClick={() => changeRoute('/register')} sx={{ my: 2, color: 'white', display: 'inline' }}>
-                Sign Up
+              <Button component='p' sx={{ my: 2, color: 'white', display: 'inline' }}>
+                <Link to={'/register'}>
+                  Sign Up
+                </Link>
               </Button>
             </Box>}
         </Toolbar>

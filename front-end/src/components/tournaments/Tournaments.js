@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 import "./../../sass/tournaments.scss"
+import ResetBox from "./ResetBox";
 
 const Tournaments = ({ handleRoute }) => {
   const [tournaments, setTournaments] = useState([]);
@@ -22,7 +23,7 @@ const Tournaments = ({ handleRoute }) => {
   }, [])
 
   const getData = async () => {
-    const tournamentData = await axios.get("tournaments/")
+    const tournamentData = await axios.get("/tournaments")
     setTournaments(tournamentData.data)
   }
 
@@ -51,7 +52,12 @@ const Tournaments = ({ handleRoute }) => {
     setRegistration(textClicked)
   }
 
-  // const resetFiltersClick = async 
+  const resetFiltersClick = () => {
+    setFiltered([])
+    setGame('All')
+    setTournamentState('All')
+    setRegistration('All')
+  }
 
   return(
     <>
@@ -70,9 +76,9 @@ const Tournaments = ({ handleRoute }) => {
           <div className="filter-box">
             <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
           </div>
-          {filtered.length &&          
+          {filtered.length > 0 &&          
             <div className="filter-box">
-              <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
+              <ResetBox title="CLEAR FILTERS" handleClick={resetFiltersClick}/>
             </div>
           }
         </div>

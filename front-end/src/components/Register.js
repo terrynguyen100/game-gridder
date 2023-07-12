@@ -1,3 +1,7 @@
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
+import { ErrorContext } from '../providers/ErrorProvider';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -10,15 +14,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { useContext, useState } from 'react';
-import { RouteContext } from '../providers/RouteProvider';
-import { AuthContext } from '../providers/AuthProvider';
-import { ErrorContext } from '../providers/ErrorProvider';
 
 const Register = () => {
-  const { changeRoute } = useContext(RouteContext);
   const { login } = useContext(AuthContext);
   const { displayError } = useContext(ErrorContext);
+  const navigate = useNavigate();
 
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
@@ -60,7 +60,7 @@ const Register = () => {
     })
       .then((response) => {
         login(response.data.id);
-        changeRoute('/');
+        navigate('/');
       })
       .catch((error) => {
         displayError(error);
@@ -167,7 +167,7 @@ const Register = () => {
                 color="white"
                 component="button"
                 underline="hover"
-                onClick={() => changeRoute('/login')}
+                onClick={() => navigate('/login')}
                 variant="body2">
                 Already have an account? Login
               </Link>
