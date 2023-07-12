@@ -4,6 +4,7 @@ CREATE TABLE tournaments (
   id SERIAL PRIMARY KEY NOT NULL,
   organizer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE NOT NULL,
+  game_name VARCHAR(250),
   name VARCHAR(50) NOT NULL,
   start_date DATE NOT NULL,
   status VARCHAR(50) NOT NULL,
