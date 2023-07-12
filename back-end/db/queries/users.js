@@ -30,6 +30,17 @@ const getUserByLogin = (userLogin) => {
     .catch(err => console.log(err.message));
 };
 
+//Get a user based on email and password. Requires userEmail and userPassword => returns a single user.
+const getUserByUserName = (userName) => {
+  const query = `SELECT * FROm users 
+    WHERE user_name = $1;`;
+
+  return db.query(query, [userName])
+    .then(data => data.rows[0])
+    .catch(err => console.log(err.message));
+};
+
+
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new user.
 // Requires a user object {user_name, email, password, date_of_birth, profile_img, wins}
@@ -73,6 +84,7 @@ module.exports = {
   getUsers,
   getUserById,
   getUserByLogin,
+  getUserByUserName,
   addUser,
   updateUser,
   deleteUser

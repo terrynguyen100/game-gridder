@@ -6,6 +6,7 @@ const {
   getUsers,
   getUserById,
   getUserByLogin,
+  getUserByUserName,
   addUser,
   deleteUser,
 } = require('../db/queries/users.js');
@@ -43,10 +44,10 @@ router.get('/:id', (req, res) => {
 });
 
 // GET a user by their login
-router.get('/login', (req, res) => {
-  const userLogin = req.body
+router.get('/login/:username', (req, res) => {
+  const userName = req.params.username;
 
-  getUserByLogin(userLogin)
+  getUserByUserName(userName)
     .then(user => {
       if (user) {
         res.json(user);
