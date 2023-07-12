@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { RouteContext } from '../../providers/RouteProvider';
 import { AuthContext } from '../../providers/AuthProvider';
+import axios from 'axios';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
@@ -21,11 +22,24 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const { changeRoute } = useContext(RouteContext);
-  const { auth, logout } = useContext(AuthContext);
+  const { auth, logout, userId } = useContext(AuthContext);
  
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElTournament, setAnchorElTournament] = useState(null);
+  const [avatarURL, setAvatarURL] = useState(null);
+
+  useEffect(() => {
+    if (userId) {
+    axios.get(`/users/${userId}`)
+      .then((response) => {
+        setAvatarURL(response.data.profile_img);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+  }, [userId])
 
   // Open MaterialUI drop-down menus
   const handleOpenNavMenu = (event) => {
@@ -173,7 +187,7 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>  
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar />
+                  <Avatar src={avatarURL} />
                 </IconButton>
               </Tooltip>
               <Menu

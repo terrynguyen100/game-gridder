@@ -22,6 +22,7 @@ const Register = () => {
 
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
+
   const formatDateOfBirth = (dateOfBirth) => {
     if (dateOfBirth !== null) {
       let day = dateOfBirth.$D;
@@ -46,13 +47,15 @@ const Register = () => {
     if (email === '') return displayError("Please enter an email");
     const password = data.get('password');
     if (password === '') return displayError("Please enter a password");
+    const imageURL = data.get('image_url');
+
 
     axios.post('/users/create', {
       user_name: username,
       email: email,
       password: password,
       date_of_birth: formatDateOfBirth(dateOfBirth),
-      profile_img: null,
+      profile_img: imageURL,
       wins: 0
     })
       .then((response) => {
@@ -96,6 +99,7 @@ const Register = () => {
                 fullWidth
                 id="username"
                 label="Username"
+                type="text"
                 autoFocus
                 color="warning"
               />
@@ -108,6 +112,7 @@ const Register = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                type="email"
                 color="warning"
               />
             </Grid>
@@ -132,6 +137,18 @@ const Register = () => {
                 color="warning"
                 value={dateOfBirth}
                 onChange={(newValue) => setDateOfBirth(newValue)}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="image_url"
+                label="Profile Image URL"
+                type="url"
+                id="password"
+                autoComplete="new-password"
+                color="warning"
               />
             </Grid>
           </Grid>
