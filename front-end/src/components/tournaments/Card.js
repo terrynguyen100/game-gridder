@@ -26,7 +26,7 @@ export default function ImgCard({ tournament, handleRoute }) {
   }, [])
 
   const getData = async() => {
-    const tournamentData = await axios.get(`tournaments/${tournament.id}`)
+    const tournamentData = await axios.get(`/tournaments/${tournament.id}`)
     setTournamentInfo(tournamentData.data)
 
     //Get number of players in a tournament

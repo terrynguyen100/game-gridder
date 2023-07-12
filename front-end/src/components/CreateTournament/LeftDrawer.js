@@ -72,7 +72,7 @@ export default function MiniDrawer() {
   }, []);
 
   const fetchCategories = async () => {
-    const categoriesData = await axios.get("categories/")
+    const categoriesData = await axios.get("/categories")
     setCategories(categoriesData.data)
   }
 

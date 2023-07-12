@@ -1,3 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import { ErrorContext } from "../providers/ErrorProvider";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -5,14 +10,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useContext } from "react";
-import { RouteContext } from "../providers/RouteProvider";
-import { AuthContext } from "../providers/AuthProvider";
-import axios from "axios";
-import { ErrorContext } from "../providers/ErrorProvider";
+
 
 const Login = () => {
-  const { changeRoute } = useContext(RouteContext);
+  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const { displayError } = useContext(ErrorContext);
 
@@ -27,7 +28,7 @@ const Login = () => {
     axios.get(`/users/login/${username}`)
     .then((response) => {
       login(response.data.id);
-      changeRoute('/');
+      navigate('/');
     })
     .catch(() => {
       displayError('Verify your username and password are correct');
@@ -90,7 +91,7 @@ const Login = () => {
                 color="white"
                 component="button"
                 underline="hover"
-                onClick={() => changeRoute('/register')} 
+                onClick={() => navigate('/register')} 
                 variant="body2">
                 Don't have an account? Sign Up
               </Link>

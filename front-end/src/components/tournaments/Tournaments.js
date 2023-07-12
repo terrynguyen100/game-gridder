@@ -23,7 +23,7 @@ const Tournaments = ({ handleRoute }) => {
   }, [])
 
   const getData = async () => {
-    const tournamentData = await axios.get("tournaments/")
+    const tournamentData = await axios.get("/tournaments")
     setTournaments(tournamentData.data)
   }
 
