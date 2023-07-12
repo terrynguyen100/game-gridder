@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import { useContext } from "react";
 import { RouteContext } from "../providers/RouteProvider";
 import { AuthContext } from "../providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
   const { changeRoute } = useContext(RouteContext);
@@ -18,8 +19,14 @@ const Login = () => {
     const data = new FormData(event.currentTarget);
     const username = data.get("username");
     const password = data.get("password");
-    login();
-    changeRoute('/');
+
+    if (username && password) {
+      axios.get(`/users/login/${username}`)
+      .then((response) => {
+        login(response.data.id);
+        changeRoute('/');
+      })
+    }
   };
 
   return (
