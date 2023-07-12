@@ -18,7 +18,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
   let factorOf2 = 0
   while (Math.pow(2, factorOf2) < numOfPlayers) factorOf2++;
 
-  console.log(generateTemplateAreas(numOfPlayers, factorOf2))
+  // console.log(generateTemplateAreas(numOfPlayers, factorOf2))
   // console.log("Tournament ", tournament, "Number of players: ", numOfPlayers)
 
   const bracketStyle = {
@@ -48,7 +48,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
             <VideogameAssetIcon sx={{mx: 1.5}}/>
-            <span>{numOfPlayers}</span>
+            <span>{tournament.game_name}</span>
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
           <CalendarMonthIcon sx={{mx: 1.5}}/> 
