@@ -54,7 +54,7 @@ export default function MiniDrawer() {
     tourGameName, setTourGameName,
     tourDescription, setTourDescription,
     tourDate, setTourDate,
-    
+
   } = useContext(CreateTournamentContext);
 
   const icons = [
@@ -77,78 +77,77 @@ export default function MiniDrawer() {
     </ListItem>
   ));
 
-  const handleDrawerOpen = (index) => {
 
- 
-  const handleDrawerOpen = (tab) => {
-    setTab(tab);
-    setOpen(true);
-  };
 
-  const handleDrawerClose = () => {
-    setTabIndex(null);
-    setOpen(false);
-  };
+    const handleDrawerOpen = (tab) => {
+      setTabIndex(tab);
+      setOpen(true);
+    };
 
-  const handleButtonNext = () => {
-    setTabIndex(prev => prev + 1);
-  };
+    const handleDrawerClose = () => {
+      setTabIndex(null);
+      setOpen(false);
+    };
 
-  // This effect is to update the color of the icons when the tab changes
-  useEffect(() => {
-    const updatedColors = iconColors.map((color, i) => (i === tabIndex ? '#BB0C05' : '#EDF2F4'));
-    setIconColors(updatedColors);
-  }, [tabIndex]);
+    const handleButtonNext = () => {
+      setTabIndex(prev => prev + 1);
+    };
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+    // This effect is to update the color of the icons when the tab changes
+    useEffect(() => {
+      const updatedColors = iconColors.map((color, i) => (i === tabIndex ? '#BB0C05' : '#EDF2F4'));
+      setIconColors(updatedColors);
+    }, [tabIndex]);
 
-      <Drawer variant="permanent" open={open} PaperProps={{
-        sx: { bgcolor: '#2B2D42', zIndex: 0 }
-      }}>
-        <DrawerHeader sx={{ height: 80 }}>
-        </DrawerHeader>
-        <List>
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
 
-          <>{listItems}</>
-
-          <Divider />
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5, }} onClick={handleDrawerClose}>
-              <ListItemIcon sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', }} >
-                <ChevronLeftIcon
-                  fontSize='large'
-
-                  sx={{ color: '#EDF2F4' }}
-                />
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-      {(open === true) &&
-        <Box sx={{
-          bgcolor: '#edf2f4',
-          width: '300px',
-          height: '100vh',
-          borderLeft: '1px solid gray',
-          marginLeft: '10px',
+        <Drawer variant="permanent" open={open} PaperProps={{
+          sx: { bgcolor: '#2B2D42', zIndex: 0 }
         }}>
-          {(tabIndex === 0) && <TournamentTab
-            handleButtonNext={handleButtonNext}
-          />}
-          {(tabIndex === 1) && <ParticipantsTab
-            handleButtonNext={handleButtonNext}
-          />}
-          {(tabIndex === 2) && <div>222222222222222222</div>}
-        </Box>}
+          <DrawerHeader sx={{ height: 80 }}>
+          </DrawerHeader>
+          <List>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <TournamentView />
+            <>{listItems}</>
+
+            <Divider />
+            <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5, }} onClick={handleDrawerClose}>
+                <ListItemIcon sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', }} >
+                  <ChevronLeftIcon
+                    fontSize='large'
+
+                    sx={{ color: '#EDF2F4' }}
+                  />
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+        {(open === true) &&
+          <Box sx={{
+            bgcolor: '#edf2f4',
+            width: '300px',
+            height: '100vh',
+            borderLeft: '1px solid gray',
+            marginLeft: '10px',
+          }}>
+            {(tabIndex === 0) && <TournamentTab
+              handleButtonNext={handleButtonNext}
+            />}
+            {(tabIndex === 1) && <ParticipantsTab
+              handleButtonNext={handleButtonNext}
+            />}
+            {(tabIndex === 2) && <div>222222222222222222</div>}
+          </Box>}
+
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <TournamentView />
+        </Box>
       </Box>
-    </Box>
-  );
-}
+    );
+  }
