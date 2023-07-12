@@ -9,24 +9,29 @@ import { useContext } from "react";
 import { RouteContext } from "../providers/RouteProvider";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
+import { ErrorContext } from "../providers/ErrorProvider";
 
 const Login = () => {
   const { changeRoute } = useContext(RouteContext);
   const { login } = useContext(AuthContext);
+  const { displayError } = useContext(ErrorContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const username = data.get("username");
+    if (!username) return displayError('Please enter a username');
     const password = data.get("password");
+    if (!password) return displayError('Please enter a password');
 
-    if (username && password) {
-      axios.get(`/users/login/${username}`)
-      .then((response) => {
-        login(response.data.id);
-        changeRoute('/');
-      })
-    }
+    axios.get(`/users/login/${username}`)
+    .then((response) => {
+      login(response.data.id);
+      changeRoute('/');
+    })
+    .catch(() => {
+      displayError('Verify your username and password are correct');
+    })
   };
 
   return (
