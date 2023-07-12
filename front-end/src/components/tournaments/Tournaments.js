@@ -51,7 +51,7 @@ const Tournaments = ({ handleRoute }) => {
     setRegistration(textClicked)
   }
 
-  const resetFiltersClick = async 
+  // const resetFiltersClick = async 
 
   return(
     <>
