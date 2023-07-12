@@ -146,7 +146,7 @@ const Register = () => {
                 name="image_url"
                 label="Profile Image URL"
                 type="url"
-                id="password"
+                id="imageurl"
                 autoComplete="new-password"
                 color="warning"
               />
