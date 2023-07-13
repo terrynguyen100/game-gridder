@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { RouteContext } from '../../providers/RouteProvider';
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled, Paper, Typography, Card, IconButton, Divider, Container, Autocomplete } from "@mui/material";
+
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
 import ClearIcon from '@mui/icons-material/Clear';

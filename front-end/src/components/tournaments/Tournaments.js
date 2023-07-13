@@ -1,18 +1,18 @@
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
-import { useEffect, useState } from "react";
-import axios from 'axios';
-
-import "./../../sass/tournaments.scss"
 import ResetBox from "./ResetBox";
+import "./../../sass/tournaments.scss"
 
-const Tournaments = ({ handleRoute }) => {
+const Tournaments = () => {
   const [tournaments, setTournaments] = useState([]);
   const [filtered, setFiltered] = useState([])
   const [game, setGame] = useState('All')
   const [tournamentState, setTournamentState] = useState('All')
   const [registration, setRegistration] = useState('All')
+  
 
   const gameArray = ['Mario Kart', 'Zelda: Tears of the Kingdom']
   const tournamentStateArray = ['Upcoming', 'Ongoing', 'Completed']
@@ -87,10 +87,10 @@ const Tournaments = ({ handleRoute }) => {
         {
         filtered.length ? 
         filtered.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })
         :tournaments.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })}
       </div>
     </>

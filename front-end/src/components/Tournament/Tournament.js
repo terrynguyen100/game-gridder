@@ -1,3 +1,5 @@
+import { useContext, useEffect } from 'react';
+import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -6,9 +8,18 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { generateTemplateAreas } from './helpers/helpers';
 
 import "./../../sass/tournament.scss"
+import { TournamentContext } from '../../providers/TournamentProvider';
 
 const Tournament = ({ tournament, numOfPlayers }) => {
+  // const { t, setT, tournamentID } = useContext(TournamentContext);
 
+  // useEffect(() => {
+  //   axios.get(`/tournaments/1`)
+  //   .then((response) => {
+
+
+  //   })
+  // }, []);
   console.log("players: ",numOfPlayers)
 
   const tournamentDate = `${new Date(tournament.start_date).toString().slice(0, 16)} at ${new Date(tournament.start_date).toString().slice(16, 28)}`
@@ -67,7 +78,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
           {tournament.matches.map((match, i) => {
             if(i < numOfPlayers / 2) {
               return(
-                <div className={`round-1 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}} >
+                <div className={`round-1 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}} key={i}>
                   <section className="bracket">
                     <div className="container">
                       <div className="split split-one">
@@ -86,7 +97,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
 
             if(i >= numOfPlayers / 2 && i < (numOfPlayers - numOfPlayers / 2 / 2)) {
               return(
-                <div className={`round-2 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}}>
+                <div className={`round-2 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
                       <div className="split split-one">
@@ -105,7 +116,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
 
             if(i >= (numOfPlayers - numOfPlayers / 2 / 2) && i < (numOfPlayers - numOfPlayers / 2 / 2 / 2)) {
               return(
-                <div className={`round-3 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}}>
+                <div className={`round-3 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
                       <div className="split split-one">
@@ -124,7 +135,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
 
             if(i >= (numOfPlayers - numOfPlayers / 2 / 2 / 2) && i < (numOfPlayers - numOfPlayers / 2 / 2 / 2 / 2)) {
               return(
-                <div className={`round-4 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}}>
+                <div className={`round-4 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
                       <div className="split split-one">
