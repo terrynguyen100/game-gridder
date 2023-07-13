@@ -70,7 +70,7 @@ const Register = () => {
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
-      <Box
+      <Box bgcolor="primary.main"
         sx={{
           boxShadow: 3,
           borderRadius: 2,
@@ -80,13 +80,12 @@ const Register = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: "#BB0C05"
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'warning.main' }}>
+        <Avatar color="secondary.main" sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" sx={{ color: 'white', fontFamily: 'Bebas Neue', fontSize: '2rem', letterSpacing: '.1rem' }}>
+        <Typography component="h2" variant="h4" sx={{ letterSpacing: '.1rem' }}>
           Sign up
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -101,7 +100,7 @@ const Register = () => {
                 label="Username"
                 type="text"
                 autoFocus
-                color="warning"
+                color="secondary"
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,7 +112,7 @@ const Register = () => {
                 name="email"
                 autoComplete="email"
                 type="email"
-                color="warning"
+                color="secondary"
               />
             </Grid>
             <Grid item xs={12}>
@@ -125,7 +124,7 @@ const Register = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                color="warning"
+                color="secondary"
               />
             </Grid>
             <Grid item xs={12}>
@@ -134,7 +133,7 @@ const Register = () => {
                 name="date-of-birth"
                 id="date-of-birth"
                 label='Date of Birth'
-                color="warning"
+                color="secondary"
                 value={dateOfBirth}
                 onChange={(newValue) => setDateOfBirth(newValue)}
                 slotProps={{ textField: { fullWidth: true } }}
@@ -148,7 +147,7 @@ const Register = () => {
                 type="url"
                 id="imageurl"
                 autoComplete="new-password"
-                color="warning"
+                color="secondary"
               />
             </Grid>
           </Grid>
@@ -156,7 +155,7 @@ const Register = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="warning"
+            color="secondary"
             sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
@@ -164,7 +163,7 @@ const Register = () => {
           <Grid container justifyContent="flex-start">
             <Grid item>
               <Link
-                color="white"
+                color="primary.contrastText"
                 component="button"
                 underline="hover"
                 onClick={() => navigate('/login')}
