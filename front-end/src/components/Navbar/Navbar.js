@@ -18,7 +18,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const { auth, logout, userId } = useContext(AuthContext);
@@ -61,10 +61,6 @@ function Navbar() {
 
     if (setting === 'Profile') {
       navigate(`/users/${userId}/profile`);
-    }
-
-    if (setting === 'Account') {
-      navigate(`/users/${userId}/edit`)
     }
 
     if (setting === 'Dashboard') {
