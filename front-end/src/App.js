@@ -22,6 +22,7 @@ function App() {
   const { userId } = useContext(AuthContext);
   const { error } = useContext(ErrorContext);
   const { t } = useContext(TournamentContext);
+  console.log(t);
 
 
   return (
@@ -35,11 +36,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path={`/users/${userId}/profile`} element={<UserProfile />} />
             <Route path="/tournaments/Create" element={<CreateTournament />} />
-            <Route path="/tournaments/view" element={<Tournaments />} />
-            {t.tournamentInfo &&
+            <Route path="/tournaments/view" element={<Tournaments />} />  
+            {t !== null  &&
               <Route path={`/tournaments/${t.tournamentInfo.id}`} 
-                  element={<Tournament tournament={t.tournamentInfo} 
-                  numOfPlayer={t.numOfPlayers}/>} 
+                element={<Tournament tournament={t.tournamentInfo} 
+                numOfPlayers={t.numOfPlayers}/>} 
               />}
           </Routes>
           {error !== '' && <Error />}

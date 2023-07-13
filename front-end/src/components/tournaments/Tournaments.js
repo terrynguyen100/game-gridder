@@ -1,16 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
 import ResetBox from "./ResetBox";
 import "./../../sass/tournaments.scss"
-import { TournamentContext } from "../../providers/TournamentProvider";
 
 const Tournaments = () => {
-  const navigate = useNavigate();
-  const { setT } = useContext(TournamentContext);
   const [tournaments, setTournaments] = useState([]);
   const [filtered, setFiltered] = useState([])
   const [game, setGame] = useState('All')
@@ -29,12 +25,6 @@ const Tournaments = () => {
   const getData = async () => {
     const tournamentData = await axios.get("/tournaments")
     setTournaments(tournamentData.data)
-  }
-
-  const handleRoute = ({ tournamentInfo, numOfPlayers}) => {
-    console.log(tournamentInfo)
-    navigate(`/tournament/${tournamentInfo.id}`);
-    setT({tournamentInfo, numOfPlayers})
   }
 
 
@@ -97,10 +87,10 @@ const Tournaments = () => {
         {
         filtered.length ? 
         filtered.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })
         :tournaments.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })}
       </div>
     </>
