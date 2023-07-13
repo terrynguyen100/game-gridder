@@ -1,5 +1,3 @@
-import { useContext, useEffect } from 'react';
-import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -8,18 +6,10 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { generateTemplateAreas } from './helpers/helpers';
 
 import "./../../sass/tournament.scss"
-import { TournamentContext } from '../../providers/TournamentProvider';
+
 
 const Tournament = ({ tournament, numOfPlayers }) => {
-  // const { t, setT, tournamentID } = useContext(TournamentContext);
 
-  // useEffect(() => {
-  //   axios.get(`/tournaments/1`)
-  //   .then((response) => {
-
-
-  //   })
-  // }, []);
   console.log("players: ",numOfPlayers)
 
   const tournamentDate = `${new Date(tournament.start_date).toString().slice(0, 16)} at ${new Date(tournament.start_date).toString().slice(16, 28)}`

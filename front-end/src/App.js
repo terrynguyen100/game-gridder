@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './components/UserProfile';
+import Dashboard from './components/Dashboard';
 import CreateTournament from './components/CreateTournament/CreateTournament';
 import Error from './components/Error';
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path={`/users/${userId}/profile`} element={<UserProfile />} />
+            <Route path={`/users/${userId}/dashboard`} element={<Dashboard />} />
             <Route path="/tournaments/Create" element={<CreateTournament />} />
             <Route path="/tournaments/view" element={<Tournaments />} />  
             {t !== null  &&

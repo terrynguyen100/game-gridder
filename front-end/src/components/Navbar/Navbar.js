@@ -68,7 +68,7 @@ function Navbar() {
     }
 
     if (setting === 'Dashboard') {
-      navigate(`/users/${userId}`)
+      navigate(`/users/${userId}/dashboard`)
     }
 
     if (setting === 'Logout') {
