@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { RouteContext } from '../../providers/RouteProvider';
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled } from "@mui/material";
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled, Paper, Typography, Card, IconButton, Divider, Container, Autocomplete } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
-
+import ClearIcon from '@mui/icons-material/Clear';
+import UserSearchField from './UserSearchField';
 
 const ParticipantsTab = (props) => {
   const [participantName, setParticipantName] = useState('');
@@ -19,10 +20,19 @@ const ParticipantsTab = (props) => {
 
   const spacingItems = 2;
 
-  const addTourParticipant = () => {
-    if (participantName !== '') {
+  const top100Films = [
+    { label: '@he Shawshank Redemption', year: 1994 },
+    { label: '@The Godfather', year: 1972 },
+    { label: '@The Godfather: Part II', year: 1974 },
+    { label: '@The Dark Knight', year: 2008 },
+    { label: '@12 Angry Men', year: 1957 },
+    { label: "@Schindler's List", year: 1993 },
+    { label: '@Pulp Fiction', year: 1994 }]
+
+  const addTourParticipant = (playerName) => {
+    if (playerName !== '') {
       // Add new participant to the tourParticipants array
-      setTourParticipants([...tourParticipants, participantName]);
+      setTourParticipants([...tourParticipants, playerName]);
       setParticipantName('');
     }
   };
@@ -39,7 +49,7 @@ const ParticipantsTab = (props) => {
       "name": tourName,
       "start_date": "2023-07-15T06:00:00.000Z",
       "status": "created",
-      "game_name": tourGameName,
+      "game_name": "Poker",
       "description": tourDescription,
       "private": false,
       "matches": tourMatches
@@ -53,6 +63,17 @@ const ParticipantsTab = (props) => {
         console.log(error.message);
       });
   };
+  const handleIconDelete = (index) => {
+    const updatedParticipants = [...tourParticipants];
+    updatedParticipants.splice(index, 1);
+    setTourParticipants(updatedParticipants);
+  };
+
+  const handleNewParticipantOnChange = (event) => {
+    setParticipantName(event.target.value);
+
+  };
+
   return (
     <Box sx={{
       marginLeft: 2,
@@ -62,16 +83,41 @@ const ParticipantsTab = (props) => {
 
     }}
     >
+      {/* <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={top100Films}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Movie" />}
+      />
       <TextField
         label="Enter a Partcipant Name"
         value={participantName}
         sx={{ width: '100%', marginBottom: spacingItems }}
-        onChange={(event) => { setParticipantName(event.target.value) }}
+        onChange={(event) => { handleNewParticipantOnChange(event) }}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
             addTourParticipant();
           }
         }}
+      /> */}
+
+        <TextField
+          label="Enter a Participant Name"
+          value={participantName}
+          sx={{ width: '100%', marginBottom: spacingItems }}
+          onChange={(event) => {
+            handleNewParticipantOnChange(event);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              addTourParticipant(participantName);
+            }
+          }}
+        />
+
+      <UserSearchField
+        addTourParticipant ={addTourParticipant}
       />
 
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
@@ -90,17 +136,39 @@ const ParticipantsTab = (props) => {
 
         </Select>
       </FormControl>
-      <TextField
+      {/* -------------------------------------------------------- */}
+      <Box sx={{ padding: '15px', border: '1px solid black', borderRadius: 2, marginBottom: spacingItems }}>
+        <Typography variant="h6" sx={{ marginBottom: 1 }}>Participants</Typography>
+        <Divider></Divider>
+        {tourParticipants.map((participant, index) => {
+          return <Card
+            variant="outlined"
+            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 1, bgcolor: "#8D99AE" }}
+            key={index}
+          >
+            <Typography variant="h6"
+              sx={{ marginLeft: 1 }}
+            > {index + 1} </Typography>
+
+            <Typography variant="h7"> {participant} </Typography>
+            <IconButton sx={{ color: '#BB0C05' }} onClick={() => handleIconDelete(index)}>
+              < ClearIcon fontSize="small" sx={{ color: '#BB0C05' }} />
+            </IconButton>
+          </Card>
+        })}
+      </Box>
+
+      {/* <TextField
         id="outlined-multiline-static"
         label="Participants"
         value={participantsList}
         multiline
         rows={8}
         sx={{ width: '100%', marginBottom: spacingItems }}
-      />
+      /> */}
 
 
-      <Button
+      {/* <Button
         variant="contained"
         sx={{
           width: '100%',
@@ -108,7 +176,7 @@ const ParticipantsTab = (props) => {
           marginBottom: spacingItems
         }}
         onClick={props.handleButtonNext}
-      >Next</Button>
+      >Next</Button> */}
 
       <Button
         variant="contained"
