@@ -1,23 +1,14 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
-export default function UserSearchField(props) {
-  const [open, setOpen] = React.useState(false);
+export default function UserSearchField (props) {
   const [options, setOptions] = React.useState([]);
-  const loading = open && options.length === 0;
-  const [autoCompleteValue, setAutoCompleteValue] = React.useState(false);
-
+  const [inputValue, setInputValue] = React.useState(null);
   const fetchUsers = async () => {
-    const usersData = await axios.get("/users")
+    const usersData = await axios.get("/users");
     const userNames = usersData.data.reduce((acc, obj) => {
       if (obj.hasOwnProperty('user_name')) {
         acc.push('@' + obj.user_name);
@@ -25,81 +16,61 @@ export default function UserSearchField(props) {
       return acc;
     }, []);
 
-    setOptions(userNames)
-  }
-
+    setOptions(userNames);
+  };
 
   React.useEffect(() => {
-    let active = true;
 
-    if (!loading) {
-      return undefined;
+    fetchUsers();
+  }, []);
+
+  const handleEnter = (newParticipant) => {
+    const IsExisted = options.includes(newParticipant);
+    
+
+    if (!newParticipant.startsWith('@')) {
+      props.addTourParticipant(newParticipant);
+    } else if (IsExisted) {
+      props.addTourParticipant(newParticipant);
     }
-
-    (async () => {
-      await sleep(1e3); // For demo purposes.
-
-      if (active) {
-        fetchUsers();
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-  React.useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
-
-
-  const clearAutoComplete = () => {
-    setAutoCompleteValue(true);
-  }
-
+    setInputValue('');
+  };
+  
 
   return (
+
     <Autocomplete
-      key={autoCompleteValue} // this is the key to re-render the component
-      id="asynchronous"
-      open={open}
-      sx={{ width: '100%', marginBottom: 2 }}
-      onOpen={() => {
-        setOpen(true);
-      }}
-      onClose={() => {
-        setOpen(false);
-      }}
-      isOptionEqualToValue={(option, value) => option === value}
-      getOptionLabel={(option) => option}
+      selectOnFocus={true}
+      clearOnBlur={true}
+      freeSolo={true}
+      id="free-solo-2-demo"
+      disableClearable={true}
+      autoComplete={true}
+      autoHighlight={true}
+      clearOnEscape={true}
+      filterSelectedOptions={true}
       options={options}
-      loading={loading}
+      value={inputValue}
+      onInputChange={(newInputValue) => {
+        setInputValue(newInputValue);
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Enter a @UserName"
+          label="Add Participant"
           InputProps={{
             ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
+            type: 'search',
           }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
-              if (open === false) {
-                console.log(params.inputProps);
-                props.addTourParticipant(params.inputProps.value);
-                clearAutoComplete();
-              }
+              handleEnter(params.inputProps.value);
             }
-          }}
+          }
+          }
         />
       )}
     />
   );
 }
+

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled, Paper, Typography, Card, IconButton, Divider, Container, Autocomplete } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
 import ClearIcon from '@mui/icons-material/Clear';
@@ -70,7 +69,8 @@ const ParticipantsTab = (props) => {
   };
 
   const handleNewParticipantOnChange = (event) => {
-    setParticipantName(event.target.value);
+    const value = event.target.value;
+    setParticipantName(value);
 
   };
 
@@ -83,42 +83,24 @@ const ParticipantsTab = (props) => {
 
     }}
     >
-      {/* <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={top100Films}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Movie" />}
-      />
+
       <TextField
-        label="Enter a Partcipant Name"
+        label="Enter a Participant Name"
         value={participantName}
         sx={{ width: '100%', marginBottom: spacingItems }}
-        onChange={(event) => { handleNewParticipantOnChange(event) }}
+        onChange={(event) => {
+          handleNewParticipantOnChange(event);
+        }}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            addTourParticipant();
+            addTourParticipant(participantName);
           }
         }}
-      /> */}
-
-        <TextField
-          label="Enter a Participant Name"
-          value={participantName}
-          sx={{ width: '100%', marginBottom: spacingItems }}
-          onChange={(event) => {
-            handleNewParticipantOnChange(event);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              addTourParticipant(participantName);
-            }
-          }}
-        />
+      />
 
       <UserSearchField
-        addTourParticipant ={addTourParticipant}
-      />
+      addTourParticipant={addTourParticipant}
+       ></UserSearchField>        
 
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
         <InputLabel id="type-select-label">Number of Partcipants</InputLabel>
