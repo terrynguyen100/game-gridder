@@ -12,7 +12,7 @@ import Error from './components/Error';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-import Tournaments from './components/tournaments/Tournaments';
+import Tournaments from './components/Tournaments/Tournaments';
 import Tournament from './components/Tournament/Tournament';
 import { ErrorContext } from './providers/ErrorProvider';
 import { AuthContext } from './providers/AuthProvider';
