@@ -9,6 +9,10 @@ import { generateTemplateAreas } from './helpers/helpers';
 
 import "./../../sass/tournament.scss"
 import { TournamentContext } from '../../providers/TournamentProvider';
+import top_match_down from './svg_files/top_match_down';
+import bottom_match_up from './svg_files/bottom_match_up';
+import connector from './svg_files/connector';
+import straight_line from './svg_files/straight_line';
 
 const Tournament = ({ tournament, numOfPlayers }) => {
   // const { t, setT, tournamentID } = useContext(TournamentContext);
@@ -20,25 +24,35 @@ const Tournament = ({ tournament, numOfPlayers }) => {
 
   //   })
   // }, []);
-  console.log("players: ",numOfPlayers)
 
   const tournamentDate = `${new Date(tournament.start_date).toString().slice(0, 16)} at ${new Date(tournament.start_date).toString().slice(16, 28)}`
-  // console.log(tournament)
 
   //Determine how many rounds there will be
-  let factorOf2 = 0
-  while (Math.pow(2, factorOf2) < numOfPlayers) factorOf2++;
+  let numOfRounds = 0
+  while (Math.pow(2, numOfRounds) < numOfPlayers) numOfRounds++;
 
-  // console.log(generateTemplateAreas(numOfPlayers, factorOf2))
-  // console.log("Tournament ", tournament, "Number of players: ", numOfPlayers)
-
-  const bracketStyle = {
+    const bracketStyle = {
     display: "grid",
-    gridTemplateRows: `repeat(${numOfPlayers - 1}, 1fr)`,
-    gridTemplateColumns: `repeat(${factorOf2}, 1fr)`,
-    gridTemplateAreas: generateTemplateAreas(numOfPlayers, factorOf2),
+    gridTemplateRows: `repeat(${numOfPlayers - 1}, 60px)`,
+    gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)}, 1fr)`,
+    gridTemplateAreas: generateTemplateAreas(numOfPlayers, numOfRounds),
     justifyContent: "center",
     alignItems: "stretch"
+  }
+
+  let bracketWidth = '100%'
+  if( numOfPlayers < 8) {
+    bracketWidth = {
+      width: "50%"
+    }
+  } else if ( numOfPlayers < 16) {
+    bracketWidth = {
+      width: "75%"
+    }
+  } else if ( numOfPlayers < 32) {
+    bracketWidth = {
+      width: "90%"
+    }
   }
 
   return (
@@ -69,15 +83,18 @@ const Tournament = ({ tournament, numOfPlayers }) => {
       </div>
 
       <div id="tournament-bracket">
-        <div id="tournament-rounds">
-          {[...Array(factorOf2)].map((e, i) => 
-              <div className="round-details" key={i}>Round {i + 1}<br/><span className="date">{new Date(tournament.start_date).toString().slice(0, 10)}</span></div>
+        {/* <div id="tournament-rounds">
+          {[...Array(numOfRounds)].map((e, i) => 
+              <div className="round-details" key={i}>Round {i + 1}<div className="date" backgroundColor="red">{new Date(tournament.start_date).toString().slice(0, 10)}</div></div>
           )}
-        </div>
-        <div id="tournament-games" style={bracketStyle}>
+        </div> */}
+
+        <div id="tournament-games" style={{...bracketStyle, ...bracketWidth, margin:"4rem auto",}}>
+          
           {tournament.matches.map((match, i) => {
             if(i < numOfPlayers / 2) {
               return(
+
                 <div className={`round-1 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}} key={i}>
                   <section className="bracket">
                     <div className="container">
@@ -92,11 +109,24 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                     </div>  
                   </section >
                 </div>
+
               )
             }
 
-            if(i >= numOfPlayers / 2 && i < (numOfPlayers - numOfPlayers / 2 / 2)) {
+            if(i >= numOfPlayers / 2 && i < (numOfPlayers - numOfPlayers / 4)) {
+
               return(
+              <>
+                <div className="top_match_down" style={{gridArea:`top_match_down-${i}`}}>
+                  {top_match_down(numOfRounds)}
+                </div>
+                <div className="bottom_match_up" style={{gridArea:`bottom_match_up-${i}`}}>
+                  {bottom_match_up(numOfRounds)}
+                </div>
+                <div className="connector" style={{gridArea:`connector-${i}`}}>
+                  {connector(numOfRounds)}
+                </div>
+
                 <div className={`round-2 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
@@ -111,11 +141,26 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                     </div>  
                   </section >
                 </div>
+
+              </>
               )
             }
 
-            if(i >= (numOfPlayers - numOfPlayers / 2 / 2) && i < (numOfPlayers - numOfPlayers / 2 / 2 / 2)) {
+            if(i >= (numOfPlayers - numOfPlayers / 4) && i < (numOfPlayers - numOfPlayers / 8)) {
               return(
+              <>
+                <div className="top_match_down" style={{gridArea:`top_match_down-${i}`}}>
+                  {top_match_down(numOfRounds)}
+                </div>
+
+                <div className="bottom_match_up" style={{gridArea:`bottom_match_up-${i}`}}>
+                  {bottom_match_up(numOfRounds)}
+                </div>
+
+                <div className="connector" style={{gridArea:`connector-${i}`}}>
+                  {connector(numOfRounds)}
+                </div>
+
                 <div className={`round-3 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
@@ -130,11 +175,25 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                     </div>  
                   </section >
                 </div>
+              </>
               )
             }
 
-            if(i >= (numOfPlayers - numOfPlayers / 2 / 2 / 2) && i < (numOfPlayers - numOfPlayers / 2 / 2 / 2 / 2)) {
+            if(i >= (numOfPlayers - numOfPlayers / 8) && i < (numOfPlayers - numOfPlayers / 16)) {
               return(
+              <>
+                <div className="top_match_down" style={{gridArea:`top_match_down-${i}`}}>
+                {top_match_down(numOfRounds)}
+                </div>
+  
+                <div className="bottom_match_up" style={{gridArea:`bottom_match_up-${i}`}}>
+                  {bottom_match_up(numOfRounds)}
+                </div>
+  
+                <div className="connector" style={{gridArea:`connector-${i}`}}>
+                  {connector(numOfRounds)}
+                </div>
+
                 <div className={`round-4 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
@@ -149,6 +208,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                     </div>  
                   </section >
                 </div>
+              </>
               )
             }
           })}
