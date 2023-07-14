@@ -6,22 +6,17 @@ import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { generateTemplateAreas } from './helpers/helpers';
-
-import "./../../sass/tournament.scss"
-import top_match_down from './svg_files/top_match_down';
-import bottom_match_up from './svg_files/bottom_match_up';
-import connector from './svg_files/connector';
-import straight_line from './svg_files/straight_line';
 import Bracket from './Bracket';
+import "./../../sass/tournament.scss"
+
 
 const Tournament = () => {
   const [tournament, setTournament] = useState(null);
   const [tournamentDate, setTournamentDate] = useState("");
-  const [numOfRounds, setNumOfRounds] = useState(0);
+
   const [numOfPlayers, setNumOfPlayers] = useState(0);
   const [bracketStyle, setBracketStyle] = useState({});
-  const [bracketWidth, setBracketWidth] = useState('100%');
+
 
   let tournamentID = useParams();
 
@@ -45,40 +40,9 @@ const Tournament = () => {
         setNumOfPlayers(getPlayerNums.length);
 
         setTournamentDate(`${new Date(tempData.data.start_date).toString().slice(0, 16)} at ${new Date(tempData.data.start_date).toString().slice(16, 28)}`)
-
-
-        //Determine how many rounds there will be
-        if(numOfPlayers !== 0) {
-          const numOfRoundsHolder = Math.ceil(Math.log2(numOfPlayers));
-          setNumOfRounds(numOfRoundsHolder);
-        }
-
-        if( numOfPlayers < 8) {
-          setBracketWidth({
-            width: "50%"
-          })
-        } else if ( numOfPlayers < 16) {
-          setBracketWidth({
-            width: "75%"
-          })
-        } else if ( numOfPlayers < 32) {
-          setBracketWidth({
-            width: "90%"
-          })
-        }
   }
 
-  const bs = {
-    display: "grid",
-    gridTemplateRows: `repeat(${numOfPlayers - 1}, 60px)`,
-    gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)}, 1fr)`,
-    gridTemplateAreas: generateTemplateAreas(numOfPlayers, numOfRounds),
-    justifyContent: "center",
-    alignItems: "stretch"
-  };
-
-
-  if (tournament !== null && numOfRounds !== 0) {
+  if (tournament !== null) {
   return (
     <div key={tournament.id}>
       <div id="tournament-info">
@@ -103,7 +67,7 @@ const Tournament = () => {
         </div>
       </div>
 
-      <Bracket bs={bs} bracketWidth={bracketWidth} tournament={tournament} numOfPlayers={numOfPlayers} numOfRounds={numOfRounds}/>
+      <Bracket numOfPlayers={numOfPlayers} tournament={tournament} />
       
     </div>
   )
