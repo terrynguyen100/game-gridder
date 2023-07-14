@@ -8,27 +8,29 @@ const TournamentView = () => {
   const {
     tourMatches, setTourMatches,
     tourParticipants, setTourParticipants,
+    usersIds, setUsersIds
   } = useContext(CreateTournamentContext);
 
-
-
-  const fetchUserIdByUsername = async (username) => {
-    const response = await axios.get(`/users/login/${username}`);
-    return response.data.id;
-  }
-
   const updateMatches = () => {
-
     const matchesArray = tourParticipants.reduce((acc, currentName, index) => {
       if (index % 2 === 0) {
-        if (currentName.startsWith('@')){
-          const id1 = fetchUserIdByUsername(currentName.slice(1));
-          const id2 = fetchUserIdByUsername(tourParticipants[index + 1].slice(1));
-          acc.push({ players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] });
-          acc.push({ players: [{ user_id: id1, }, { player_id: id2 }] }); 
+      // REFACTOR THIS FOR CASES WHERE A PAIRS ARE NOT ALL PLAYERS OR NOT ALL USERS
+        if (currentName.startsWith('@')) {
+          const userPlayer1 = currentName.slice(1);
+          const userPlayer2 = tourParticipants[index + 1]?.slice(1);
+          const id1 = usersIds[userPlayer1];
+          const id2 = usersIds[userPlayer2];
+          const pushUserPlayers = {
+            players: [
+              { player_name: userPlayer1, user_id: id1 },
+              { player_name: userPlayer2, user_id: id2 }
+            ]
+          }
+          acc.push(pushUserPlayers);
         }
         else {
-          acc.push({ players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] });
+          const pushPlayers = { players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] }
+          acc.push(pushPlayers);
         }
       }
       index++;
