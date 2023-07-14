@@ -6,9 +6,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -17,7 +15,6 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PrintIcon from '@mui/icons-material/Print';
-
 import TournamentView from './TournamentView';
 import TournamentTab from './TournamentTab';
 import { CreateTournamentContext } from '../../providers/CreateTournamentProvider';

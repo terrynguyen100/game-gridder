@@ -8,7 +8,7 @@ import UserSearchField from './UserSearchField';
 const ParticipantsTab = (props) => {
   const [participantName, setParticipantName] = useState('');
   const [participantsList, setParticipantList] = useState('');
-  const [participantsNumber, setParticipantsNumber] = useState('');
+  const [participantsNumber, setParticipantsNumber] = useState(4);
   const {
     tourName, setTourName,
     tourGameName, setTourGameName,
@@ -18,15 +18,7 @@ const ParticipantsTab = (props) => {
   } = useContext(CreateTournamentContext);
 
   const spacingItems = 2;
-
-  const top100Films = [
-    { label: '@he Shawshank Redemption', year: 1994 },
-    { label: '@The Godfather', year: 1972 },
-    { label: '@The Godfather: Part II', year: 1974 },
-    { label: '@The Dark Knight', year: 2008 },
-    { label: '@12 Angry Men', year: 1957 },
-    { label: "@Schindler's List", year: 1993 },
-    { label: '@Pulp Fiction', year: 1994 }]
+  const numberOfParticipantsOptions = [4,8,16,32]
 
   const addTourParticipant = (playerName) => {
     if (playerName !== '') {
@@ -38,6 +30,15 @@ const ParticipantsTab = (props) => {
 
   useEffect(() => {
     setParticipantList(tourParticipants.join('\n'));
+    // This to make sure the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
+    // while being among the options 4, 8, 16, 32
+    if (tourParticipants.length > participantsNumber) {
+      for (let i = 0; i < numberOfParticipantsOptions.length; i++) {
+        if (tourParticipants.length > numberOfParticipantsOptions[i]) {
+          setParticipantsNumber(numberOfParticipantsOptions[i + 1]);
+        }
+      }
+    }
   }, [tourParticipants]);
 
   const handleButtonGenerate = () => {
@@ -56,7 +57,7 @@ const ParticipantsTab = (props) => {
 
     axios.post('/tournaments/create', requestBody)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -83,25 +84,6 @@ const ParticipantsTab = (props) => {
 
     }}
     >
-
-      <TextField
-        label="Enter a Participant Name"
-        value={participantName}
-        sx={{ width: '100%', marginBottom: spacingItems }}
-        onChange={(event) => {
-          handleNewParticipantOnChange(event);
-        }}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            addTourParticipant(participantName);
-          }
-        }}
-      />
-
-      <UserSearchField
-      addTourParticipant={addTourParticipant}
-       ></UserSearchField>        
-
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
         <InputLabel id="type-select-label">Number of Partcipants</InputLabel>
         <Select
@@ -118,8 +100,19 @@ const ParticipantsTab = (props) => {
 
         </Select>
       </FormControl>
-      {/* -------------------------------------------------------- */}
-      <Box sx={{ padding: '15px', border: '1px solid black', borderRadius: 2, marginBottom: spacingItems }}>
+
+      <UserSearchField
+        addTourParticipant={addTourParticipant}
+      ></UserSearchField>
+
+
+
+      <Box sx={{
+        padding: '15px', border: '1px solid black', borderRadius: 2, marginBottom: spacingItems,
+        height: `${participantsNumber* 45+ 80}px`,
+        maxHeight: '60vh',
+        overflow: 'auto'
+      }}>
         <Typography variant="h6" sx={{ marginBottom: 1 }}>Participants</Typography>
         <Divider></Divider>
         {tourParticipants.map((participant, index) => {
@@ -139,16 +132,6 @@ const ParticipantsTab = (props) => {
           </Card>
         })}
       </Box>
-
-      {/* <TextField
-        id="outlined-multiline-static"
-        label="Participants"
-        value={participantsList}
-        multiline
-        rows={8}
-        sx={{ width: '100%', marginBottom: spacingItems }}
-      /> */}
-
 
       {/* <Button
         variant="contained"
