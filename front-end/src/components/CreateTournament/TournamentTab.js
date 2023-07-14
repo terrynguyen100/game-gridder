@@ -15,7 +15,7 @@ const TournamentTab = (props) => {
     categories, setCategories,
   } = useContext(CreateTournamentContext);
 
-  const spacingItems = 2;
+  const spacingItems = 1;
 
   useEffect(() => {
     fetchCategories();
@@ -31,6 +31,7 @@ const TournamentTab = (props) => {
       marginLeft: 2,
       marginRight: 2,
       marginTop: 12,
+      width: '230px',
     }}
     >
       <TextField
