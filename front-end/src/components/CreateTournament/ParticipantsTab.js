@@ -17,6 +17,7 @@ const ParticipantsTab = (props) => {
     tourDescription, setTourDescription,
     tourParticipants, setTourParticipants,
     tourMatches, setTourMatches,
+    tourPlayerNum, setTourPlayerNum,
   } = useContext(CreateTournamentContext);
   const{ displayError } = useContext(ErrorContext);
 
@@ -107,9 +108,9 @@ const ParticipantsTab = (props) => {
         <Select
           labelId="type-select-label"
           id="type-select"
-          value={participantsNumber}
+          value={tourPlayerNum}
           label="Number of Participants"
-          onChange={(event) => { setParticipantsNumber(event.target.value) }}
+          onChange={(event) => { setTourPlayerNum(event.target.value) }}
         >
           <MenuItem value={'4'}>4</MenuItem>
           <MenuItem value={'8'}>8</MenuItem>
