@@ -9,7 +9,6 @@ import { ErrorContext } from "../../providers/ErrorProvider";
 const ParticipantsTab = (props) => {
   const [participantName, setParticipantName] = useState('');
   const [participantsList, setParticipantList] = useState('');
-  const [participantsNumber, setParticipantsNumber] = useState(4);
   const {
     tourName, setTourName,
     tourDate, setTourDate,
@@ -19,10 +18,10 @@ const ParticipantsTab = (props) => {
     tourMatches, setTourMatches,
     tourPlayerNum, setTourPlayerNum,
   } = useContext(CreateTournamentContext);
-  const{ displayError } = useContext(ErrorContext);
+  const { displayError } = useContext(ErrorContext);
 
-  const spacingItems = 2;
-  const numberOfParticipantsOptions = [4,8,16,32]
+  const spacingItems = 1;
+  const numberOfParticipantsOptions = [4, 8, 16, 32]
 
   const addTourParticipant = (playerName) => {
     const trimmedPlayerName = playerName.trim();
@@ -51,10 +50,10 @@ const ParticipantsTab = (props) => {
     setParticipantList(tourParticipants.join('\n'));
     // To make the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
     // while being among the options 4, 8, 16, 32
-    if (tourParticipants.length > participantsNumber) {
+    if (tourParticipants.length > tourPlayerNum) {
       for (let i = 0; i < numberOfParticipantsOptions.length; i++) {
         if (tourParticipants.length > numberOfParticipantsOptions[i]) {
-          setParticipantsNumber(numberOfParticipantsOptions[i + 1]);
+          setTourPlayerNum(numberOfParticipantsOptions[i + 1]);
         }
       }
     }
@@ -62,7 +61,7 @@ const ParticipantsTab = (props) => {
 
   const handleButtonGenerate = () => {
 
-    if (tourParticipants.length < participantsNumber) {
+    if (tourParticipants.length < tourPlayerNum) {
       displayError('Need more participants');
     }
     else {
@@ -85,7 +84,7 @@ const ParticipantsTab = (props) => {
           console.log(error.message);
         });
     }
-    
+
   };
   const handleIconDelete = (index) => {
     const updatedParticipants = [...tourParticipants];
@@ -100,6 +99,7 @@ const ParticipantsTab = (props) => {
       marginRight: 2,
       marginTop: 12,
       textAlign: 'center',
+      width: '230px',
 
     }}
     >
@@ -125,30 +125,35 @@ const ParticipantsTab = (props) => {
       ></UserSearchField>
 
       <Box sx={{
-        padding: '15px', border: '1px solid black', borderRadius: 2, marginBottom: spacingItems,
-        height: `${participantsNumber* 45+ 80}px`,
-        maxHeight: '60vh',
-        overflow: 'auto'
+        padding: '10px',
+        border: '1px solid black',
+        borderRadius: 2,
+        marginBottom: spacingItems,
+        
+        // height: `${tourPlayerNum* 45+ 80}px`,
+        maxHeight: '54vh',
+        overflow: 'auto',
+        bgcolor: '#2B2D42'
       }}>
-        <Typography variant="h6" sx={{ marginBottom: 1 }}>Participants</Typography>
-        <Divider></Divider>
+        <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Participants</Typography>
+        <Divider color="#EDF2F4" sx={{marginBottom: 1}}></Divider>
         {tourParticipants.map((participant, index) => {
           return <Card
             variant="outlined"
-            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 1, bgcolor: "#8D99AE" }}
+            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2px", bgcolor: "#EDF2F4" }}
             key={index}
           >
             <Typography variant="h6"
               sx={{ marginLeft: 1 }}
             > {index + 1} </Typography>
 
-            <Typography variant="h7"> {participant} </Typography>
+            <Typography variant="body1"> {participant} </Typography>
             <IconButton sx={{ color: '#BB0C05' }} onClick={() => handleIconDelete(index)}>
               < ClearIcon fontSize="small" sx={{ color: '#BB0C05' }} />
             </IconButton>
           </Card>
         })}
-        
+
       </Box>
 
       {/* <Button
