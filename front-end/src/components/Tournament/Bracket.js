@@ -5,11 +5,12 @@ import straight_line from './svg_files/straight_line';
 import { generateTemplateAreas } from './helpers/helpers';
 import {useState, useEffect} from 'react'
 
-const Bracket = ({numOfPlayers, tournament, playersObj}) => {
+const Bracket = ({numOfPlayers, tournament, matchesObj}) => {
+  console.log("Num of players:", numOfPlayers)
   const [bracketWidth, setBracketWidth] = useState({width:'100%'});
   const [numOfRounds, setNumOfRounds] = useState(0);
-  const [numOfMatches, setNumOfMatches] = useState(numOfPlayers - 1)
-
+  // const [numOfMatches, setNumOfMatches] = useState(numOfPlayers - 1)
+  const numOfMatches = numOfPlayers ? numOfPlayers - 1 : 0
   useEffect(() => {
     //Determine how many rounds there will be
     if(numOfPlayers !== 0) {
@@ -33,7 +34,7 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
       })
       // bracketWidth = "90%"
     }
-  }, [])
+  }, [numOfPlayers])
 
   const bs = {
     display: "grid",
@@ -48,7 +49,7 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
     <div id="tournament-bracket" style={{...bracketWidth, margin:"auto"}}>
       <div id="tournament-rounds">
         {[...Array(numOfRounds)].map((e, i) => 
-            <div className="round-details" key={i}>Round {i + 1}<div className="date" >{new Date(tournament.start_date).toString().slice(0, 10)}</div></div>
+            <div className="round-details" key={i}>Round {i + 1}<div className="date" >{new Date(tournament?.start_date).toString().slice(0, 10)}</div></div>
         )}
       </div>
 
@@ -65,7 +66,6 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
                     <div className="split split-one">
                       <div className="round round-one current">
                         <ul className="matchup">
-                          {console.log(tournament.matches[i])}
                           {tournament ? 
                           <>
                             <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
@@ -73,8 +73,8 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
                           </>
                           :
                           <>
-                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
-                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                            <li className="team team-top">{matchesObj[i]?.players[0]?.player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{matchesObj[i]?.players[1]?.player_name}<span className="score">{match?.players[1]?.score}</span></li>
                           </>
                           }
                          
@@ -107,10 +107,17 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
                     <div className="split split-one">
                       <div className="round round-one current">
                         <ul className="matchup">
-                          {/* <li className="team team-top">{match.players[0].player_name}<span className="score">{match.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{match.players[1].player_name}<span className="score">{match.players[1]?.score}</span></li> */}
-                          <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                        {tournament ? 
+                          <>
+                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          :
+                          <>
+                            <li className="team team-top">{matchesObj[i]?.players[0]?.player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{matchesObj[i]?.players[1]?.player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          }
                         </ul>
                       </div>  
                     </div>  
@@ -150,10 +157,17 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
                     <div className="split split-one">
                       <div className="round round-one current">
                         <ul className="matchup">
-                          {/* <li className="team team-top">{match.players[0].player_name}<span className="score">{match.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{match.players[1].player_name}<span className="score">{match.players[1]?.score}</span></li> */}
-                          <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                        {tournament ? 
+                          <>
+                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          :
+                          <>
+                            <li className="team team-top">{matchesObj[i]?.players[0]?.player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{matchesObj[i]?.players[1]?.player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          }
                         </ul>
                       </div>  
                     </div>  
@@ -210,10 +224,17 @@ const Bracket = ({numOfPlayers, tournament, playersObj}) => {
                     <div className="split split-one">
                       <div className="round round-one current">
                         <ul className="matchup">
-                          {/* <li className="team team-top">{match.players[0].player_name}<span className="score">{match.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{match.players[1].player_name}<span className="score">{match.players[1]?.score}</span></li> */}
-                          <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
-                          <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                        {tournament ? 
+                          <>
+                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          :
+                          <>
+                            <li className="team team-top">{matchesObj[i]?.players[0]?.player_name}<span className="score">{match?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{matchesObj[i]?.players[1]?.player_name}<span className="score">{match?.players[1]?.score}</span></li>
+                          </>
+                          }
                         </ul>
                       </div>  
                     </div>  
