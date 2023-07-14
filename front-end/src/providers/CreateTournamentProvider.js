@@ -11,6 +11,7 @@ const CreateTournamentProvider = (props) => {
   const [tourDate, setTourDate] = useState(null);
   const [tourDescription, setTourDescription] = useState('');
   const [tourParticipants, setTourParticipants] = useState([]);
+  const [tourPlayerNum, setTourPlayerNum] = useState(4)
   const [categories, setCategories] = useState([]);
   
   const [tourMatches, setTourMatches] = useState([]);
@@ -24,6 +25,7 @@ const CreateTournamentProvider = (props) => {
     tourDescription, setTourDescription,
     tourDate, setTourDate,
     tourParticipants, setTourParticipants,
+    tourPlayerNum, setTourPlayerNum,
     categories, setCategories,
     tourMatches, setTourMatches,
     usersIds, setUsersIds,
