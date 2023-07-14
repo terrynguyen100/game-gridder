@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,19 +11,15 @@ import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import joypad from './../../images/joypad.svg'
-import cards from './../../images/cards.png'
-
-// import { RouteContext } from '../../providers/RouteProvider';
+// import cards from './../../images/cards.png'
 
 
-import { useState, useEffect, useContext } from 'react';
-import axios from 'axios'
-
-export default function ImgCard({ tournament, handleRoute }) {
+export default function ImgCard({ tournament }) {
+  const navigate = useNavigate();
   const [gamePlayed, setGamePlayed] = useState('')
   const [numOfPlayers, setNumOfPlayers] = useState([])
   const [startDate, setStartDate] = useState('')
-  const [cardImage, setCardImage] = useState('')
+  // const [cardImage, setCardImage] = useState('')
   const [tournamentInfo, setTournamentInfo] = useState([])
 
   useEffect(() => {
@@ -50,6 +49,10 @@ export default function ImgCard({ tournament, handleRoute }) {
 
     //Get game being played
     setGamePlayed(tournamentData.data.game_name)
+  }
+
+  const handleRoute = () => {
+    navigate(`/tournaments/${tournamentInfo.id}`);
   }
 
   // const getCategory = async() => {
@@ -86,7 +89,7 @@ export default function ImgCard({ tournament, handleRoute }) {
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center"}}>
-        <Button onClick={() => handleRoute({tournamentInfo, numOfPlayers})} sx={{ backgroundColor: "#454d60", width: "90%", color: "#FFF", boxShadow: "0 1px 1px 0 rgba(0,0,0,0.3)" }} size="large">View</Button>
+        <Button onClick={() => handleRoute()} sx={{ backgroundColor: "#454d60", width: "90%", color: "#FFF", boxShadow: "0 1px 1px 0 rgba(0,0,0,0.3)" }} size="large">View</Button>
       </CardActions>
     </Card>
   );
