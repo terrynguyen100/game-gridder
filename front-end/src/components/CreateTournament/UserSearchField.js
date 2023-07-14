@@ -2,23 +2,30 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
+import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 
 export default function UserSearchField(props) {
-  const [userNames, setUserNames] = React.useState([]);
+  const [userTags, setUserTags] = React.useState([]);
   const [options, setOptions] = React.useState([]);
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
+  const {usersIds, setUsersIds} = React.useContext(CreateTournamentContext);
 
   const fetchUsers = async () => {
     // requires revision to get only the user names and not the complete users
     const usersData = await axios.get("/users");
-    const userNames = usersData.data.reduce((acc, obj) => {
+    const userTags = usersData.data.reduce((acc, obj) => {
       if (obj.hasOwnProperty('user_name')) {
-        acc.push('@' + obj.user_name);
+        const { id, user_name } = obj;
+        // fill the userNames array with the user tags
+        acc.push('@' + user_name);
+        // fill the usersIds object with the user ids key value pairs
+        setUsersIds(prevState => ({ ...prevState, [user_name]: id }));
       }
       return acc;
     }, []);
-    setUserNames(userNames);
+    setUserTags(userTags);
+    
   };
 
   React.useEffect(() => {
@@ -27,7 +34,7 @@ export default function UserSearchField(props) {
 
   React.useEffect(() => {
     if (inputValue?.startsWith('@')) {
-      setOptions(userNames);
+      setOptions(userTags);
     }
     else {
       setOptions([]);
@@ -36,13 +43,13 @@ export default function UserSearchField(props) {
 
 
   const handleEnter = (newParticipant) => {
-    const isExisted = userNames.includes(newParticipant);
+    const isExisted = userTags.includes(newParticipant);
     if (newParticipant.startsWith('@') && isExisted) {
       props.addTourParticipant(newParticipant);
     } else if (!newParticipant.startsWith('@') && newParticipant === inputValue) {
       props.addTourParticipant(newParticipant);
     }
-    
+
     setInputValue('');
   };
 

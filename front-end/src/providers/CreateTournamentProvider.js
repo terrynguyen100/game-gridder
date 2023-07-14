@@ -14,6 +14,7 @@ const CreateTournamentProvider = (props) => {
   const [categories, setCategories] = useState([]);
   
   const [tourMatches, setTourMatches] = useState([]);
+  const [usersIds, setUsersIds] = useState({}); //storeing the key is user_name, value is id
 
   const value = {
     tourName, setTourName,
@@ -25,6 +26,7 @@ const CreateTournamentProvider = (props) => {
     tourParticipants, setTourParticipants,
     categories, setCategories,
     tourMatches, setTourMatches,
+    usersIds, setUsersIds,
   };
 
   return (
