@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import ImgCard from "./tournaments/Card";
+import ImgCard from "./Tournaments/Card";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
