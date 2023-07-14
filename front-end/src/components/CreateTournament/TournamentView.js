@@ -14,27 +14,19 @@ const TournamentView = () => {
   const updateMatches = () => {
     const matchesArray = tourParticipants.reduce((acc, currentName, index) => {
       if (index % 2 === 0) {
-      // REFACTOR THIS FOR CASES WHERE A PAIRS ARE NOT ALL PLAYERS OR NOT ALL USERS
-        if (currentName.startsWith('@')) {
-          const userPlayer1 = currentName.slice(1);
-          const userPlayer2 = tourParticipants[index + 1]?.slice(1);
-          const id1 = usersIds[userPlayer1];
-          const id2 = usersIds[userPlayer2];
-          const pushUserPlayers = {
-            players: [
-              { player_name: userPlayer1, user_id: id1 },
-              { player_name: userPlayer2, user_id: id2 }
-            ]
-          }
-          acc.push(pushUserPlayers);
+        const userPlayer1 = currentName.startsWith('@') ? currentName.slice(1) : currentName;
+        const userPlayer2 = tourParticipants[index + 1]?.startsWith('@') ? tourParticipants[index + 1]?.slice(1) : tourParticipants[index + 1];
+        const id1 = usersIds[userPlayer1];
+        const id2 = usersIds[userPlayer2];
+        const pushUserPlayers = {
+          players: [
+            { player_name: userPlayer1, user_id: id1 },
+            { player_name: userPlayer2, user_id: id2 }
+          ]
         }
-        else {
-          const pushPlayers = { players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] }
-          acc.push(pushPlayers);
-        }
+        acc.push(pushUserPlayers);
       }
       index++;
-      console.log(acc);
       return acc;
     }, []);
 
