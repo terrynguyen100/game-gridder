@@ -95,11 +95,11 @@ export default function MiniDrawer() {
   }, [tabIndex]);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
 
       <Drawer variant="permanent" open={open} PaperProps={{
-        sx: { bgcolor: '#2B2D42', zIndex: 0 }
+        sx: { bgcolor: '#2B2D42', zIndex: 0, width: '65px' }
       }}>
         <DrawerHeader sx={{ height: 80 }}>
         </DrawerHeader>
@@ -124,10 +124,7 @@ export default function MiniDrawer() {
       </Drawer>
       {(open === true) &&
         <Box sx={{
-          bgcolor: '#edf2f4',
-          width: '300px',
-          borderLeft: '1px solid gray',
-          marginLeft: '10px',
+          bgcolor: '#EDF2F4',
           minHeight: '100vh',
         }}
           fullheight='true'
