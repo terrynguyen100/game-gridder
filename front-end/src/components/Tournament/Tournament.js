@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -6,50 +9,76 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { generateTemplateAreas } from './helpers/helpers';
 
 import "./../../sass/tournament.scss"
-import { TournamentContext } from '../../providers/TournamentProvider';
 import top_match_down from './svg_files/top_match_down';
 import bottom_match_up from './svg_files/bottom_match_up';
 import connector from './svg_files/connector';
 import straight_line from './svg_files/straight_line';
 
-const Tournament = ({ tournament, numOfPlayers }) => {
+const Tournament = () => {
+  const [tournament, setTournament] = useState(null);
+  const [tournamentDate, setTournamentDate] = useState("");
+  const [numOfRounds, setNumOfRounds] = useState(0);
+  const [numOfPlayers, setNumOfPlayers] = useState(0);
+  const [bracketStyle, setBracketStyle] = useState({});
+  const [bracketWidth, setBracketWidth] = useState('100%');
 
+  let tournamentID = useParams();
 
-  const tournamentDate = `${new Date(tournament.start_date).toString().slice(0, 16)} at ${new Date(tournament.start_date).toString().slice(16, 28)}`
+  // Need proper cleanup to work in this file, otherwise app crashes from too many requests
+  useEffect(() => {
+    let isMounted = true;
+    axios.get(`/tournaments/${tournamentID.id}`)
+    .then((response) => {
+      if (isMounted) {
+      setTournament(response.data)
+      if(response.data.matches.length === 0) setNumOfPlayers([].length)
+    const getPlayerNums = response.data.matches.reduce((ac, cv) => {
+      if(cv.players.length === 0) return ac
+      if(!ac.includes(cv.players[0].player_name)) ac.push(cv.players[0]?.player_name)
+      if(!ac.includes(cv.players[1].player_name)) ac.push(cv.players[1]?.player_name)
+      return ac
+    }, [])
+    setNumOfPlayers(getPlayerNums.length);
 
-  //Determine how many rounds there will be
-  let numOfRounds = 0
-  while (Math.pow(2, numOfRounds) < numOfPlayers) numOfRounds++;
+    setTournamentDate(`${new Date(response.data.start_date).toString().slice(0, 16)} at ${new Date(response.data.start_date).toString().slice(16, 28)}`)
 
-    const bracketStyle = {
-    display: "grid",
-    gridTemplateRows: `repeat(${numOfPlayers - 1}, 60px)`,
-    gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)}, 1fr)`,
-    gridTemplateAreas: generateTemplateAreas(numOfPlayers, numOfRounds),
-    justifyContent: "center",
-    alignItems: "stretch"
-  }
-
-  let bracketWidth = '100%'
-  if( numOfPlayers < 8) {
-    bracketWidth = {
-      width: "50%"
+    //Determine how many rounds there will be
+    while (Math.pow(2, numOfRounds) < numOfPlayers) setNumOfRounds((prev) => prev + 1);
+  
+    // This is not spreading properly on line 111. If spread operator is used, all matches are stacked on top of each other. Put it inside useEffect since it needs the numOfPlayers and numOfRounds and the API call needs to happen before those can be defined.
+      setBracketStyle({
+      display: "grid",
+      gridTemplateRows: `repeat(${numOfPlayers - 1}, 60px)`,
+      gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)}, 1fr)`,
+      gridTemplateAreas: generateTemplateAreas(numOfPlayers, numOfRounds),
+      justifyContent: "center",
+      alignItems: "stretch"
+    });
+  
+    if( numOfPlayers < 8) {
+      setBracketWidth({
+        width: "50%"
+      })
+    } else if ( numOfPlayers < 16) {
+      setBracketWidth({
+        width: "75%"
+      })
+    } else if ( numOfPlayers < 32) {
+      setBracketWidth({
+        width: "90%"
+      })
     }
-  } else if ( numOfPlayers < 16) {
-    bracketWidth = {
-      width: "75%"
-    }
-  } else if ( numOfPlayers < 32) {
-    bracketWidth = {
-      width: "90%"
-    }
-  }
+    }})
 
+    return () => {
+      isMounted = false;
+    };
+  }, [])
+
+
+  if (tournament !== null) {
   return (
     <div key={tournament.id}>
-      <h1>
-        Hello
-      </h1>
       <div id="tournament-info">
         <h1 className="title">{tournament.name}</h1>
         <div className="tournament-stats">
@@ -79,7 +108,7 @@ const Tournament = ({ tournament, numOfPlayers }) => {
           )}
         </div> */}
 
-        <div id="tournament-games" style={{...bracketStyle, ...bracketWidth, margin:"4rem auto",}}>
+        <div id="tournament-games" style={{bracketStyle, ...bracketWidth, margin:"4rem auto",}}>
           
           {tournament.matches.map((match, i) => {
             if(i < numOfPlayers / 2) {
@@ -238,7 +267,13 @@ const Tournament = ({ tournament, numOfPlayers }) => {
         </div>  
       </div>
     </div>
-  )
+  ) } else {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
 }
 
-export default Tournament
+export default Tournament;

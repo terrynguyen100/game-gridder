@@ -4,9 +4,6 @@ import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
 import ResetBox from "./ResetBox";
-import { useContext } from "react";
-import { TournamentContext } from './../../providers/TournamentProvider';
-import { Link, useNavigate } from 'react-router-dom';
 import "./../../sass/tournaments.scss"
 
 const Tournaments = () => {
@@ -15,9 +12,6 @@ const Tournaments = () => {
   const [game, setGame] = useState('All')
   const [tournamentState, setTournamentState] = useState('All')
   const [registration, setRegistration] = useState('All')
-  
-  const { setT } = useContext(TournamentContext);
-  const navigate = useNavigate();
 
   const gameArray = ['Mario Kart', 'Zelda: Tears of the Kingdom']
   const tournamentStateArray = ['Upcoming', 'Ongoing', 'Completed']
@@ -64,11 +58,6 @@ const Tournaments = () => {
     setRegistration('All')
   }
 
-  const handleRoute = (e) => {
-    setT(e)
-    navigate(`/tournaments/${e.tournamentInfo.id}`);
-  }
-
   return(
     <>
       <h1 id="t-title">Tournaments</h1>
@@ -97,10 +86,10 @@ const Tournaments = () => {
         {
         filtered.length ? 
         filtered.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute} />
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })
         :tournaments.map(tournament => {
-          return <ImgCard tournament={tournament} key={tournament.id} handleRoute={handleRoute}/>
+          return <ImgCard tournament={tournament} key={tournament.id} />
         })}
       </div>
     </>
