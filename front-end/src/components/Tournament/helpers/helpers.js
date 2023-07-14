@@ -1,180 +1,91 @@
 function generateTemplateAreas(numOfPlayers) {
   const numOfRounds = Math.ceil(Math.log2(numOfPlayers));
-  const templateAreas = [];
+  let arr = []
 
-  let gameCount = 1;
-  for (let i = 1; i <= numOfRounds; i++) {
-    const round = [];
-
-    const gamesInRound = Math.pow(2, numOfRounds - i);
-
-    //3 matches
-    if (numOfRounds === 2) {
-      // for (let j = 1; j <= gamesInRound; j++) {
-      //   if(i > 1 && j === 1) {
-      //     for(let z = 1; z < i; z++){
-      //       round.push(".")
-      //     }
-      //   }
-      //   round.push(`game-${gameCount}`);
-      //   if (j < gamesInRound) {
-      //     round.push(".");
-      //   }
-  
-      //   if(i > 1 && j === gamesInRound) {
-      //     for(let z = 1; z < i; z++){
-      //       round.push(".")
-      //     }
-      //   }
-      //   gameCount++;
-      // }
-      const arr = [['game-1 .'], ['. game-3'], ['game-2 .']]
-
-      const formattedTemplateAreas = arr.map((round) =>
-        `"${round.join(" ")}"`
-      );
-      console.log(numOfRounds, formattedTemplateAreas)
-      return formattedTemplateAreas.join("\n");
-  
-    }
-    
-    //7 matches
-    if (numOfRounds === 3){
-      // for (let j = 1; j <= gamesInRound; j++) {
-      //   if(i > 1 && j === 1) {
-      //     for(let z = 1; z <= i; z++){
-      //       round.push(".")
-      //     }
-      //   }
-      //   round.push(`game-${gameCount}`);
-      //   if (j < gamesInRound) {
-      //     round.push(".");
-      //   }
-  
-      //   if(i > 1 && j === gamesInRound) {
-      //     for(let z = 1; z <= i; z++){
-      //       round.push(".")
-      //     }
-      //   }
-      //   gameCount++;
-      // }
-
-      const arr = [
-        ['game-1 . .'], 
-        ['. game-5 .'], 
-        ['game-2 . .'],
-        ['. . game-7'], 
-        ['game-3 . .'], 
-        ['. game-6 .'],
-        ['game-4 . .']
-      ]
-
-      const formattedTemplateAreas = arr.map((round) =>
-        `"${round.join(" ")}"`
-      );
-      console.log(numOfRounds, formattedTemplateAreas)
-      return formattedTemplateAreas.join("\n");
-    }
-    
-    //15 matches
-    if (numOfRounds === 4){
-      // for (let j = 1; j <= gamesInRound; j++) {
-      //   if (i < numOfRounds) {
-      //     if(i > 1 && j === 1) {
-      //       for(let z = 1; z <= i; z++){
-      //         round.push(".");
-      //         round.push(".");
-      //       }
-      //     }
-      //     round.push(`game-${gameCount}`);
-      //     if (j < gamesInRound) {
-      //       round.push(".");
-      //     }
-    
-      //     if(i > 1 && j === gamesInRound) {
-      //       for(let z = 1; z <= i; z++){
-      //         round.push(".");
-      //         round.push(".");
-      //       }
-      //     }
-      //   } else {
-      //     for(let z = 1; z <= 7; z++){
-      //       round.push(".");
-
-      //     }
-      //     round.push(`game-${gameCount}`);
-      //     for(let z = 1; z <= 7; z++){
-      //       round.push(".");
-
-      //     }
-      //   }
-        
-      //   gameCount++;
-      // }
-
-      const arr = [
-        ['game-1 . . .'], 
-        ['. . . .'], 
-        ['game-2 . . .'],
-        ['. game-9 . .'], 
-        ['game-3 . game-13 .'], 
-        ['. . . .'],
-        ['game-4 game-10 . .'],
-        ['. . . game-15'],
-        ['game-5 game-11 . .'], 
-        ['. . . .'], 
-        ['game-6 . game-14 .'],
-        ['. game-12 . .'],
-        ['game-7 . . .'],
-        ['. . . .'],
-        ['game-8 . . .']
-      ]
-
-      const formattedTemplateAreas = arr.map((round) =>
-        `"${round.join(" ")}"`
-      );
-      console.log(numOfRounds, formattedTemplateAreas)
-      return formattedTemplateAreas.join("\n");
-
-    }
-
-
-    templateAreas.push(round);
+  //3 matches
+  if (numOfRounds === 2) {
+    arr = [
+      ['game-1 game-1 top_match_down-2 . .'], 
+      ['. . connector-2 game-3 game-3'], 
+      ['game-2 game-2 bottom_match_up-2 . .']
+    ] 
   }
-  console.log(numOfRounds, templateAreas)
-
-  const transposedArr = transpose(templateAreas)
-
-  //If element is undefined turn it into a "."
-  for(let i = 0; i < numOfPlayers - 1; i++) {
-    for(let j = 0; j < numOfRounds; j++){
-      if (transposedArr[i][j] === undefined) transposedArr[i][j] = "." 
-    }
+  
+  //7 matches
+  if (numOfRounds === 3){
+    arr = [
+      ['game-1 game-1 top_match_down-4 . . . . .'], 
+      ['. . connector-4 game-5 game-5 top_match_down-6 . .'], 
+      ['game-2 game-2 bottom_match_up-4 . . straight_line-6 . .'],
+      ['. . . . . connector-6 game-7 game-7'], 
+      ['game-3 game-3 top_match_down-5 . . straight_line2-6 . .'], 
+      ['. . connector-5 game-6 game-6 bottom_match_up-6 . .'],
+      ['game-4 game-4 bottom_match_up-5 . . . . .']
+    ]
+  }
+  
+  //15 matches
+  if (numOfRounds === 4){
+    arr = [
+      ['game-1 game-1 top_match_down-8 . . . . . . . .'], 
+      ['. . connector-8 game-9 game-9 top_match_down-12 . . . . .'], 
+      ['game-2 game-2 bottom_match_up-8 . . straight_line-12 . . . . .'],
+      ['. . . . . connector-12 game-13 game-13 top_match_down-14 . .'], 
+      ['game-3 game-3 top_match_down-9 . . straight_line2-12 . . straight_line-14 . .'], 
+      ['. . connector-9 game-10 game-10 bottom_match_up-12 . . straight_line2-14 . .'],
+      ['game-4 game-4 bottom_match_up-9 . . . . . straight_line3-14 . .'],
+      ['. . . . . . . . connector-14 game-15 game-15'],
+      ['game-5 game-5 top_match_down-10 . . . . . straight_line4-14 . .'], 
+      ['. . connector-10 game-11 game-11 top_match_down-13 . . straight_line5-14 . .'], 
+      ['game-6 game-6 bottom_match_up-10 . . straight_line-13 . . straight_line6-14 . .'],
+      ['. . . . . connector-13 game-14 game-14 bottom_match_up-14 . .'],
+      ['game-7 game-7 top_match_down-11 . . straight_line2-13 . . . . .'],
+      ['. . connector-11 game-12 game-12 bottom_match_up-13 . . . . .'],
+      ['game-8 game-8 bottom_match_up-11 . . . . . . . .']
+    ]
   }
 
+  //31 matches
+  if (numOfRounds === 5){
+    arr = [
+      ['game-1 . . . .'], 
+      ['. game-17 . . .'], 
+      ['game-2 . . . .'],
+      ['. . game-25 . .'], 
+      ['game-3 . . . .'], 
+      ['. game-18 . . .'],
+      ['game-4 . . . .'],
+      ['. . . game-29 .'],
+      ['game-5 . . . .'], 
+      ['. game-19 . . .'], 
+      ['game-6 . . . .'],
+      ['. . game-26 . .'],
+      ['game-7 . . . .'],
+      ['. game-20 . . .'],
+      ['game-8 . . . .'],
+      ['. . . . game-31'], 
+      ['game-9 . . . .'],
+      ['. game-21 . . .'], 
+      ['game-10 . . . .'], 
+      ['. . game-27 . .'],
+      ['game-11 . . . .'],
+      ['. game-22 . . .'],
+      ['game-12 . . . .'], 
+      ['. . . game-30 .'], 
+      ['game-13 . . . .'],
+      ['. game-23 . . .'],
+      ['game-14 . . . .'],
+      ['. . game-28 . .'],
+      ['game-15 . . . .'],
+      ['. game-24 . . .'],
+      ['game-16 . . . .']
+    ]
+  }
 
-  const formattedTemplateAreas = transposedArr.map((round) =>
-    `"${round.join(" ")}"`
+  const formattedTemplateAreas = arr.map((round) =>
+  `"${round.join(" ")}"`
   );
-  console.log(numOfRounds, formattedTemplateAreas)
   return formattedTemplateAreas.join("\n");
 }
-
-const transpose = function (matrix) {
-  // Replace this code with your solution
-  const rowLength = matrix.length;
-  const columnLength = matrix[0].length;
-
-  let tempArray = [];
-
-  for (let i = 0; i < columnLength; i++) {
-    const col = [];
-    for (let j = 0; j < rowLength; j++) {
-      col.push(matrix[j][i]);
-    }
-    tempArray.push(col);
-  }
-  return tempArray;
-};
 
 module.exports = {generateTemplateAreas}
