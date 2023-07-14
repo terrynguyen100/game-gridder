@@ -11,7 +11,6 @@ import top_match_down from './svg_files/top_match_down';
 import bottom_match_up from './svg_files/bottom_match_up';
 import connector from './svg_files/connector';
 import straight_line from './svg_files/straight_line';
-import straight_line2 from './svg_files/straight_line';
 
 const Tournament = ({ tournament, numOfPlayers }) => {
 
