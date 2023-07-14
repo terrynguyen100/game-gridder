@@ -11,6 +11,7 @@ import top_match_down from './svg_files/top_match_down';
 import bottom_match_up from './svg_files/bottom_match_up';
 import connector from './svg_files/connector';
 import straight_line from './svg_files/straight_line';
+import straight_line2 from './svg_files/straight_line';
 
 const Tournament = ({ tournament, numOfPlayers }) => {
 
@@ -151,6 +152,13 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                   {connector(numOfRounds)}
                 </div>
 
+                <div className="straight_line" style={{gridArea:`straight_line-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+                <div className="straight_line2" style={{gridArea:`straight_line2-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
                 <div className={`round-3 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
                     <div className="container">
@@ -183,6 +191,31 @@ const Tournament = ({ tournament, numOfPlayers }) => {
                 <div className="connector" style={{gridArea:`connector-${i}`}}>
                   {connector(numOfRounds)}
                 </div>
+
+                <div className="straight_line" style={{gridArea:`straight_line-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
+                <div className="straight_line2" style={{gridArea:`straight_line2-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
+                <div className="straight_line3" style={{gridArea:`straight_line3-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
+                <div className="straight_line4" style={{gridArea:`straight_line4-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
+                <div className="straight_line5" style={{gridArea:`straight_line5-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
+                <div className="straight_line6" style={{gridArea:`straight_line6-${i}`}}>
+                  {straight_line(numOfRounds)}
+                </div>
+
 
                 <div className={`round-4 game-${i + 1}`} key={i} style={{gridArea: `game-${i + 1}`}}>
                   <section className="bracket">
