@@ -42,12 +42,13 @@ export default function UserSearchField(props) {
   }, [inputValue]);
 
 
-  const handleEnter = (newParticipant) => {
-    const isExisted = userTags.includes(newParticipant);
-    if (newParticipant.startsWith('@') && isExisted) {
-      props.addTourParticipant(newParticipant);
-    } else if (!newParticipant.startsWith('@') && newParticipant === inputValue) {
-      props.addTourParticipant(newParticipant);
+  const handleEnter = (paramsInput) => {
+    const isExisted = userTags.includes(paramsInput);
+    if (paramsInput.startsWith('@') && isExisted) {
+      props.addTourParticipant(paramsInput);
+    } 
+    else if (!paramsInput.startsWith('@') && paramsInput === inputValue) {
+      props.addTourParticipant(paramsInput);
     }
 
     setInputValue('');
