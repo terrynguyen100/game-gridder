@@ -4,6 +4,7 @@ import { CreateTournamentContext } from "../../providers/CreateTournamentProvide
 import axios from "axios";
 import ClearIcon from '@mui/icons-material/Clear';
 import UserSearchField from './UserSearchField';
+import { ErrorContext } from "../../providers/ErrorProvider";
 
 const ParticipantsTab = (props) => {
   const [participantName, setParticipantName] = useState('');
@@ -11,11 +12,13 @@ const ParticipantsTab = (props) => {
   const [participantsNumber, setParticipantsNumber] = useState(4);
   const {
     tourName, setTourName,
+    tourDate, setTourDate,
     tourGameName, setTourGameName,
     tourDescription, setTourDescription,
     tourParticipants, setTourParticipants,
     tourMatches, setTourMatches,
   } = useContext(CreateTournamentContext);
+  const{ displayError } = useContext(ErrorContext);
 
   const spacingItems = 2;
   const numberOfParticipantsOptions = [4,8,16,32]
@@ -27,6 +30,20 @@ const ParticipantsTab = (props) => {
       setTourParticipants([...tourParticipants, playerName]);
       setParticipantName('');
     }
+  };
+
+  const formatDateOfBirth = (dateOfBirth) => {
+    if (dateOfBirth !== null) {
+      let day = dateOfBirth.$D;
+      let month = dateOfBirth.$M + 1;
+      let year = dateOfBirth.$y;
+
+      if (day < 10) day = '0' + day;
+      if (month < 10) month = '0' + month;
+
+      return `${year}-${month}-${day}`;
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -44,25 +61,30 @@ const ParticipantsTab = (props) => {
 
   const handleButtonGenerate = () => {
 
+    if (tourParticipants.length < participantsNumber) {
+      displayError('Need more participants');
+    }
+    else {
+      const requestBody = {
+        "organizer_id": 1,
+        "category_id": 1,
+        "name": tourName,
+        "start_date": formatDateOfBirth(tourDate),
+        "status": "created",
+        "game_name": tourGameName,
+        "description": tourDescription,
+        "private": false,
+        "matches": tourMatches
+      };
+      axios.post('/tournaments/create', requestBody)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    }
     
-    const requestBody = {
-      "organizer_id": 1,
-      "category_id": 1,
-      "name": tourName,
-      "start_date": "2023-07-15T06:00:00.000Z",
-      "status": "created",
-      "game_name": tourGameName,
-      "description": tourDescription,
-      "private": false,
-      "matches": tourMatches
-    };
-    axios.post('/tournaments/create', requestBody)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
   };
   const handleIconDelete = (index) => {
     const updatedParticipants = [...tourParticipants];
