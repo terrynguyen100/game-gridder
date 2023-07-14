@@ -9,7 +9,7 @@ const ResetBox = ({ title, handleClick }) => {
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: "space-between", alignItems: "center", height: "100%"}}>
         <Button
         onClick={handleClick}
-        sx={{ my: 2, color: '#9F9EA8', display: "flex", alignItems: "end"}}
+        sx={{ my: 2, color: '#9F9EA8', display: "flex", alignItems: "end", width: "100%", fontSize: "20px"}}
         >
           <div id="">
             <Typography variant="p" component="div" sx={{ padding: "4px", color: "#FFFFFF" }}>
