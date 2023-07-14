@@ -3,18 +3,14 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 
-
-let parsedUserNames = [];
-
 export default function UserSearchField(props) {
   const [userNames, setUserNames] = React.useState([]);
   const [options, setOptions] = React.useState([]);
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
 
-
-
   const fetchUsers = async () => {
+    // requires revision to get only the user names and not the complete users
     const usersData = await axios.get("/users");
     const userNames = usersData.data.reduce((acc, obj) => {
       if (obj.hasOwnProperty('user_name')) {
@@ -51,7 +47,6 @@ export default function UserSearchField(props) {
   };
 
   return (
-    // edge case: user choose a @user and continue to type
     <Autocomplete
       sx={{ width: '100%', marginBottom: 2 }}
       selectOnFocus={true}

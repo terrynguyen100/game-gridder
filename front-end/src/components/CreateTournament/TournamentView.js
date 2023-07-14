@@ -1,7 +1,7 @@
 import { Container, Paper, Input, Button, Box, Card, Typography, Grid } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import { useContext, useEffect, useState } from "react";
-
+import axios from "axios";
 const TournamentView = () => {
   // ------------------- State & Context -------------------
   const [rounds, setRounds] = useState([]);
@@ -11,16 +11,25 @@ const TournamentView = () => {
   } = useContext(CreateTournamentContext);
 
 
+
+  const fetchUserIdByUsername = async (username) => {
+    const response = await axios.get(`/users/login/${username}`);
+    return response.data.id;
+  }
+
   const updateMatches = () => {
 
     const matchesArray = tourParticipants.reduce((acc, currentName, index) => {
       if (index % 2 === 0) {
-        acc.push({
-          players: [
-            { player_name: currentName },
-            { player_name: tourParticipants[index + 1] }
-          ]
-        });
+        if (currentName.startsWith('@')){
+          const id1 = fetchUserIdByUsername(currentName.slice(1));
+          const id2 = fetchUserIdByUsername(tourParticipants[index + 1].slice(1));
+          acc.push({ players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] });
+          acc.push({ players: [{ user_id: id1, }, { player_id: id2 }] }); 
+        }
+        else {
+          acc.push({ players: [{ player_name: currentName, }, { player_name: tourParticipants[index + 1] }] });
+        }
       }
       index++;
       console.log(acc);
@@ -30,7 +39,7 @@ const TournamentView = () => {
     setTourMatches(matchesArray);
   };
 
-  const updateRoutes = (participantCount) => {
+  const updateRounds = (participantCount) => {
     const roundsNumber = Math.ceil(Math.log2(participantCount));
     const roundNames = Array.from({ length: roundsNumber }, (_, index) => {
 
@@ -42,7 +51,7 @@ const TournamentView = () => {
 
   useEffect(() => {
     updateMatches();
-    updateRoutes(tourParticipants.length);
+    updateRounds(tourParticipants.length);
   }, [tourParticipants]);
 
   return (
