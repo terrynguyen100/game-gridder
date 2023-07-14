@@ -50,7 +50,7 @@ const ParticipantsTab = (props) => {
       "name": tourName,
       "start_date": "2023-07-15T06:00:00.000Z",
       "status": "created",
-      "game_name": "Poker",
+      "game_name": tourGameName,
       "description": tourDescription,
       "private": false,
       "matches": tourMatches
@@ -58,7 +58,7 @@ const ParticipantsTab = (props) => {
 
     axios.post('/tournaments/create', requestBody)
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -68,12 +68,6 @@ const ParticipantsTab = (props) => {
     const updatedParticipants = [...tourParticipants];
     updatedParticipants.splice(index, 1);
     setTourParticipants(updatedParticipants);
-  };
-
-  const handleNewParticipantOnChange = (event) => {
-    const value = event.target.value;
-    setParticipantName(value);
-
   };
 
   return (
