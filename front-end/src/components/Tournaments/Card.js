@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import ShareButtons from './ShareButtons';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -27,7 +28,7 @@ export default function ImgCard({ tournament }) {
   }, [])
 
   const getData = async() => {
-    const tournamentData = await axios.get(`${tournament.id}`)
+    const tournamentData = await axios.get(`/tournaments/${tournament.id}`)
     setTournamentInfo(tournamentData.data)
 
     //Get number of players in a tournament
@@ -91,6 +92,7 @@ export default function ImgCard({ tournament }) {
       <CardActions sx={{ justifyContent: "center"}}>
         <Button onClick={() => handleRoute()} sx={{ backgroundColor: "#454d60", width: "90%", color: "#FFF", boxShadow: "0 1px 1px 0 rgba(0,0,0,0.3)" }} size="large">View</Button>
       </CardActions>
+      <ShareButtons tournament={tournament}/>
     </Card>
   );
 }
