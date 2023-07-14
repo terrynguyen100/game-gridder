@@ -21,7 +21,8 @@ const ParticipantsTab = (props) => {
   const numberOfParticipantsOptions = [4,8,16,32]
 
   const addTourParticipant = (playerName) => {
-    if (playerName !== '') {
+    const trimmedPlayerName = playerName.trim();
+    if (trimmedPlayerName !== '') {
       // Add new participant to the tourParticipants array
       setTourParticipants([...tourParticipants, playerName]);
       setParticipantName('');
@@ -131,6 +132,9 @@ const ParticipantsTab = (props) => {
             </IconButton>
           </Card>
         })}
+
+
+        
       </Box>
 
       {/* <Button
