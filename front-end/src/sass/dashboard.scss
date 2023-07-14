@@ -1,0 +1,14 @@
+@use './utilities/variables' as v;
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    h2 {
+      color: v.$third-color;
+      font-family: v.$main-font;
+      font-size: 2.5rem;
+    }
+}
