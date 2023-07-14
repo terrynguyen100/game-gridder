@@ -56,7 +56,7 @@ export default function UserSearchField(props) {
 
   return (
     <Autocomplete
-      sx={{ width: '100%', marginBottom: 2 }}
+      sx={{ width: '100%', marginBottom: 1 }}
       selectOnFocus={true}
       clearOnBlur={true}
       freeSolo={true}
@@ -77,6 +77,7 @@ export default function UserSearchField(props) {
         <TextField
           {...params}
           label="Add Participant"
+          placeholder='Type @ to search for a user'
           InputProps={{
             ...params.InputProps,
             type: 'search',
