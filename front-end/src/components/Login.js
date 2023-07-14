@@ -37,7 +37,7 @@ const Login = () => {
 
   return (
     <Container component="main" maxWidth="sm" mt="20" >
-      <Box
+      <Box bgcolor='primary.main'
         sx={{
           boxShadow: 3,
           borderRadius: 2,
@@ -47,10 +47,9 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor: "#BB0C05",
         }}
       >
-        <Typography component="h1" variant="h5" sx={{color: 'white', fontFamily: 'Bebas Neue', fontSize: '2rem', letterSpacing: '.1rem' }}>
+        <Typography component="h2" variant="h4" color="primary.contrastText" sx={{  letterSpacing: '.1rem' }}>
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -62,7 +61,7 @@ const Login = () => {
             label="Username"
             name="username"
             autoComplete="username"
-            color="warning"
+            color="secondary"
             autoFocus
           />
           <TextField
@@ -74,13 +73,13 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            color="warning"
+            color="secondary"
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="warning"
+            color="secondary"
             sx={{ mt: 3, mb: 2 }}
           >
             Let's Go!
@@ -88,7 +87,7 @@ const Login = () => {
           <Grid container>
             <Grid item>
               <Link 
-                color="white"
+                color="primary.contrastText"
                 component="button"
                 underline="hover"
                 onClick={() => navigate('/register')} 

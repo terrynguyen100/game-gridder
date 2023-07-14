@@ -1,5 +1,3 @@
-import { useContext, useEffect } from 'react';
-import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -15,15 +13,7 @@ import connector from './svg_files/connector';
 import straight_line from './svg_files/straight_line';
 
 const Tournament = ({ tournament, numOfPlayers }) => {
-  // const { t, setT, tournamentID } = useContext(TournamentContext);
 
-  // useEffect(() => {
-  //   axios.get(`/tournaments/1`)
-  //   .then((response) => {
-
-
-  //   })
-  // }, []);
 
   const tournamentDate = `${new Date(tournament.start_date).toString().slice(0, 16)} at ${new Date(tournament.start_date).toString().slice(16, 28)}`
 

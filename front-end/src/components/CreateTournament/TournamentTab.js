@@ -73,7 +73,7 @@ const TournamentTab = (props) => {
       </FormControl>
 
       <TextField
-        label="Game Name"
+        label="Game Name (Optional)"
         value={tourGameName}
         sx={{ width: '100%', marginBottom: spacingItems }}
         onChange={(event) => { setTourGameName(event.target.value) }}

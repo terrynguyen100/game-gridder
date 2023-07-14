@@ -18,7 +18,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const pages = ['Tournaments', 'Communities'];
 const tournamentOptions = ['Create', 'View'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const { auth, logout, userId } = useContext(AuthContext);
@@ -63,12 +63,8 @@ function Navbar() {
       navigate(`/users/${userId}/profile`);
     }
 
-    if (setting === 'Account') {
-      navigate(`/users/${userId}/edit`)
-    }
-
     if (setting === 'Dashboard') {
-      navigate(`/users/${userId}`)
+      navigate(`/users/${userId}/dashboard`)
     }
 
     if (setting === 'Logout') {
@@ -83,18 +79,17 @@ function Navbar() {
   };
 
   return (
-    <AppBar sx={{ backgroundColor: '#BB0C05' }}>
+    <AppBar>
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <EmojiEventsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link to='/'>
             <Typography
-            variant="h6"
+            variant="h1"
             noWrap
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Bebas Neue',
               fontSize: '2rem',
               fontWeight: 700,
               letterSpacing: '.2rem',
@@ -154,7 +149,6 @@ function Navbar() {
               fontWeight: 700,
               letterSpacing: '.2rem',
               color: 'inherit',
-              textDecoration: 'none',
               }}>
               GG
             </Typography>
@@ -164,7 +158,7 @@ function Navbar() {
               <div key={page}>
                 <Button
                   onClick={handleOpenTournamentMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{ my: 2, fontSize: '1.25rem', color: 'primary.contrastText', display: 'block' }}
                 >
                   {page}
                 </Button>
@@ -186,11 +180,11 @@ function Navbar() {
                   }}>
                   {tournamentOptions.map((option) => (
                     <MenuItem key={option} onClick={handleCloseTournamentMenu}>
-                      <Typography textAlign="center">
-                        <Link to={`/tournaments/${option}`}>
-                          {option}
-                        </Link>
-                      </Typography>
+                      <Link to={`/tournaments/${option}`}>
+                        <Typography textAlign="center">
+                            {option}
+                        </Typography>
+                      </Link>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -223,18 +217,18 @@ function Navbar() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-                    <Typography textAlign="center" fontFamily='Titillium Web'>{setting}</Typography>
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box> :
             <Box sx={{ flexGrow: 0 }}>
-              <Button component='p' sx={{ my: 2, color: 'white', display: 'inline' }}>
+              <Button component='p' sx={{ my: 2, display: 'inline', fontSize: '1.25rem' }}>
                 <Link to={'/login'}>
                   Login
                 </Link>
               </Button>
-              <Button component='p' sx={{ my: 2, color: 'white', display: 'inline' }}>
+              <Button component='p' sx={{ my: 2, display: 'inline', fontSize: '1.25rem' }}>
                 <Link to={'/register'}>
                   Sign Up
                 </Link>
