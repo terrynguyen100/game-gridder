@@ -31,7 +31,7 @@ const ParticipantsTab = (props) => {
 
   useEffect(() => {
     setParticipantList(tourParticipants.join('\n'));
-    // This to make sure the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
+    // To make the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
     // while being among the options 4, 8, 16, 32
     if (tourParticipants.length > participantsNumber) {
       for (let i = 0; i < numberOfParticipantsOptions.length; i++) {
@@ -44,21 +44,21 @@ const ParticipantsTab = (props) => {
 
   const handleButtonGenerate = () => {
 
+    
     const requestBody = {
       "organizer_id": 1,
       "category_id": 1,
       "name": tourName,
       "start_date": "2023-07-15T06:00:00.000Z",
       "status": "created",
-      "game_name": "Poker",
+      "game_name": tourGameName,
       "description": tourDescription,
       "private": false,
       "matches": tourMatches
     };
-
     axios.post('/tournaments/create', requestBody)
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -70,11 +70,6 @@ const ParticipantsTab = (props) => {
     setTourParticipants(updatedParticipants);
   };
 
-  const handleNewParticipantOnChange = (event) => {
-    const value = event.target.value;
-    setParticipantName(value);
-
-  };
 
   return (
     <Box sx={{
@@ -106,8 +101,6 @@ const ParticipantsTab = (props) => {
         addTourParticipant={addTourParticipant}
       ></UserSearchField>
 
-
-
       <Box sx={{
         padding: '15px', border: '1px solid black', borderRadius: 2, marginBottom: spacingItems,
         height: `${participantsNumber* 45+ 80}px`,
@@ -132,8 +125,6 @@ const ParticipantsTab = (props) => {
             </IconButton>
           </Card>
         })}
-
-
         
       </Box>
 
