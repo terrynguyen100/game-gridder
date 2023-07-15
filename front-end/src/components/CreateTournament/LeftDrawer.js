@@ -136,6 +136,7 @@ export default function MiniDrawer() {
           />}
           {(tabIndex === 1) && <ParticipantsTab
             handleButtonNext={handleButtonNext}
+            setTabIndex={setTabIndex}
           />}
           {(tabIndex === 2) && <div><ThemesTab/></div>}
         </Box>}
