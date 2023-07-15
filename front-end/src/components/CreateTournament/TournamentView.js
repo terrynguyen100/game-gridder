@@ -51,39 +51,16 @@ const TournamentView = () => {
   }, [tourParticipants]);
 
   return (
-    // <Box sx={{
-    //   maxWidth: '100%',
-    //   maxHeight: '100%',
-    //   border: '1px solid black',
-    // }}>
-    //   <Grid container direction="row" justifyContent="center" alignItems="center">
-    //     {rounds.map((round, index) => (
-    //       <Grid item xs={3} sm={3} md={12 / rounds.length} key={index} sx={{ border: '1px solid black', padding: '10px' }}>
-    //         <Typography
-    //           variant="h2"
-    //           textAlign={'center'}
-    //         >
-    //           {round}
-    //         </Typography>
-    //       </Grid>
-    //     ))}
-    //   </Grid>
-    //   <Grid container direction="column" justifyContent="center" alignItems="center">
-    //     {tourMatches.map((match, index) => (
-    //       <Grid item xs={3} sm={3} md={12 / tourMatches.length} key={index} sx={{ border: '1px solid black' }}>
-    //         {match.players.map((player, index1) => (
-    //           <Typography
-    //             variant="h2"
-    //             textAlign={'center'}
-    //             key={index1}
-    //           > {player.player_name} </Typography>
-    //         ))}
-    //       </Grid>
-    //     ))}
-    //   </Grid>
+      <Box sx={{
+        minWidth: '100%',
+        height: '80vh',
+        border: '1px solid black',
+        overflow: 'auto',
+      }}>
 
-    // </Box>
-    <Bracket numOfPlayers={tourPlayerNum} matchesObj={tourMatches}/>
+        <Bracket numOfPlayers={tourPlayerNum} matchesObj={tourMatches} />
+      </Box>
+
   );
 };
 
