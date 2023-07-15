@@ -92,6 +92,14 @@ const ParticipantsTab = (props) => {
     setTourParticipants(updatedParticipants);
   };
 
+const onChangePlayerNum = (newPlayerNum) => {
+  if (newPlayerNum < tourParticipants.length) {
+    displayError('There are too many players.');
+  } else {
+    setTourPlayerNum(newPlayerNum);
+
+  }
+};
 
   return (
     <Box sx={{
@@ -109,8 +117,8 @@ const ParticipantsTab = (props) => {
           labelId="type-select-label"
           id="type-select"
           value={tourPlayerNum}
-          label="Number of Participants"
-          onChange={(event) => { setTourPlayerNum(event.target.value) }}
+          label="Number of Players"
+          onChange={(event) => { onChangePlayerNum(event.target.value) }}
         >
           <MenuItem value={'4'}>4</MenuItem>
           <MenuItem value={'8'}>8</MenuItem>
@@ -135,7 +143,7 @@ const ParticipantsTab = (props) => {
         overflow: 'auto',
         bgcolor: '#2B2D42'
       }}>
-        <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Participants</Typography>
+        <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Players</Typography>
         <Divider color="#EDF2F4" sx={{marginBottom: 1}}></Divider>
         {tourParticipants.map((participant, index) => {
           return <Card
