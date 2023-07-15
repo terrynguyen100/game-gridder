@@ -60,7 +60,6 @@ export default function UserSearchField(props) {
       selectOnFocus={true}
       clearOnBlur={true}
       freeSolo={true}
-      id="free-solo-2-demo"
       disableClearable={true}
       autoComplete={true}
       autoHighlight={true}
@@ -76,7 +75,7 @@ export default function UserSearchField(props) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Add Participant"
+          label="Add Player"
           placeholder='Type @ to search for a user'
           InputProps={{
             ...params.InputProps,
