@@ -3,6 +3,7 @@ import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } fro
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
+import dayjs from 'dayjs';
 
 const TournamentTab = (props) => {
   const {
@@ -19,6 +20,7 @@ const TournamentTab = (props) => {
 
   useEffect(() => {
     fetchCategories();
+    setTourDate(dayjs());
   }, []);
 
   const fetchCategories = async () => {
@@ -83,6 +85,7 @@ const TournamentTab = (props) => {
       <DatePicker
         sx={{ width: '100%', marginBottom: spacingItems }}
         value={tourDate}
+        defaultValue={dayjs()}
         onChange={(newValue) => setTourDate(newValue)}
       />
 
