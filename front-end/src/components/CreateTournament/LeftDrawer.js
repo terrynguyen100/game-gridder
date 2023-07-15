@@ -20,6 +20,7 @@ import TournamentTab from './TournamentTab';
 import { CreateTournamentContext } from '../../providers/CreateTournamentProvider';
 import axios from 'axios';
 import ParticipantsTab from './ParticipantsTab';
+import ThemesTab from './ThemeTabs';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -51,6 +52,7 @@ export default function MiniDrawer() {
     tourGameName, setTourGameName,
     tourDescription, setTourDescription,
     tourDate, setTourDate,
+    tourPlayerNum, setTourPlayerNum,
 
   } = useContext(CreateTournamentContext);
 
@@ -135,12 +137,12 @@ export default function MiniDrawer() {
           {(tabIndex === 1) && <ParticipantsTab
             handleButtonNext={handleButtonNext}
           />}
-          {(tabIndex === 2) && <div>222222222222222222</div>}
+          {(tabIndex === 2) && <div><ThemesTab/></div>}
         </Box>}
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <TournamentView />
+        {tourPlayerNum !== 0 && <TournamentView/>}
       </Box>
     </Box>
   );
