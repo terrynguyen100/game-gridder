@@ -5,8 +5,10 @@ import axios from "axios";
 import ClearIcon from '@mui/icons-material/Clear';
 import UserSearchField from './UserSearchField';
 import { ErrorContext } from "../../providers/ErrorProvider";
+import { Link, useNavigate } from 'react-router-dom';
 
 const ParticipantsTab = (props) => {
+  const navigate = useNavigate();
   const [participantName, setParticipantName] = useState('');
   const [participantsList, setParticipantList] = useState('');
   const {
@@ -94,6 +96,7 @@ const ParticipantsTab = (props) => {
     axios.post('/tournaments/create', requestBody)
       .then(response => {
         console.log(response.data);
+        navigate(`/tournaments/${response.data.id}`);
       })
       .catch(error => {
         console.log(error.message);
