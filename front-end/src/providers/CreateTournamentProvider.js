@@ -11,7 +11,7 @@ const CreateTournamentProvider = (props) => {
   const [tourDate, setTourDate] = useState(null);
   const [tourDescription, setTourDescription] = useState('');
   const [tourParticipants, setTourParticipants] = useState([]);
-  const [tourPlayerNum, setTourPlayerNum] = useState(4)
+  const [tourPlayerNum, setTourPlayerNum] = useState(0)
   const [categories, setCategories] = useState([]);
   
   const [tourMatches, setTourMatches] = useState([]);
