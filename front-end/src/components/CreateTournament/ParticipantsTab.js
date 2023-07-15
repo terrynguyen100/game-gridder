@@ -51,6 +51,9 @@ const ParticipantsTab = (props) => {
     // To make the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
     // while being among the options 4, 8, 16, 32
     if (tourParticipants.length > tourPlayerNum) {
+      if (tourPlayerNum === 0) {
+        setTourPlayerNum(numberOfParticipantsOptions[0]);
+      }
       for (let i = 0; i < numberOfParticipantsOptions.length; i++) {
         if (tourParticipants.length > numberOfParticipantsOptions[i]) {
           setTourPlayerNum(numberOfParticipantsOptions[i + 1]);
@@ -61,29 +64,40 @@ const ParticipantsTab = (props) => {
 
   const handleButtonGenerate = () => {
 
+    // Validation for any fields from Tournament Tab
+    if (tourName === '') {
+      props.setTabIndex(0);
+      return displayError('Need a name for the tournament');
+    }
+    // if (tourCategory === '') {
+    //   props.setTabIndex(0);
+    //   return displayError('Need a name for the tournament');
+    // }
+
+    // Validation for any fields from Participants Tab
     if (tourParticipants.length < tourPlayerNum) {
-      displayError('Need more participants');
+      props.setTabIndex(1);
+      return displayError('Need more participants');
     }
-    else {
-      const requestBody = {
-        "organizer_id": 1,
-        "category_id": 1,
-        "name": tourName,
-        "start_date": formatDateOfBirth(tourDate),
-        "status": "created",
-        "game_name": tourGameName,
-        "description": tourDescription,
-        "private": false,
-        "matches": tourMatches
-      };
-      axios.post('/tournaments/create', requestBody)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log(error.message);
-        });
-    }
+
+    const requestBody = {
+      "organizer_id": 1, //change to current user from AuthProvider
+      "category_id": 1,
+      "name": tourName,
+      "start_date": formatDateOfBirth(tourDate),
+      "status": "created",
+      "game_name": tourGameName,
+      "description": tourDescription,
+      "private": false,
+      "matches": tourMatches
+    };
+    axios.post('/tournaments/create', requestBody)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
 
   };
   const handleIconDelete = (index) => {
@@ -92,14 +106,14 @@ const ParticipantsTab = (props) => {
     setTourParticipants(updatedParticipants);
   };
 
-const onChangePlayerNum = (newPlayerNum) => {
-  if (newPlayerNum < tourParticipants.length) {
-    displayError('There are too many players.');
-  } else {
-    setTourPlayerNum(newPlayerNum);
+  const onChangePlayerNum = (newPlayerNum) => {
+    if (newPlayerNum < tourParticipants.length) {
+      displayError('There are too many players.');
+    } else {
+      setTourPlayerNum(newPlayerNum);
 
-  }
-};
+    }
+  };
 
   return (
     <Box sx={{
@@ -112,7 +126,7 @@ const onChangePlayerNum = (newPlayerNum) => {
     }}
     >
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
-        <InputLabel id="type-select-label">Number of Partcipants</InputLabel>
+        <InputLabel id="type-select-label">Number of Players</InputLabel>
         <Select
           labelId="type-select-label"
           id="type-select"
@@ -120,10 +134,9 @@ const onChangePlayerNum = (newPlayerNum) => {
           label="Number of Players"
           onChange={(event) => { onChangePlayerNum(event.target.value) }}
         >
-          <MenuItem value={'4'}>4</MenuItem>
-          <MenuItem value={'8'}>8</MenuItem>
-          <MenuItem value={'16'}>16</MenuItem>
-          <MenuItem value={'32'}>32</MenuItem>
+          {numberOfParticipantsOptions.map((option, index) => {
+            return <MenuItem key={index} value={option}>{option}</MenuItem>
+          })}
 
         </Select>
       </FormControl>
@@ -137,14 +150,14 @@ const onChangePlayerNum = (newPlayerNum) => {
         border: '1px solid black',
         borderRadius: 2,
         marginBottom: spacingItems,
-        
+
         // height: `${tourPlayerNum* 45+ 80}px`,
         maxHeight: '54vh',
         overflow: 'auto',
         bgcolor: '#2B2D42'
       }}>
         <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Players</Typography>
-        <Divider color="#EDF2F4" sx={{marginBottom: 1}}></Divider>
+        <Divider color="#EDF2F4" sx={{ marginBottom: 1 }}></Divider>
         {tourParticipants.map((participant, index) => {
           return <Card
             variant="outlined"
