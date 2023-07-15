@@ -137,8 +137,11 @@ const ParticipantsTab = (props) => {
           label="Number of Players"
           onChange={(event) => { onChangePlayerNum(event.target.value) }}
         >
+
+          <MenuItem disabled value='0'></MenuItem>
           {numberOfParticipantsOptions.map((option, index) => {
             return <MenuItem key={index} value={option}>{option}</MenuItem>
+
           })}
 
         </Select>
