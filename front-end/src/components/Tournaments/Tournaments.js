@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
 import ResetBox from "./ResetBox";
+import { Box, Container } from "@mui/material";
 import "./../../sass/tournaments.scss"
 
 const Tournaments = () => {
@@ -59,22 +60,22 @@ const Tournaments = () => {
   }
 
   return(
-    <>
+    <Container maxWidth="lg">
       <h1 id="t-title">Tournaments</h1>
       <div id="search-filters">
         <div id="search">
           <SearchBar />
         </div>
         <div id="filters">
-          <div className="filter-box">
+          <Box className="filter-box" sx={{display: { xs: 'none', md: 'flex' }}}>
             <DropBox title="GAME" filter={game} dropDownItems={gameArray} handleClick={tournamentGameClick}/>
-          </div>
-          <div className="filter-box">
+          </Box>
+          <Box className="filter-box" sx={{display: { xs: 'none', md: 'flex' }}}>
             <DropBox title="STATE" filter={tournamentState} dropDownItems={tournamentStateArray} handleClick={tournamentStateClick}/>
-          </div>
-          <div className="filter-box">
+          </Box>
+          <Box className="filter-box" sx={{display: { xs: 'none', md: 'flex' }}}>
             <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick}/>
-          </div>
+          </Box>
           {filtered.length > 0 &&          
             <div className="filter-box">
               <ResetBox title="CLEAR FILTERS" handleClick={resetFiltersClick}/>
@@ -82,7 +83,7 @@ const Tournaments = () => {
           }
         </div>
       </div>
-      <div id="card-container">
+      <Container id="card-container" maxWidth="lg">
         {
         filtered.length ? 
         filtered.map(tournament => {
@@ -91,8 +92,8 @@ const Tournaments = () => {
         :tournaments.map(tournament => {
           return <ImgCard tournament={tournament} key={tournament.id} />
         })}
-      </div>
-    </>
+      </Container>
+    </Container>
   )
 
 }

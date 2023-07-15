@@ -40,6 +40,8 @@ const CardPhoto = ({categoryID}) => {
     component="img"
     alt={category.name}
     image={SelectPhoto(category)}
+    height="175px"
+    width="auto"
   />
   ) } else {
     return (

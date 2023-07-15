@@ -12,3 +12,12 @@
       font-size: 2.5rem;
     }
 }
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.share-icon {
+  margin: 0.25rem 0.5rem;
+}

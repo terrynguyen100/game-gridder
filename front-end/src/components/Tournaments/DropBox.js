@@ -19,13 +19,13 @@ const DropBox = ({ title, filter, dropDownItems, handleClick }) => {
   };
   
   return (
-    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: "space-between", height: "100%", color: "#FFFFFF"}}>
+    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: "space-between", height: "100%", color: "primary.contrastText"}}>
         <>
           <div id="">
             <Typography variant="p" component="div" sx={{ padding: "4px" }}>
               {title}
             </Typography>
-            <Typography variant="p" component="div" sx={{ padding: "4px", color: "#FCCA46" }}>
+            <Typography variant="p" component="div" sx={{ padding: "4px", color: "secondary.main" }}>
               {filter}
             </Typography>
           </div>
