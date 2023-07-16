@@ -23,7 +23,7 @@ const Dashboard = () => {
     <Container maxWidth="lg">
       <div className="dashboard">
       <h2>Welcome!</h2>
-      <Button component='p' id="create-btn" size="large">
+      <Button component='p' variant="contained" size="large" sx={{fontSize: "1.5rem"}}>
         <Link to={"/tournaments/create"}>
           Create a New Tournament
         </Link>
