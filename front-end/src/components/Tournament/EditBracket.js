@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Box, TextField, InputLabel, FormControl, Button } from "@mui/material";
+import { Box, TextField, FormControl, Button } from "@mui/material";
+import BracketGridStyle from './helpers/bracketGridStyle';
 import axios from 'axios'
 
-const EditBracket = ({tournament, setTournament}) => {
+const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
   const [score, setScore] = useState([])
-
   //Add entered scores to score state
   const handleChange = (e, playerIndex, matchIndex) => {
   const newScore = [...score]
@@ -40,7 +40,7 @@ const EditBracket = ({tournament, setTournament}) => {
     const winningPlayer = player1Score > player2Score ? {...match.players[0]} : {...match.players[1]}
     
     for(match in tournament.matches) {
-
+      
       if (tournament.matches[match]?.players.length === 0 || tournament.matches[match]?.players.length === 1) {
         //Update tournament state  with new player
         //Reset user's score before updating state
@@ -71,46 +71,76 @@ const EditBracket = ({tournament, setTournament}) => {
     await axios.post(`/players/`, {match_id, player_name})
   }
 
+  const {bs, bracketWidth, numOfRounds, numOfMatches} = BracketGridStyle(numOfPlayers)
+
+  console.log("bs: ",bs)
   return(
-    <>
+    <div className="edit-container">
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': { m: 0.25, width: '25ch' },
         }}
         noValidate
         autoComplete="off"
       >
-        {tournament.matches.map((match, i) => {
-          if(tournament.matches[i].players.length === 2) {
-            return(
-              <>
-                <div className="name-score-container">
-                  <div className="edit-name-score">
-                    <div className="player">
-                      <h1 className="edit-name">{match?.players[0]?.player_name}</h1>
-                      <FormControl fullWidth  >
-                        <TextField id="outlined-basic" name="0" label="Score" variant="outlined" onChange={(e) => handleChange(e, 0, i)} />
-                      </FormControl>
-                    </div>
-  
-                    <div className="player">
-                      <h1 className="edit-name">{match?.players[1]?.player_name}</h1>
-                      <FormControl fullWidth >
-                        <TextField id="outlined-basic" name="1" label="Score" variant="outlined" onChange={(e) => handleChange(e, 1, i)} />
-                      </FormControl>     
-                    </div>
-   
+        <div style={{...bracketWidth, ...bs, margin:"auto"}}>
+          {tournament.matches.map((match, i) => {
+            if(tournament.matches[i].players.length === 2) {
+              return(
+                <>
+                  <div class="names" style={{gridArea: `name-${i + 1}`}}>
+                    <h1 className="edit-name" style={{gridArea: `name-${i + 1}`}}>{match?.players[0]?.player_name}</h1>
+                    <h1 className="edit-name" style={{gridArea: `name-${i + 1}`}}>{match?.players[1]?.player_name}</h1>
                   </div>
-                  <Button variant="contained" onClick={() => submitScores(i, match)}>Submit</Button>
-                </div>
-              </>
-            )
-          }
-        })}
+                 
+                  <div className="name-score-container" style={{gridArea: `game-${i + 1}`}}>
+                    <div className="edit-name-score">
+                      <div className="player">
+                        <FormControl fullWidth  >
+                          <TextField 
+                            id="outlined-basic" 
+                            name="0" label="Score" 
+                            variant="outlined" 
+                            onChange={(e) => handleChange(e, 0, i)} 
+                            sx={{"& .MuiInputLabel-root": {color: 'white'},
+                              "& .MuiOutlinedInput-root": {
+                              "& > fieldset": { borderColor: "#5E6772" }},
+                              input: { color: 'white' }
+                            }}
+
+                          />
+                        </FormControl>
+                      </div>
+    
+                      <div className="player">
+                        <FormControl fullWidth >
+                          <TextField 
+                            id="outlined-basic" 
+                            name="1" 
+                            label="Score" 
+                            variant="outlined" 
+                            onChange={(e) => handleChange(e, 1, i)} 
+                            sx={{"& .MuiInputLabel-root": {color: 'white'},
+                              "& .MuiOutlinedInput-root": {
+                              "& > fieldset": { borderColor: "#5E6772" }},
+                              input: { color: 'white' }
+                            }}
+                          />
+                        </FormControl>     
+                      </div>
+    
+                    </div>
+                    <Button variant="contained" onClick={() => submitScores(i, match)}>Submit</Button>
+                  </div>
+                </>
+              )
+            }
+          })}
+        </div>
       </Box>
 
-    </>
+    </div>
   )
 }
 
