@@ -5,6 +5,7 @@ import Image from 'mui-image';
 import cards from '../images/amanda-jones-P787-xixGio-unsplash.jpg';
 import videoGames from '../images/fredrick-tendong-HVYepJYeHdQ-unsplash.jpg';
 import chess from '../images/alex-engelman--LCRyAc0WfE-unsplash.jpg';
+import Footer from './Footer';
 
 const Home = () => {
 
@@ -42,6 +43,7 @@ const Home = () => {
           <Image src={chess} width="50%" />
         </div>
       </Container>
+      <Footer />
     </div>
   );
 };
