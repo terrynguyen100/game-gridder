@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './providers/AuthProvider';
 import ErrorProvider from './providers/ErrorProvider';
-import CardList from './components/CreateTournament/smallComponents/CardList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
