@@ -34,7 +34,7 @@ const Dashboard = () => {
       {tournaments.length > 0 && <div id="card-container">
         {tournaments.map((tournament) => {
           return (
-          <div>
+          <div key={tournament.id}>
             <ImgCard tournament={tournament} key={tournament.id} />
             <ShareButtons tournament={tournament}/>
           </div>
