@@ -103,7 +103,7 @@ const TournamentTab = (props) => {
         variant="contained"
         sx={{
           width: '100%',
-          bgcolor: '#BB0C05'
+          bgcolor: 'primary.main'
         }}
         onClick={props.handleButtonNext}
       >Next</Button>

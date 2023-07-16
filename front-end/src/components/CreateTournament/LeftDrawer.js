@@ -92,7 +92,7 @@ export default function MiniDrawer() {
 
   // This effect is to update the color of the icons when the tab changes
   useEffect(() => {
-    const updatedColors = iconColors.map((color, i) => (i === tabIndex ? '#BB0C05' : '#EDF2F4'));
+    const updatedColors = iconColors.map((color, i) => (i === tabIndex ? 'primary.main' : '#EDF2F4'));
     setIconColors(updatedColors);
   }, [tabIndex]);
 
