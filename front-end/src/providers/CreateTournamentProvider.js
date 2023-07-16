@@ -5,7 +5,7 @@ export const CreateTournamentContext = createContext();
 const CreateTournamentProvider = (props) => {
 
   const [tourName, setTourName] = useState('');
-  const [tourType, setTourType] = useState('');
+  const [tourType, setTourType] = useState('singleElemination');
   const [tourCategory, setTourCategory] = useState('');
   const [tourGameName, setTourGameName] = useState('');
   const [tourDate, setTourDate] = useState(null);
