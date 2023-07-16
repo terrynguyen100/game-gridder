@@ -1,9 +1,10 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PlayerCard from "./PlayerCard";
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Typography, Divider, Container, useThemeProps } from '@mui/material';
+import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
 
-const PlayerCardList = ({ tourParticipants, handleDragEnd, handleIconDelete, spacingItems }) => {
+const PlayerCardList = ({ tourParticipants, handleDragEnd, handleIconDelete, spacingItems, handleShuffle }) => {
 
   return (
     <Box
@@ -17,7 +18,15 @@ const PlayerCardList = ({ tourParticipants, handleDragEnd, handleIconDelete, spa
         bgcolor: '#2B2D42'
       }}
     >
-      <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Players</Typography>
+      <Container className='card-list-header' sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <ShuffleOnIcon 
+          sx={{ bgcolor: "white" , marginTop: '5px'}}
+          onClick={handleShuffle}
+        ></ShuffleOnIcon>
+        <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Players</Typography>
+        <ShuffleOnIcon sx={{ opacity: '0' }}></ShuffleOnIcon>
+
+      </Container>
       <Divider color="#EDF2F4" sx={{ marginBottom: 1 }}></Divider>
       <div>
         <DragDropContext onDragEnd={handleDragEnd}>

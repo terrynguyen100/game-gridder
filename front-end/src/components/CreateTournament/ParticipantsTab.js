@@ -129,6 +129,14 @@ export default function ParticipantsTab(props) {
     setTourParticipants(newParticipants);
   };
 
+  const handleShuffle = () => {
+    const shuffledParticipants = [...tourParticipants];
+    for (let i = shuffledParticipants.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledParticipants[i], shuffledParticipants[j]] = [shuffledParticipants[j], shuffledParticipants[i]];
+    }
+    setTourParticipants(shuffledParticipants);
+  };
 
   return (
     <Box sx={{
@@ -164,6 +172,7 @@ export default function ParticipantsTab(props) {
         handleIconDelete={handleIconDelete}
         handleDragEnd={handleDragEnd}
         spacingItems={spacingItems}
+        handleShuffle={handleShuffle}
       />
 
       <Button
