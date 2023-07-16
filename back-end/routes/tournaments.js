@@ -4,23 +4,23 @@ const router = express.Router();
 
 // SQL imports
 const { getTournaments,
-        getTournamentById,
-        getTournamentsByCategory,
-        getTournamentsByOrganizerId,
-        getTournamentsByName,
-        getTournamentsByNameOrCategory,
-        addTournament,
-        updateTournament,
-        deleteTournament,
-        getCompleteTournamentById,
-      } = require('../db/queries/tournaments.js');
+  getTournamentById,
+  getTournamentsByCategory,
+  getTournamentsByOrganizerId,
+  getTournamentsByName,
+  getTournamentsByNameOrCategory,
+  addTournament,
+  updateTournament,
+  deleteTournament,
+  getCompleteTournamentById,
+} = require('../db/queries/tournaments.js');
 
 const { getMatchesByTournamentId,
-        addMatch
-      } = require('../db/queries/matches.js');
+  addMatch
+} = require('../db/queries/matches.js');
 const { getPlayersByMatchId,
-        addPlayer
-      } = require('../db/queries/players.js');
+  addPlayer
+} = require('../db/queries/players.js');
 
 // ---- Routes -----
 
@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
   getTournaments()
     .then(tournaments => {
       // send the 'tournaments' back as JSON to the client
-      res.json(tournaments); 
+      res.json(tournaments);
     })
     .catch(error => {
       console.error("Error fetching tournaments:", error);
@@ -67,14 +67,14 @@ router.get('/users/:id', (req, res) => {
 // GET 1 tournament by its id
 router.get('/:id', (req, res) => {
   const tournamentId = req.params.id;
-  
+
   // Get tournament and matches in parallel
   Promise.all([
     getTournamentById(tournamentId),
     getMatchesByTournamentId(tournamentId)
   ])
     .then(([tournament, matches]) => { // Destructure the results into two variables
-      if (tournament) { 
+      if (tournament) {
         tournament.matches = []; // Inside `tournament`, initialize an empty array for matches
 
         // Using map, create an array of promises that will each resolve to an array of players
@@ -107,22 +107,22 @@ router.get('/:id', (req, res) => {
 
 // PUT a tournament by its id
 router.put('/:id', (req, res) => {
-  const tournament = req.body; 
+  const tournament = req.body;
   tournament.id = req.params.id;
 
   console.log(tournament);
   updateTournament(tournament)
-  .then(updatedTournament => {
-    if (updatedTournament) {
-      res.json(updatedTournament);
-    } else {
-      res.status(404).json({ error: "Tournament not found" });
-    }
-  })
-  .catch(error => {
-    console.error("Error updating tournament:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  });
+    .then(updatedTournament => {
+      if (updatedTournament) {
+        res.json(updatedTournament);
+      } else {
+        res.status(404).json({ error: "Tournament not found" });
+      }
+    })
+    .catch(error => {
+      console.error("Error updating tournament:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 });
 
 // DELETE a tournament by its id
@@ -158,7 +158,7 @@ router.post('/create', (req, res) => {
           .then(createdMatch => {
             const playerPromises = match.players.map(player => {
               // Add the newly created match_id to each player
-              player.match_id = createdMatch.id; 
+              player.match_id = createdMatch.id;
               return addPlayer(player);
             });
             return Promise.all(playerPromises)
@@ -169,16 +169,36 @@ router.post('/create', (req, res) => {
           });
       });
 
-      return Promise.all(matchPromises)
+      const futureMatchPromises = [];
+      for (let i = 0; i < 3; i++) {
+        const futureMatch = { tournament_id: createdTournament.id };
+        const futureMatchPromise = addMatch(futureMatch);
+        futureMatchPromises.push(futureMatchPromise);
+      }
+
+      Promise.all([...matchPromises, ...futureMatchPromises])
         .then(matchesResults => {
-          createdTournament.matches = matchesResults; // Add matches to the created tournament object
+          const updatedMatches = matchesResults.slice(0, newMatches.length);
+
+          createdTournament.matches = updatedMatches; // Add matches to the created tournament object
+
+          // Add the additional future matches to the created tournament
+          for (let i = 0; i < 3; i++) {
+            createdTournament.matches.push(matchesResults[newMatches.length + i]);
+          }
+
           res.status(201).json(createdTournament); // Return the updated tournament object with matches and players
+        })
+        .catch(error => {
+          console.error("Error creating tournament:", error);
+          res.status(500).json({ error: "Internal Server Error" });
         });
     })
     .catch(error => {
       console.error("Error creating tournament:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
+
 });
 
 module.exports = router;
