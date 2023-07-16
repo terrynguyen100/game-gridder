@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, Typography } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import { DatePicker } from "@mui/x-date-pickers";
+import LockIcon from '@mui/icons-material/Lock';
 import axios from "axios";
 import dayjs from 'dayjs';
 
@@ -53,8 +54,17 @@ const TournamentTab = (props) => {
           label="Type"
           onChange={(event) => { setTourType(event.target.value) }}
         >
-          <MenuItem value={'singleElemination'}>Single Elimination</MenuItem>
-          <MenuItem value={'doubleElemination'}>Double Elimination</MenuItem>
+          <MenuItem value={'singleElemination'} sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography>Single Elimination</Typography>
+          </MenuItem>
+          <MenuItem disabled value={'doubleElemination'} sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography>Double Elimination </Typography>
+            <LockIcon />
+          </MenuItem>
+          <MenuItem disabled value={'roundRobin'} sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography>Round Robin </Typography>
+            <LockIcon />
+          </MenuItem>
 
         </Select>
       </FormControl>
@@ -92,6 +102,7 @@ const TournamentTab = (props) => {
       <TextField
         id="outlined-multiline-static"
         label="Description"
+        onFocus={event => { event.target.select() }}
         value={tourDescription}
         multiline
         rows={8}
@@ -103,7 +114,7 @@ const TournamentTab = (props) => {
         variant="contained"
         sx={{
           width: '100%',
-          bgcolor: '#BB0C05'
+          bgcolor: 'primary.main'
         }}
         onClick={props.handleButtonNext}
       >Next</Button>

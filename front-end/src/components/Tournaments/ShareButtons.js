@@ -23,7 +23,7 @@ const ShareButtons = ({ tournament }) => {
       <Typography component="h6" variant="h6" fontSize="1.25rem" color="secondary.main" mt="0.75rem" mb="0.3rem">
         Share Tournament:
       </Typography>
-      <div>
+      <div className="share-icons">
         <EmailShareButton 
           url={`${domain}/tournaments/${tournament.id}`}
           subject={`🏆 GameGridder Tournament: ${tournament.name}`}

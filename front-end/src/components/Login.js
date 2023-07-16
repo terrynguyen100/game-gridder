@@ -63,6 +63,13 @@ const Login = () => {
             autoComplete="username"
             color="secondary"
             autoFocus
+            sx={{
+              "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
+              "& .MuiOutlinedInput-root": {
+                "& > fieldset": { borderColor: "white", opacity: '0.3' },
+              },
+              input: { color: 'white' }
+            }}
           />
           <TextField
             margin="normal"
@@ -74,13 +81,20 @@ const Login = () => {
             id="password"
             autoComplete="current-password"
             color="secondary"
+            sx={{
+              "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
+              "& .MuiOutlinedInput-root": {
+                "& > fieldset": { borderColor: "white", opacity: '0.3' },
+              },
+              input: { color: 'white' }
+            }}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="secondary"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, fontSize: '1.25rem', letterSpacing: '0.06rem' }}
           >
             Let's Go!
           </Button>
