@@ -75,11 +75,11 @@ router.get('/:id', (req, res) => {
   ])
     .then(([tournament, matches]) => { // Destructure the results into two variables
       if (tournament) {
-        tournament.matches = []; // Inside `tournament`, initialize an empty array for matches
+        tournament.matches = matches; // Inside `tournament`, initialize an empty array for matches
 
         // Using map, create an array of promises that will each resolve to an array of players
         // (since there are 2 players each match)
-        const playerPromises = matches.map(match => {
+        const playerPromises = tournament.matches.map(match => {
           const matchId = match.id;
           return getPlayersByMatchId(matchId);
         });
@@ -92,7 +92,9 @@ router.get('/:id', (req, res) => {
               match.players = playersResults[index];
               return match;
             });
-
+            // Since the promises are executed in parallel, the matches are not in order
+            // Sort the matches by id
+            tournament.matches.sort((a, b) => a.id - b.id);
             res.json(tournament);
           });
       } else {
@@ -170,7 +172,7 @@ router.post('/create', (req, res) => {
       });
 
       const futureMatchPromises = [];
-      for (let i = 0; i < newMatches.length- 1; i++) {
+      for (let i = 0; i < newMatches.length - 1; i++) {
         const futureMatch = { tournament_id: createdTournament.id };
         const futureMatchPromise = addMatch(futureMatch);
         futureMatchPromises.push(futureMatchPromise);
@@ -183,10 +185,10 @@ router.post('/create', (req, res) => {
           createdTournament.matches = updatedMatches; // Add matches to the created tournament object
 
           // Add the additional future matches to the created tournament
-          for (let i = 0; i < newMatches.length-1; i++) {
+          for (let i = 0; i < newMatches.length - 1; i++) {
             createdTournament.matches.push(matchesResults[newMatches.length + i]);
           }
-
+          createdTournament.matches.sort((a, b) => a.id - b.id);
           res.status(201).json(createdTournament); // Return the updated tournament object with matches and players
         })
         .catch(error => {
