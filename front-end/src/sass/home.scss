@@ -1,25 +1,37 @@
 @use './utilities/variables' as v;
 
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 6rem;
+  margin-top: 8rem;
+  margin-bottom: 3rem;
 }
 
 h2 {
   color: v.$secondary-color;
   text-align: center;
   font-family: v.$secondary-font;
-  margin: 1rem 0 3rem 0;
+  margin-bottom: 1.5rem;
   font-weight: lighter;
 }
 
-#create-btn, #find-btn {
-  color: v.$secondary-color;
-  background-color: v.$main-color;
-  font-family: v.$main-font;
-  font-size: 1.75rem;
-  padding: 1rem 2rem;
+.buttons {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: space-evenly;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  margin-top: 4rem;
+  height: 17.75rem;
+  img {
+    border-radius: 6px;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
 }

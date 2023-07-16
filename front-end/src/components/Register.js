@@ -101,6 +101,12 @@ const Register = () => {
                 type="text"
                 autoFocus
                 color="secondary"
+                sx={{
+                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "white", opacity: '0.3' },
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,6 +119,12 @@ const Register = () => {
                 autoComplete="email"
                 type="email"
                 color="secondary"
+                sx={{
+                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "white", opacity: '0.3' },
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -125,6 +137,12 @@ const Register = () => {
                 id="password"
                 autoComplete="new-password"
                 color="secondary"
+                sx={{
+                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "white", opacity: '0.3' },
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -137,6 +155,12 @@ const Register = () => {
                 value={dateOfBirth}
                 onChange={(newValue) => setDateOfBirth(newValue)}
                 slotProps={{ textField: { fullWidth: true } }}
+                sx={{
+                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "white", opacity: '0.3' },
+                  }
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -148,6 +172,12 @@ const Register = () => {
                 id="imageurl"
                 autoComplete="new-password"
                 color="secondary"
+                sx={{
+                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "white", opacity: '0.3' },
+                  }
+                }}
               />
             </Grid>
           </Grid>
@@ -156,7 +186,7 @@ const Register = () => {
             fullWidth
             variant="contained"
             color="secondary"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, fontSize: '1.25rem', letterSpacing: '0.06rem' }}
           >
             Sign Up
           </Button>

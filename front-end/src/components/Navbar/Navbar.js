@@ -82,18 +82,18 @@ function Navbar() {
     <AppBar>
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
-          <EmojiEventsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <EmojiEventsIcon color="secondary" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link to='/'>
             <Typography
             variant="h1"
             noWrap
+            color="secondary"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontSize: '2rem',
               fontWeight: 700,
               letterSpacing: '.2rem',
-              color: 'inherit',
               textDecoration: 'none',
             }}>
             GAMEGRIDDER
