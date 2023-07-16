@@ -2,15 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled, Paper, Typography, Card, IconButton, Divider, Container, Autocomplete } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
-import ClearIcon from '@mui/icons-material/Clear';
+
 import UserSearchField from './UserSearchField';
 import { ErrorContext } from "../../providers/ErrorProvider";
 import { Link, useNavigate } from 'react-router-dom';
+import PlayerCard from "./smallComponents/PlayerCard";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import PlayerCardList from "./smallComponents/PlayerCardList";
 
-const ParticipantsTab = (props) => {
+export default function ParticipantsTab(props) {
   const navigate = useNavigate();
-  const [participantName, setParticipantName] = useState('');
-  const [participantsList, setParticipantList] = useState('');
   const {
     tourName, setTourName,
     tourDate, setTourDate,
@@ -20,6 +21,7 @@ const ParticipantsTab = (props) => {
     tourMatches, setTourMatches,
     tourPlayerNum, setTourPlayerNum,
   } = useContext(CreateTournamentContext);
+
   const { displayError } = useContext(ErrorContext);
 
   const spacingItems = 1;
@@ -30,7 +32,6 @@ const ParticipantsTab = (props) => {
     if (trimmedPlayerName !== '') {
       // Add new participant to the tourParticipants array
       setTourParticipants([...tourParticipants, playerName]);
-      setParticipantName('');
     }
   };
 
@@ -49,7 +50,6 @@ const ParticipantsTab = (props) => {
   };
 
   useEffect(() => {
-    setParticipantList(tourParticipants.join('\n'));
     // To make the number of participants (in the dropdown) is always greater than the number of participants in the tournament 
     // while being among the options 4, 8, 16, 32
     if (tourParticipants.length > tourPlayerNum) {
@@ -96,7 +96,7 @@ const ParticipantsTab = (props) => {
     axios.post('/tournaments/create', requestBody)
       .then(response => {
         console.log(response.data);
-        navigate(`/tournaments/${response.data.id}`);
+        // navigate(`/tournaments/${response.data.id}`);
       })
       .catch(error => {
         console.log(error.message);
@@ -108,15 +108,25 @@ const ParticipantsTab = (props) => {
     updatedParticipants.splice(index, 1);
     setTourParticipants(updatedParticipants);
   };
-
   const onChangePlayerNum = (newPlayerNum) => {
     if (newPlayerNum < tourParticipants.length) {
       displayError('There are too many players.');
     } else {
       setTourPlayerNum(newPlayerNum);
-
     }
   };
+  const handleDragEnd = (result) => {
+    if (!result.destination) {
+      return; // If the participant is dropped outside a Droppable, do nothing
+    }
+
+    const newParticipants = Array.from(tourParticipants);
+    const [reorderedParticipant] = newParticipants.splice(result.source.index, 1);
+    newParticipants.splice(result.destination.index, 0, reorderedParticipant);
+
+    setTourParticipants(newParticipants);
+  };
+
 
   return (
     <Box sx={{
@@ -125,7 +135,6 @@ const ParticipantsTab = (props) => {
       marginTop: 12,
       textAlign: 'center',
       width: '230px',
-
     }}
     >
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
@@ -137,13 +146,10 @@ const ParticipantsTab = (props) => {
           label="Number of Players"
           onChange={(event) => { onChangePlayerNum(event.target.value) }}
         >
-
           <MenuItem disabled value='0'></MenuItem>
           {numberOfParticipantsOptions.map((option, index) => {
             return <MenuItem key={index} value={option}>{option}</MenuItem>
-
           })}
-
         </Select>
       </FormControl>
 
@@ -151,58 +157,23 @@ const ParticipantsTab = (props) => {
         addTourParticipant={addTourParticipant}
       ></UserSearchField>
 
-      <Box sx={{
-        padding: '10px',
-        border: '1px solid black',
-        borderRadius: 2,
-        marginBottom: spacingItems,
 
-        // height: `${tourPlayerNum* 45+ 80}px`,
-        maxHeight: '54vh',
-        overflow: 'auto',
-        bgcolor: '#2B2D42'
-      }}>
-        <Typography variant="h6" sx={{ marginBottom: 1, color: "white" }}>Players</Typography>
-        <Divider color="#EDF2F4" sx={{ marginBottom: 1 }}></Divider>
-        {tourParticipants.map((participant, index) => {
-          return <Card
-            variant="outlined"
-            sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2px", bgcolor: "#EDF2F4" }}
-            key={index}
-          >
-            <Typography variant="h6"
-              sx={{ marginLeft: 1 }}
-            > {index + 1} </Typography>
+      <PlayerCardList
+        tourParticipants={tourParticipants}
+        handleIconDelete={handleIconDelete}
+        handleDragEnd={handleDragEnd}
+        spacingItems={spacingItems}
+      />
 
-            <Typography variant="body1"> {participant} </Typography>
-            <IconButton sx={{ color: '#BB0C05' }} onClick={() => handleIconDelete(index)}>
-              < ClearIcon fontSize="small" sx={{ color: '#BB0C05' }} />
-            </IconButton>
-          </Card>
-        })}
-
-      </Box>
-
-      {/* <Button
-        variant="contained"
-        sx={{
-          width: '100%',
-          bgcolor: '#BB0C05',
-          marginBottom: spacingItems
-        }}
-        onClick={props.handleButtonNext}
-      >Next</Button> */}
 
       <Button
         variant="contained"
         sx={{
           width: '100%',
-          bgcolor: '#BB0C05'
+          bgcolor: 'primary.main'
         }}
         onClick={handleButtonGenerate}
       >Create Tournament</Button>
     </Box>
   );
 };
-
-export default ParticipantsTab;
