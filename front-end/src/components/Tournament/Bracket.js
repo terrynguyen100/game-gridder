@@ -2,10 +2,12 @@ import top_match_down from './svg_files/top_match_down';
 import bottom_match_up from './svg_files/bottom_match_up';
 import connector from './svg_files/connector';
 import straight_line from './svg_files/straight_line';
+import BracketGridStyle from './helpers/bracketGridStyle';
+import {useState, useEffect} from 'react';
 import { generateTemplateAreas } from './helpers/helpers';
-import {useState, useEffect} from 'react'
 
-const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
+const Bracket = ({numOfPlayers, tournament, matchesObj}) => {
+
   const [bracketWidth, setBracketWidth] = useState({width:'100%'});
   const [numOfRounds, setNumOfRounds] = useState(0);
 
@@ -21,28 +23,27 @@ const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
       setBracketWidth({
         width: "50%"
       })
-      // bracketWidth = "50%"
     } else if ( numOfPlayers < 16) {
       setBracketWidth({
         width: "75%"
       })
-      // bracketWidth = "75%"
     } else if ( numOfPlayers < 32) {
       setBracketWidth({
         width: "90%"
       })
-      // bracketWidth = "90%"
     }
   }, [numOfPlayers])
 
   const bs = {
     display: "grid",
     gridTemplateRows: `repeat(${numOfPlayers - 1}, 60px)`,
-    gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)}, 1fr)`,
+    gridTemplateColumns: `repeat(${(2 * numOfRounds) + (numOfRounds - 1)},  1fr)`,
     gridTemplateAreas: generateTemplateAreas(numOfPlayers, numOfRounds),
     justifyContent: "center",
     alignItems: "stretch"
   };
+
+  // const {bs, bracketWidth, numOfRounds, numOfMatches} = BracketGridStyle(numOfPlayers)
 
   return(
     <div id="tournament-bracket" style={{...bracketWidth, margin:"auto"}}>
