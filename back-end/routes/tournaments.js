@@ -170,7 +170,7 @@ router.post('/create', (req, res) => {
       });
 
       const futureMatchPromises = [];
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < newMatches.length- 1; i++) {
         const futureMatch = { tournament_id: createdTournament.id };
         const futureMatchPromise = addMatch(futureMatch);
         futureMatchPromises.push(futureMatchPromise);
@@ -183,7 +183,7 @@ router.post('/create', (req, res) => {
           createdTournament.matches = updatedMatches; // Add matches to the created tournament object
 
           // Add the additional future matches to the created tournament
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < newMatches.length-1; i++) {
             createdTournament.matches.push(matchesResults[newMatches.length + i]);
           }
 
