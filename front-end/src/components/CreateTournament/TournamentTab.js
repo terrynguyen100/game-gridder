@@ -92,6 +92,7 @@ const TournamentTab = (props) => {
       <TextField
         id="outlined-multiline-static"
         label="Description"
+        onFocus={event => { event.target.select() }}
         value={tourDescription}
         multiline
         rows={8}
