@@ -12,7 +12,7 @@ const ResetBox = ({ title, handleClick }) => {
         sx={{ my: 2, color: '#9F9EA8', display: "flex", alignItems: "end", width: "100%", fontSize: "20px"}}
         >
           <div id="">
-            <Typography variant="p" component="div" sx={{ padding: "4px", color: "#FFFFFF" }}>
+            <Typography variant="p" component="div" sx={{ padding: "4px", color: "secondary.main" }}>
               {title}
             </Typography>
           </div>  

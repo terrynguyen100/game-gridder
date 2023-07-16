@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -6,9 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.35),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.45),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -42,7 +42,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ tournaments, setFiltered, setActiveFilter, searchTerm, setSearchTerm }) {
+  
+  const tournamentTitleSearch = (ev) => {
+    setFiltered(tournaments);
+    setActiveFilter(true);
+    setSearchTerm(ev.target.value);
+    const filteredTournaments = [];
+    for (let tournament of tournaments) {
+      const name = tournament.name.toLowerCase().trim();
+      const search = ev.target.value.toLowerCase().trim();
+      if (name.match(search)) {
+        filteredTournaments.push(tournament);
+      }
+    }
+    setFiltered(filteredTournaments);
+  };
 
   return (
     <Search>
@@ -50,8 +65,11 @@ export default function SearchBar() {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder="Search…"
+        placeholder="Search tournament name"
         inputProps={{ 'aria-label': 'search' }}
+        value={searchTerm}
+        onChange={(ev) => tournamentTitleSearch(ev)}
+        id="search-input"
       />
     </Search>
   );
