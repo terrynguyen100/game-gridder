@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Button,  Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
+import { Button, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
 
@@ -27,10 +27,14 @@ export default function ParticipantsTab(props) {
 
   const addTourParticipant = (playerName) => {
     const trimmedPlayerName = playerName.trim();
-    if (trimmedPlayerName !== '') {
-      // Add new participant to the tourParticipants array
-      setTourParticipants([...tourParticipants, playerName]);
+    if (trimmedPlayerName === '') {
+      return displayError('Need a player name');
     }
+    if (tourParticipants.includes(trimmedPlayerName)) {
+      return displayError('This player name already added');
+    }
+    // Add new participant to the tourParticipants array
+    setTourParticipants([...tourParticipants, playerName]);
   };
 
   const formatDateOfBirth = (dateOfBirth) => {
@@ -94,7 +98,7 @@ export default function ParticipantsTab(props) {
     axios.post('/tournaments/create', requestBody)
       .then(response => {
         console.log(response.data);
-        // navigate(`/tournaments/${response.data.id}`);
+        navigate(`/tournaments/${response.data.id}`);
       })
       .catch(error => {
         console.log(error.message);
