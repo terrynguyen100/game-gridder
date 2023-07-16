@@ -102,10 +102,11 @@ const Register = () => {
                 autoFocus
                 color="secondary"
                 sx={{
-                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
                   "& .MuiOutlinedInput-root": {
                     "& > fieldset": { borderColor: "white", opacity: '0.3' },
-                  }
+                  },
+                  input: { color: 'white' }
                 }}
               />
             </Grid>
@@ -120,10 +121,11 @@ const Register = () => {
                 type="email"
                 color="secondary"
                 sx={{
-                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
                   "& .MuiOutlinedInput-root": {
                     "& > fieldset": { borderColor: "white", opacity: '0.3' },
-                  }
+                  },
+                  input: { color: 'white' }
                 }}
               />
             </Grid>
@@ -138,10 +140,11 @@ const Register = () => {
                 autoComplete="new-password"
                 color="secondary"
                 sx={{
-                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
                   "& .MuiOutlinedInput-root": {
                     "& > fieldset": { borderColor: "white", opacity: '0.3' },
-                  }
+                  },
+                  input: { color: 'white' }
                 }}
               />
             </Grid>
@@ -156,10 +159,11 @@ const Register = () => {
                 onChange={(newValue) => setDateOfBirth(newValue)}
                 slotProps={{ textField: { fullWidth: true } }}
                 sx={{
-                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
                   "& .MuiOutlinedInput-root": {
                     "& > fieldset": { borderColor: "white", opacity: '0.3' },
-                  }
+                  },
+                  input: { color: 'white' }
                 }}
               />
             </Grid>
@@ -173,10 +177,11 @@ const Register = () => {
                 autoComplete="new-password"
                 color="secondary"
                 sx={{
-                  "& .MuiInputLabel-root": {color: 'white'},
+                  "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
                   "& .MuiOutlinedInput-root": {
                     "& > fieldset": { borderColor: "white", opacity: '0.3' },
-                  }
+                  },
+                  input: { color: 'white' }
                 }}
               />
             </Grid>

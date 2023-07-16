@@ -64,10 +64,11 @@ const Login = () => {
             color="secondary"
             autoFocus
             sx={{
-              "& .MuiInputLabel-root": {color: 'white'},
+              "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
               "& .MuiOutlinedInput-root": {
                 "& > fieldset": { borderColor: "white", opacity: '0.3' },
-              }
+              },
+              input: { color: 'white' }
             }}
           />
           <TextField
@@ -81,10 +82,11 @@ const Login = () => {
             autoComplete="current-password"
             color="secondary"
             sx={{
-              "& .MuiInputLabel-root": {color: 'white'},
+              "& .MuiInputLabel-root": {color: 'white', opacity: '0.6'},
               "& .MuiOutlinedInput-root": {
                 "& > fieldset": { borderColor: "white", opacity: '0.3' },
-              }
+              },
+              input: { color: 'white' }
             }}
           />
           <Button
