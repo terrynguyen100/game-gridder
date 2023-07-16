@@ -28,7 +28,7 @@ const Login = () => {
     axios.get(`/users/login/${username}`)
     .then((response) => {
       login(response.data.id);
-      navigate('/');
+      navigate(`/users/${response.data.id}/dashboard`);
     })
     .catch(() => {
       displayError('Verify your username and password are correct');
