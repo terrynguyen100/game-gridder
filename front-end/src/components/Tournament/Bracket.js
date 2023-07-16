@@ -67,8 +67,8 @@ const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
                         <ul className="matchup">
                           {tournament ? 
                           <div key={i}>
-                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{tournament.matches[i]?.players[0]?.score}</span></li>      
-                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{tournament.matches[i]?.players[1]?.score}</span></li>
+                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>      
+                            <li className="team team-bottom">{tournament?.matches[i]?.players[1]?.player_name}<span className="score">{tournament?.matches[i]?.players[1]?.score}</span></li>
                           </div>
                           :
                           <div key={i}>
@@ -108,8 +108,8 @@ const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
                         <ul className="matchup" >
                         {tournament ? 
                           <div key={i}>
-                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{tournament.matches[i]?.players[0]?.score}</span></li>
-                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{tournament.matches[i]?.players[1]?.score}</span></li>
+                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament?.matches[i]?.players[1]?.player_name}<span className="score">{tournament?.matches[i]?.players[1]?.score}</span></li>
                           </div>
                           :
                           <div key={i}>
@@ -158,8 +158,8 @@ const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
                         <ul className="matchup" >
                         {tournament ? 
                           <div key={i}>
-                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{tournament.matches[i]?.players[0]?.score}</span></li>
-                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{tournament.matches[i]?.players[1]?.score}</span></li>
+                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament?.matches[i]?.players[1]?.player_name}<span className="score">{tournament?.matches[i]?.players[1]?.score}</span></li>
                           </div>
                           :
                           <div key={i}>
@@ -225,8 +225,8 @@ const Bracket = ({numOfPlayers, tournament, matchesObj, organizerLoggedIn}) => {
                         <ul className="matchup" >
                         {tournament ? 
                           <div key={i}>
-                            <li className="team team-top">{tournament.matches[i]?.players[0].player_name}<span className="score">{tournament.matches[i]?.players[0]?.score}</span></li>
-                            <li className="team team-bottom">{tournament.matches[i]?.players[1].player_name}<span className="score">{tournament.matches[i]?.players[1]?.score}</span></li>
+                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>
+                            <li className="team team-bottom">{tournament?.matches[i]?.players[1]?.player_name}<span className="score">{tournament?.matches[i]?.players[1]?.score}</span></li>
                           </div>
                           :
                           <div key={i}>
