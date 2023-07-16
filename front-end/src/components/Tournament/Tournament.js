@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
@@ -6,17 +6,20 @@ import Typography from '@mui/material/Typography';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import Fab from '@mui/material/Fab';
+import EditIcon from '@mui/icons-material/Edit';
 import Bracket from './Bracket';
+import { AuthContext } from '../../providers/AuthProvider';
 import "./../../sass/tournament.scss"
-
+import EditBracket from './EditBracket';
 
 const Tournament = () => {
   const [tournament, setTournament] = useState(null);
   const [tournamentDate, setTournamentDate] = useState("");
-
   const [numOfPlayers, setNumOfPlayers] = useState(0);
-  const [bracketStyle, setBracketStyle] = useState({});
-
+  const [organizerLoggedIn, setOrganizerLoggedIn] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const { userId } = useContext(AuthContext)
 
   let tournamentID = useParams();
 
@@ -38,36 +41,59 @@ const Tournament = () => {
           return ac
         }, [])
         setNumOfPlayers(getPlayerNums.length);
-
+        
         setTournamentDate(`${new Date(tempData.data.start_date).toString().slice(0, 16)} at ${new Date(tempData.data.start_date).toString().slice(16, 28)}`)
+
+        if(userId) checkIfUserIsOrganizer()
+  }
+
+  const checkIfUserIsOrganizer = async() => {
+    const organizerId = tournament?.organizer_id
+    if(organizerId === userId) setOrganizerLoggedIn(true)
+  }
+
+  const handleClick = () => {
+    setEditMode(prev => !prev)
   }
 
   if (tournament !== null) {
   return (
     <div key={tournament.id}>
-      <div id="tournament-info">
+      <div id="tournament-data">
         <h1 className="title">{tournament.name}</h1>
         <div className="tournament-stats">
-          <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
-            <PersonIcon sx={{mr: 1.5}}/> 
-            <span>{numOfPlayers}</span>
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
-            <EmojiEventsIcon sx={{ mx: 1.5 }} />
-            <span>{numOfPlayers}</span>
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
-            <VideogameAssetIcon sx={{mx: 1.5}}/>
-            <span>{tournament.game_name}</span>
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
-          <CalendarMonthIcon sx={{mx: 1.5}}/> 
-            <span>{tournamentDate}</span>
-          </Typography>
+          <div className="tournament-info">
+            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
+              <PersonIcon sx={{mr: 1.5}}/> 
+              <span>{numOfPlayers}</span>
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
+              <EmojiEventsIcon sx={{ mx: 1.5 }} />
+              <span>{numOfPlayers}</span>
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
+              <VideogameAssetIcon sx={{mx: 1.5}}/>
+              <span>{tournament.game_name}</span>
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
+            <CalendarMonthIcon sx={{mx: 1.5}}/> 
+              <span>{tournamentDate}</span>
+            </Typography>
+          </div>
+          <div>
+            {organizerLoggedIn && 
+              <Fab onClick={handleClick} size="small" color="secondary" aria-label="edit">
+                <EditIcon />
+              </Fab>}
+          </div>
         </div>
       </div>
 
-      <Bracket numOfPlayers={numOfPlayers} tournament={tournament} />
+      {editMode ? 
+        <EditBracket tournament={tournament} setTournament={setTournament}/> 
+        : 
+        <Bracket numOfPlayers={numOfPlayers} tournament={tournament} organizerLoggedIn={organizerLoggedIn}/>
+      }    
       
     </div>
   )
