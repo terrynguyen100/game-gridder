@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Box, styled, Paper, Typography, Card, IconButton, Divider, Container, Autocomplete } from "@mui/material";
+import { useContext, useEffect } from "react";
+import { Button,  Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import axios from "axios";
 
 import UserSearchField from './UserSearchField';
 import { ErrorContext } from "../../providers/ErrorProvider";
-import { Link, useNavigate } from 'react-router-dom';
-import PlayerCard from "./smallComponents/PlayerCard";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 import PlayerCardList from "./smallComponents/PlayerCardList";
 
 export default function ParticipantsTab(props) {
@@ -157,7 +155,6 @@ export default function ParticipantsTab(props) {
         addTourParticipant={addTourParticipant}
       ></UserSearchField>
 
-
       <PlayerCardList
         tourParticipants={tourParticipants}
         handleIconDelete={handleIconDelete}
@@ -165,13 +162,9 @@ export default function ParticipantsTab(props) {
         spacingItems={spacingItems}
       />
 
-
       <Button
         variant="contained"
-        sx={{
-          width: '100%',
-          bgcolor: 'primary.main'
-        }}
+        sx={{ width: '100%', bgcolor: 'primary.main' }}
         onClick={handleButtonGenerate}
       >Create Tournament</Button>
     </Box>

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, cloneElement } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -18,7 +17,6 @@ import PrintIcon from '@mui/icons-material/Print';
 import TournamentView from './TournamentView';
 import TournamentTab from './TournamentTab';
 import { CreateTournamentContext } from '../../providers/CreateTournamentProvider';
-import axios from 'axios';
 import ParticipantsTab from './ParticipantsTab';
 import ThemesTab from './ThemeTabs';
 
@@ -45,16 +43,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [tabIndex, setTabIndex] = useState(null);
   const [iconColors, setIconColors] = useState(Array(5).fill('white'));
-  const {
-    tourName, setTourName,
-    tourType, setTourType,
-    tourCategory, setTourCategory,
-    tourGameName, setTourGameName,
-    tourDescription, setTourDescription,
-    tourDate, setTourDate,
-    tourPlayerNum, setTourPlayerNum,
-
-  } = useContext(CreateTournamentContext);
+  const { tourPlayerNum, setTourPlayerNum, } = useContext(CreateTournamentContext);
 
   const icons = [
     { icon: <EmojiEventsIcon fontSize='large' />, index: 0 },
@@ -70,7 +59,7 @@ export default function MiniDrawer() {
         <ListItemIcon
           sx={{ minWidth: 0, mr: 'auto', justifyContent: 'center', color: iconColors[index] }}
         >
-          {React.cloneElement(icon)}
+          {cloneElement(icon)}
         </ListItemIcon>
       </ListItemButton>
     </ListItem>
@@ -90,14 +79,14 @@ export default function MiniDrawer() {
     setTabIndex(prev => prev + 1);
   };
 
-  // This effect is to update the color of the icons when the tab changes
+  // Update the color of the icons when the tab changes
   useEffect(() => {
     const updatedColors = iconColors.map((color, i) => (i === tabIndex ? 'primary.main' : '#EDF2F4'));
     setIconColors(updatedColors);
   }, [tabIndex]);
 
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
       <Drawer variant="permanent" open={open} PaperProps={{
@@ -106,9 +95,7 @@ export default function MiniDrawer() {
         <DrawerHeader sx={{ height: 80 }}>
         </DrawerHeader>
         <List>
-
           <>{listItems}</>
-
           <Divider />
           <ListItem disablePadding sx={{ display: 'block' }}>
             <ListItemButton sx={{ minHeight: 48, justifyContent: 'center', px: 2.5, }} onClick={handleDrawerClose}>
@@ -138,12 +125,12 @@ export default function MiniDrawer() {
             handleButtonNext={handleButtonNext}
             setTabIndex={setTabIndex}
           />}
-          {(tabIndex === 2) && <div><ThemesTab/></div>}
+          {(tabIndex === 2) && <div><ThemesTab /></div>}
         </Box>}
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {tourPlayerNum !== 0 && <TournamentView/>}
+        {tourPlayerNum !== 0 && <TournamentView />}
       </Box>
     </Box>
   );
