@@ -90,7 +90,7 @@ const Tournament = () => {
       </div>
 
       {editMode ? 
-        <EditBracket tournament={tournament} setTournament={setTournament}/> 
+        <EditBracket numOfPlayers={numOfPlayers} tournament={tournament} setTournament={setTournament}/> 
         : 
         <Bracket numOfPlayers={numOfPlayers} tournament={tournament} organizerLoggedIn={organizerLoggedIn}/>
       }    
