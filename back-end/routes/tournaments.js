@@ -150,49 +150,56 @@ router.delete('/:id', (req, res) => {
 router.post('/create', (req, res) => {
   const newTournament = req.body;
   const newMatches = req.body.matches;
-
   addTournament(newTournament)
     .then(createdTournament => {
+      // create promises for each match of the first round
+      const newTourId = createdTournament.id;
       const matchPromises = newMatches.map(match => {
-        // Add the newly created tournament_id to each match
-        match.tournament_id = createdTournament.id;
-        return addMatch(match)
-          .then(createdMatch => {
-            const playerPromises = match.players.map(player => {
-              // Add the newly created match_id to each player
-              player.match_id = createdMatch.id;
-              return addPlayer(player);
-            });
-            return Promise.all(playerPromises)
-              .then(playersResults => {
-                createdMatch.players = playersResults; // Add players to the created match object
-                return createdMatch;
-              });
-          });
+        match.tournament_id = newTourId;
+        return addMatch(match);
       });
 
+      // create promises for each match of the other rounds
       const futureMatchPromises = [];
       for (let i = 0; i < newMatches.length - 1; i++) {
-        const futureMatch = { tournament_id: createdTournament.id };
-        const futureMatchPromise = addMatch(futureMatch);
-        futureMatchPromises.push(futureMatchPromise);
+        const futureMatch = { tournament_id: newTourId };
+        futureMatchPromises.push(addMatch(futureMatch));
       }
 
+      // execute all promises in parallel
       Promise.all([...matchPromises, ...futureMatchPromises])
-        .then(matchesResults => {
-          const updatedMatches = matchesResults.slice(0, newMatches.length);
+        .then(createdMatches => {
+          // sort the matches by id
+          createdMatches.sort((a, b) => a.id - b.id);
+          // add created matches to the created tournament
+          createdTournament.matches = createdMatches;
+          // create promises for all the players in all matches of the first round
+          const allPlayersPromises = newMatches.map((match, index) => {
+            const matchId = createdMatches[index].id;
+            match.players[0].match_id = matchId;
+            match.players[1].match_id = matchId;
+            // Need to add player[0] before player[1] to prevent switching their positions 
+            return addPlayer(match.players[0])
+              .then(createdPlayer1 => {
+                  createdTournament.matches[index].players = [createdPlayer1];
+                return addPlayer(match.players[1]);
+              })
+              .then(createdPlayer2 => {
+                  createdTournament.matches[index].players.push(createdPlayer2);
+              });
+          });
 
-          createdTournament.matches = updatedMatches; // Add matches to the created tournament object
-
-          // Add the additional future matches to the created tournament
-          for (let i = 0; i < newMatches.length - 1; i++) {
-            createdTournament.matches.push(matchesResults[newMatches.length + i]);
-          }
-          createdTournament.matches.sort((a, b) => a.id - b.id);
-          res.status(201).json(createdTournament); // Return the updated tournament object with matches and players
+          Promise.all(allPlayersPromises)
+            .then(() => {
+              res.json(createdTournament);
+            })
+            .catch(error => {
+              console.error("Error adding players:", error);
+              res.status(500).json({ error: "Internal Server Error" });
+            });
         })
         .catch(error => {
-          console.error("Error creating tournament:", error);
+          console.error("Error creating matches:", error);
           res.status(500).json({ error: "Internal Server Error" });
         });
     })
@@ -200,7 +207,6 @@ router.post('/create', (req, res) => {
       console.error("Error creating tournament:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
-
 });
 
 module.exports = router;
