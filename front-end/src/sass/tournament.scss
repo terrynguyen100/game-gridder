@@ -6,6 +6,7 @@
 
   .title{
     font-family: v.$main-font;
+    margin-top: 80px;
     color: #FFFFFF;
   }
 
@@ -45,28 +46,29 @@
 
 .name-score-container{
   display:flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  align-content: center;
+  margin: 2rem;
 }
 
 .edit-name-score{
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   color: v.$secondary-color;
-  width: 75%
 }
 
 .edit-name {
   font-family: v.$main-font;
-  width: 70%;
+  margin: 0;
 }
 
 .player {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 0 2rem;
 }
 
 #bracket {overflow:hidden;background-color: #e1e1e1;background-color:rgba(225,225,225,0.9);padding-top: 20px;font-size: 12px;padding: 40px 0;}
