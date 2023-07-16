@@ -44,11 +44,22 @@
   width: 100%;
 }
 
+.names{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  color: v.$secondary-color
+}
+
 .name-score-container{
   display:flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin: 2rem;
+}
+
+.edit-container{
+  margin: 4rem 0;
 }
 
 .edit-name-score{
