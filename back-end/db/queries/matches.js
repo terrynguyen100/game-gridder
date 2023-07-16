@@ -4,7 +4,8 @@ const db = require('../connection');
 //Get all matches associated with a tournament. Requires tournamentId => return match rows.
 const getMatchesByTournamentId = (tournament_id) => {
   const query = `SELECT * FROM matches 
-    WHERE tournament_id = $1;`;
+    WHERE tournament_id = $1 
+    ORDER BY id;`;
 
   return db.query(query, [tournament_id])
     .then(data => data.rows)
