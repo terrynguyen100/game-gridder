@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
   const [score, setScore] = useState([])
+  const [focus, setFocus] = useState(false)
   //Add entered scores to score state
   const handleChange = (e, playerIndex, matchIndex) => {
   const newScore = [...score]
@@ -37,43 +38,69 @@ const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
       }
     })
 
+    // console.log(tournament)
+    console.log("match: ",match)
+    console.log("index: ",i)
     const winningPlayer = player1Score > player2Score ? {...match.players[0]} : {...match.players[1]}
-    
-    for(match in tournament.matches) {
-      
-      if (tournament.matches[match]?.players.length === 0 || tournament.matches[match]?.players.length === 1) {
-        //Update tournament state  with new player
-        //Reset user's score before updating state
-        const newPlayers = [...tournament.matches]
-        if(tournament.matches[match]?.players.length === 0){
-          newPlayers[match].players[0] = winningPlayer;
-          newPlayers[match].players[0].score = ''
-        } else {
-          newPlayers[match].players[1] = winningPlayer;
-          newPlayers[match].players[1].score = ''
-        }
-        setTournament(prev => {
-          return{
-            ...prev,
-            matches: newPlayers
-          }
-        })
 
-        updateMatch(tournament.matches[match].id, winningPlayer)
-        break
+
+      const newPlayers = [...tournament.matches]
+      if(numOfPlayers === 4) {
+          if(i === 0 ){
+            newPlayers[2].players[0] = winningPlayer;
+            newPlayers[2].players[0].score = ''
+            pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+          } else {
+            newPlayers[2].players[1] = winningPlayer;
+            newPlayers[2].players[1].score = ''
+            pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+          }
+      } else if (numOfPlayers === 8) {
+        if(i === 0 ){
+          newPlayers[4].players[0] = winningPlayer;
+          newPlayers[4].players[0].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        } else if (i === 1) {
+          newPlayers[4].players[1] = winningPlayer;
+          newPlayers[4].players[1].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        } else if (i === 2) {
+          newPlayers[5].players[0] = winningPlayer;
+          newPlayers[5].players[0].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        } else if (i === 3) {
+          newPlayers[5].players[1] = winningPlayer;
+          newPlayers[5].players[1].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        } else if (i === 4) {
+          newPlayers[6].players[0] = winningPlayer;
+          newPlayers[6].players[0].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        } else if (i === 5) {
+          newPlayers[6].players[1] = winningPlayer;
+          newPlayers[6].players[1].score = ''
+          pushPlayerToNextRound(tournament.matches[i].id, winningPlayer)
+        }
       }
+
+  }
+  
+  //Updates match database with winning user
+  const pushPlayerToNextRound = async(match_id, winningPlayer) => {
+    const player_name = winningPlayer.player_name
+    const player_id = winningPlayer.id
+    await axios.patch(`/players/${player_id}`, {match_id, player_name})
+  }
+
+  const updateScoresForMatch = async(match_id, winningPlayer, losingPlayer) => {
+    const players = [winningPlayer.player_name, losingPlayer.player_name]
+    for(let player_name of players) {
+      await axios.patch(`/players/`, {match_id, player_name})
     }
   }
 
-  //Updates match database with winning user
-  const updateMatch = async(match_id, winningPlayer) => {
-    const player_name = winningPlayer.player_name
-    await axios.post(`/players/`, {match_id, player_name})
-  }
+  const {bs, bracketWidth} = BracketGridStyle(numOfPlayers)
 
-  const {bs, bracketWidth, numOfRounds, numOfMatches} = BracketGridStyle(numOfPlayers)
-
-  console.log("bs: ",bs)
   return(
     <div className="edit-container">
       <Box
@@ -100,7 +127,10 @@ const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
                         <FormControl fullWidth  >
                           <TextField 
                             id="outlined-basic" 
-                            name="0" label="Score" 
+                            name="0" 
+                            onFocus={e => setFocus(true)}
+                            onBlur={e => setFocus(false)}
+                            label={(match?.players[0]?.score && !focus) ? match?.players[0]?.score : "Score"} 
                             variant="outlined" 
                             onChange={(e) => handleChange(e, 0, i)} 
                             sx={{"& .MuiInputLabel-root": {color: 'white'},
@@ -118,7 +148,9 @@ const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
                           <TextField 
                             id="outlined-basic" 
                             name="1" 
-                            label="Score" 
+                            onFocus={e => setFocus(true)}
+                            onBlur={e => setFocus(false)}
+                            label={(match?.players[0]?.score && !focus) ? match?.players[0]?.score : "Score"} 
                             variant="outlined" 
                             onChange={(e) => handleChange(e, 1, i)} 
                             sx={{"& .MuiInputLabel-root": {color: 'white'},
