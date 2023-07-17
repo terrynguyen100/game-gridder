@@ -43,8 +43,6 @@ const Bracket = ({numOfPlayers, tournament, matchesObj}) => {
     alignItems: "stretch"
   };
 
-  // const {bs, bracketWidth, numOfRounds, numOfMatches} = BracketGridStyle(numOfPlayers)
-
   return(
     <div id="tournament-bracket" style={{...bracketWidth, margin:"auto"}}>
       <div id="tournament-rounds">
@@ -57,7 +55,7 @@ const Bracket = ({numOfPlayers, tournament, matchesObj}) => {
         
         {/* {tournament.matches.map((match, i) => { */}
         {[...Array(numOfMatches)].map((match, i) => {
-          if(i < numOfPlayers / 2) {
+          if(i < numOfPlayers / 2) {  
             return(
 
               <div className={`round-1 game-${i + 1}`} style={{gridArea: `game-${i + 1}`}} key={i}>
@@ -68,7 +66,7 @@ const Bracket = ({numOfPlayers, tournament, matchesObj}) => {
                         <ul className="matchup">
                           {tournament ? 
                           <div key={i}>
-                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>      
+                            <li className="team team-top">{tournament?.matches[i]?.players[0]?.player_name}<span className="score">{tournament?.matches[i]?.players[0]?.score}</span></li>  
                             <li className="team team-bottom">{tournament?.matches[i]?.players[1]?.player_name}<span className="score">{tournament?.matches[i]?.players[1]?.score}</span></li>
                           </div>
                           :
