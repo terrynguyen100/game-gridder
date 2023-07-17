@@ -40,9 +40,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const [open, setOpen] = useState(true);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(null);
   const [iconColors, setIconColors] = useState(Array(5).fill('white'));
-  const { tourPlayerNum, setTourPlayerNum, } = useContext(CreateTournamentContext);
+  const { tourPlayerNum,} = useContext(CreateTournamentContext);
 
   const icons = [
     { icon: <EmojiEventsIcon fontSize='large' />, index: 0 },
