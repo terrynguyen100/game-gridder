@@ -22,7 +22,7 @@ const getUserById = (userId) => {
 
 //Get a user based on email and password. Requires userEmail and userPassword => returns a single user.
 const getUserByLogin = (userLogin) => {
-  const query = `SELECT * FROm users 
+  const query = `SELECT * FROM users 
     WHERE email = $1 AND password = $2;`;
 
   return db.query(query, [userLogin.email, userLogin.password])
@@ -32,7 +32,7 @@ const getUserByLogin = (userLogin) => {
 
 //Get a user based on email and password. Requires userEmail and userPassword => returns a single user.
 const getUserByUserName = (userName) => {
-  const query = `SELECT * FROm users 
+  const query = `SELECT * FROM users 
     WHERE user_name = $1;`;
 
   return db.query(query, [userName])
@@ -58,13 +58,13 @@ const addUser = (user) => {
 //---------------------------------------------Update QUERIES---------------------------------------
 // Update a user.
 // Requires a user object {user_name, email, password, date_of_birth, profile_img, wins}
-const updateUser = (user) => {
-  const query = `UPDATE tournaments 
-  SET user_name = $2, email = $3, password = $4, date_of_birth = $5, profile_img = $6, wins = $7 
+const updateUserImage = (userId, imageUrl) => {
+  const query = `UPDATE users 
+  SET profile_img = $2 
   WHERE id = $1 
   RETURNING *;`;
 
-  return db.query(query, [user.id, user.user_name, user.email, user.password, user.date_of_birth, user.profile_img, user.wins,])
+  return db.query(query, [userId, imageUrl])
     .then(data => data.rows[0])
     .catch(err => console.log(err.message));
 };
@@ -86,6 +86,6 @@ module.exports = {
   getUserByLogin,
   getUserByUserName,
   addUser,
-  updateUser,
+  updateUserImage,
   deleteUser
 };

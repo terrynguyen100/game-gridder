@@ -8,6 +8,7 @@ const {
   getUserByLogin,
   getUserByUserName,
   addUser,
+  updateUserImage,
   deleteUser,
 } = require('../db/queries/users.js');
 
@@ -71,6 +72,21 @@ router.post('/create', (req, res) => {
     })
     .catch(error => {
       console.error('Error creating user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+});
+
+// PUT a new profile_img for user by their id
+router.put('/:id/edit', (req, res) => {
+  const userId = req.params.id;
+  const imageUrl = req.body.profile_img;
+
+  updateUserImage(userId, imageUrl)
+    .then(updatedUser => {
+      res.status(202).json(updatedUser);
+    })
+    .catch(error => {
+      console.error('Error updating user:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     });
 });
