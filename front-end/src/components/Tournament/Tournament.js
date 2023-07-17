@@ -81,7 +81,7 @@ const Tournament = () => {
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
               <CalendarMonthIcon sx={{mx: 1.5}}/> 
-              <span>{`${tournamentDate}, ${tournamentTime}`}</span>
+              <span>{tournamentDate}</span>
             </Typography>
             <AddToCalendarButton
               name={tournament.name}
