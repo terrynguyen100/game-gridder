@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react'
 import { generateEditAreas } from './helpers';
 
 const BracketGridStyle = (numOfPlayers) => {
-  console.log("numOfPlayers: ",numOfPlayers)
   // const [bracketWidth, setBracketWidth] = useState({width:'100%'});
   const [numOfRounds, setNumOfRounds] = useState(0);
 
