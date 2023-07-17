@@ -49,8 +49,9 @@ export default function ImgCard({ tournament }) {
 
   return (
     <div>
-      <CardActionArea onClick={() => handleRoute()}>
+      
         <Card variant="outlined" sx={{ padding: '1rem', maxWidth: "20rem", height: '25rem', backgroundColor: "#2B303D", borderRadius: '10px' }}>
+        <CardActionArea onClick={() => handleRoute()} sx={{"&:hover": {backgroundColor: "#262935" }}}> 
           <CardPhoto categoryID={tournament.category_id} />
           <CardContent>
             <Typography gutterBottom color="secondary" variant="h5" component="h3" textAlign={'center'}>
@@ -72,8 +73,9 @@ export default function ImgCard({ tournament }) {
               <span>{startDate}</span>
             </Typography>
           </CardContent>
+          </CardActionArea>
         </Card>
-      </CardActionArea>
+
     </div>
   );
 }

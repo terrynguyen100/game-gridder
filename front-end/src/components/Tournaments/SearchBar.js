@@ -42,14 +42,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchBar({ tournaments, setFiltered, setActiveFilter, searchTerm, setSearchTerm }) {
-  
+export default function SearchBar({ tournaments, game, tournamentState, registration, filtered, setFiltered, setActiveFilter, searchTerm, setSearchTerm }) {
+
   const tournamentTitleSearch = (ev) => {
-    setFiltered(tournaments);
-    setActiveFilter(true);
-    setSearchTerm(ev.target.value);
+    if (ev.target.value === '' && game === "All" && tournamentState === 'All' && registration === 'All') {
+      setFiltered(tournaments);
+      setActiveFilter(false);
+      setSearchTerm(ev.target.value);
+      return;
+    }
+
+    let tournamentList = [];
+    if (ev.target.value !== '') {
+      setSearchTerm(ev.target.value);
+      setActiveFilter(true);
+      if (filtered[0] === undefined) {
+        setFiltered(tournaments);
+        tournamentList = [...tournaments];
+      } else {
+        tournamentList = [...filtered];
+      }
+    } else {
+      setSearchTerm(ev.target.value);
+      return;
+    }
+    
     const filteredTournaments = [];
-    for (let tournament of tournaments) {
+    for (let tournament of tournamentList) {
       const name = tournament.name.toLowerCase().trim();
       const search = ev.target.value.toLowerCase().trim();
       if (name.match(search)) {

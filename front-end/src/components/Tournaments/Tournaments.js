@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import DropBox from "./DropBox";
 import ImgCard from "./Card";
 import ResetBox from "./ResetBox";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import "./../../sass/tournaments.scss";
 
 const Tournaments = () => {
@@ -18,7 +18,7 @@ const Tournaments = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const tournamentStateArray = ['Upcoming', 'Ongoing', 'Completed'];
-  const registrationArray = ['All', 'Free', 'Paid'];
+  // const registrationArray = ['All', 'Free', 'Paid'];
 
   useEffect(() => {
     getData();
@@ -57,14 +57,14 @@ const Tournaments = () => {
     setTournamentState(textClicked);
   };
 
-  const tournamentRegistrationClick = (ev) => {
-    setFiltered(tournaments);
-    const textClicked = ev.target.innerHTML;
-    // const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
-    // setTournaments(filteredTournaments)
-    setActiveFilter(true);
-    setRegistration(textClicked);
-  };
+  // const tournamentRegistrationClick = (ev) => {
+  //   setFiltered(tournaments);
+  //   const textClicked = ev.target.innerHTML;
+  //   const filteredTournaments = tournaments.filter(tournament => tournament.status === textClicked)
+  //   setTournaments(filteredTournaments)
+  //   setActiveFilter(true);
+  //   setRegistration(textClicked);
+  // };
 
   const resetFiltersClick = () => {
     setFiltered([]);
@@ -80,7 +80,7 @@ const Tournaments = () => {
       <h1 id="t-title">Tournaments</h1>
       <div id="search-filters">
         <div id="search">
-          <SearchBar tournaments={tournaments} filtered={filtered} setFiltered={setFiltered} setActiveFilter={setActiveFilter} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <SearchBar tournaments={tournaments} filtered={filtered} setFiltered={setFiltered} setActiveFilter={setActiveFilter} searchTerm={searchTerm} setSearchTerm={setSearchTerm} game={game} tournamentState={tournamentState} registration={registration}/>
         </div>
         <div id="filters">
           <Box className="filter-box" sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -89,9 +89,9 @@ const Tournaments = () => {
           <Box className="filter-box" sx={{ display: { xs: 'none', md: 'flex' } }}>
             <DropBox title="STATUS" filter={tournamentState} dropDownItems={tournamentStateArray} handleClick={tournamentStateClick} />
           </Box>
-          <Box className="filter-box" sx={{ display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box className="filter-box" sx={{ display: { xs: 'none', md: 'flex' } }}>
             <DropBox title="REGISTRATION" filter={registration} dropDownItems={registrationArray} handleClick={tournamentRegistrationClick} />
-          </Box>
+          </Box> */}
           {activeFilter &&
             <div className="filter-box">
               <ResetBox title="CLEAR FILTERS" handleClick={resetFiltersClick} />
@@ -104,11 +104,10 @@ const Tournaments = () => {
             tournaments.map(tournament => {
               return <ImgCard tournament={tournament} key={tournament.id} />;
             }) : filtered.length ? filtered.map(tournament => {
-              return <ImgCard tournament={tournament} key={tournament.id} />}) : <p>No matches found</p>}
+              return <ImgCard tournament={tournament} key={tournament.id} />}) : <Typography sx={{textAlign: 'center', mt: '4rem', fontSize: '1.25rem'}}>No matches found</Typography>}
       </Container>
     </Container>
   );
-
 };
 
 export default Tournaments;

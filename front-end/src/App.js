@@ -55,7 +55,7 @@ function App() {
       h6: {
         fontFamily: 'Titillium Web',
       },
-    }
+    },
   });
 
   return (
