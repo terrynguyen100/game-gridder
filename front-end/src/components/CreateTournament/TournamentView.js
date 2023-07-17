@@ -51,7 +51,6 @@ const TournamentView = () => {
       const pushUserPlayers = { players: [player1, player2] };
       matchesArray.push(pushUserPlayers);
     }
-    console.log(matchesArray);
     setTourMatches(matchesArray);
   };
   
