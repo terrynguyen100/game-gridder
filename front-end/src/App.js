@@ -17,6 +17,7 @@ import Tournament from './components/Tournament/Tournament';
 import { ErrorContext } from './providers/ErrorProvider';
 import { AuthContext } from './providers/AuthProvider';
 import { ThemeProvider, createTheme } from '@mui/material';
+import HallOfFame from './components/HallOfFame';
 
 function App() {
   const { userId } = useContext(AuthContext);
@@ -55,7 +56,7 @@ function App() {
       h6: {
         fontFamily: 'Titillium Web',
       },
-    }
+    },
   });
 
   return (
@@ -68,6 +69,7 @@ function App() {
               <Route path="/*" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/rankings" element={<HallOfFame />} />
               <Route path={`/users/${userId}/profile`} element={<UserProfile />} />
               <Route path={`/users/${userId}/dashboard`} element={<Dashboard />} />
               <Route path="/tournaments/Create" element={<CreateTournament />} />
