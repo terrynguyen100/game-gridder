@@ -85,7 +85,7 @@ const TournamentTab = (props) => {
           onChange={(event) => { setTourCategory(event.target.value) }}
         >
           {categories.map((category) => {
-            return <MenuItem key={category.id} value={category.name}> {category.name}</MenuItem>
+            return <MenuItem key={category.id} value={category.id}> {category.name}</MenuItem>
           })}
 
         </Select>
