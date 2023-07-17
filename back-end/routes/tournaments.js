@@ -21,6 +21,8 @@ const { getMatchesByTournamentId,
 const { getPlayersByMatchId,
   addPlayer
 } = require('../db/queries/players.js');
+const {getUserById} = require('../db/queries/users.js');
+
 
 // ---- Routes -----
 
@@ -87,16 +89,41 @@ router.get('/:id', (req, res) => {
         // Execute all player queries in parallel
         return Promise.all(playerPromises)
           .then(playersResults => {
-            // Add `players` into their respective matches, inside the tournament object
             tournament.matches = matches.map((match, index) => {
               match.players = playersResults[index];
               return match;
             });
-            // Since the promises are executed in parallel, the matches are not in order
-            // Sort the matches by id
+
             tournament.matches.sort((a, b) => a.id - b.id);
-            res.json(tournament);
+
+            const profileImgPromises = [];
+
+            tournament.matches.forEach(match => {
+              match.players.forEach(player => {
+                const { user_id } = player;
+                if (user_id) {
+                  const profileImgPromise = getUserById(user_id)
+                    .then(results => {
+                      const { profile_img } = results;
+                      player.profile_img = profile_img;
+                    })
+                    .catch(error => {
+                      console.error(`Error fetching profile image for user ${user_id}:`, error);
+                      // Handle any errors that occur during the query
+                      // For example, you can set a default image or handle the error in another way
+                      player.profile_img = null;
+                    });
+                  profileImgPromises.push(profileImgPromise);
+                }
+              });
+            });
+
+            return Promise.all(profileImgPromises)
+              .then(() => {
+                res.json(tournament);
+              });
           });
+
       } else {
         res.status(404).json({ error: "Tournament not found" });
       }
