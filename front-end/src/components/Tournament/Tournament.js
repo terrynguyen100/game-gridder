@@ -36,8 +36,8 @@ const Tournament = () => {
         if(tempData.data.matches.length === 0) setNumOfPlayers([].length)
         const getPlayerNums = tempData.data.matches.reduce((ac, cv) => {
           if(cv.players.length === 0) return ac
-          if(!ac.includes(cv?.players[0]?.player_name)) ac.push(cv?.players[0]?.player_name)
-          if(!ac.includes(cv?.players[1]?.player_name)) ac.push(cv?.players[1]?.player_name)
+          if(!ac.includes(cv?.players[0]?.player_name) && cv?.players[0]?.player_name !== 'TBD') ac.push(cv?.players[0]?.player_name)
+          if(!ac.includes(cv?.players[1]?.player_name) && cv?.players[0]?.player_name !== 'TBD') ac.push(cv?.players[1]?.player_name)
           return ac
         }, [])
         setNumOfPlayers(getPlayerNums.length);
