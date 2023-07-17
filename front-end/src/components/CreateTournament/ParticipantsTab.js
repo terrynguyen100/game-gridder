@@ -11,12 +11,12 @@ import PlayerCardList from "./smallComponents/PlayerCardList";
 export default function ParticipantsTab(props) {
   const navigate = useNavigate();
   const {
-    tourName, setTourName,
-    tourDate, setTourDate,
-    tourGameName, setTourGameName,
-    tourDescription, setTourDescription,
+    tourName, 
+    tourDate, 
+    tourGameName, 
+    tourDescription, 
     tourParticipants, setTourParticipants,
-    tourMatches, setTourMatches,
+    tourMatches, 
     tourPlayerNum, setTourPlayerNum,
   } = useContext(CreateTournamentContext);
 
