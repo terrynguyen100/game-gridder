@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
   const [score, setScore] = useState([])
-  const [focus, setFocus] = useState(false)
+
   //Add entered scores to score state
   const handleChange = (e, playerIndex, matchIndex) => {
   const newScore = [...score]
@@ -126,11 +126,10 @@ const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
                       <div className="player">
                         <FormControl fullWidth  >
                           <TextField 
-                            id="outlined-basic" 
+                            id="outlined-static" 
                             name="0" 
-                            onFocus={e => setFocus(true)}
-                            onBlur={e => setFocus(false)}
-                            label={(match?.players[0]?.score && !focus) ? match?.players[0]?.score : "Score"} 
+                            label={"Score"}
+                            value={match?.players[0]?.score}
                             variant="outlined" 
                             onChange={(e) => handleChange(e, 0, i)} 
                             sx={{"& .MuiInputLabel-root": {color: 'white'},
@@ -146,11 +145,10 @@ const EditBracket = ({tournament, setTournament, numOfPlayers}) => {
                       <div className="player">
                         <FormControl fullWidth >
                           <TextField 
-                            id="outlined-basic" 
+                            id="outlined-static" 
                             name="1" 
-                            onFocus={e => setFocus(true)}
-                            onBlur={e => setFocus(false)}
-                            label={(match?.players[0]?.score && !focus) ? match?.players[0]?.score : "Score"} 
+                            label={"Score"}
+                            value={match?.players[1]?.score}
                             variant="outlined" 
                             onChange={(e) => handleChange(e, 1, i)} 
                             sx={{"& .MuiInputLabel-root": {color: 'white'},
