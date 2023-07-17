@@ -161,8 +161,11 @@ router.post('/create', (req, res) => {
 
       // create promises for each match of the other rounds
       const futureMatchPromises = [];
-      for (let i = 0; i < newMatches.length - 1; i++) {
+      const numFutureMatch = newMatches.length - 1;
+      for (let i = 0; i < numFutureMatch; i++) {
         const futureMatch = { tournament_id: newTourId };
+        futureMatch.players = [{ player_name: 'TBD' }, { player_name: 'TBD' }];
+        newMatches.push(futureMatch);
         futureMatchPromises.push(addMatch(futureMatch));
       }
 
@@ -178,14 +181,15 @@ router.post('/create', (req, res) => {
             const matchId = createdMatches[index].id;
             match.players[0].match_id = matchId;
             match.players[1].match_id = matchId;
+
             // Need to add player[0] before player[1] to prevent switching their positions 
             return addPlayer(match.players[0])
               .then(createdPlayer1 => {
-                  createdTournament.matches[index].players = [createdPlayer1];
+                createdTournament.matches[index].players = [createdPlayer1];
                 return addPlayer(match.players[1]);
               })
               .then(createdPlayer2 => {
-                  createdTournament.matches[index].players.push(createdPlayer2);
+                createdTournament.matches[index].players.push(createdPlayer2);
               });
           });
 
