@@ -13,7 +13,8 @@ export default function ParticipantsTab(props) {
   const {
     tourName, 
     tourDate, 
-    tourGameName, 
+    tourGameName,
+    tourCategory, 
     tourDescription, 
     tourParticipants, setTourParticipants,
     tourMatches, 
@@ -73,10 +74,10 @@ export default function ParticipantsTab(props) {
       props.setTabIndex(0);
       return displayError('Need a name for the tournament');
     }
-    // if (tourCategory === '') {
-    //   props.setTabIndex(0);
-    //   return displayError('Need a name for the tournament');
-    // }
+    if (tourCategory === '') {
+      props.setTabIndex(0);
+      return displayError('Need to choose a category');
+    }
 
     // Validation for any fields from Participants Tab
     if (tourParticipants.length < tourPlayerNum) {
@@ -86,7 +87,7 @@ export default function ParticipantsTab(props) {
 
     const requestBody = {
       "organizer_id": 1, //change to current user from AuthProvider
-      "category_id": 1,
+      "category_id": tourCategory,
       "name": tourName,
       "start_date": formatDateOfBirth(tourDate),
       "status": "created",
