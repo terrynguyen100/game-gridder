@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Button, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 
 import UserSearchField from './UserSearchField';
@@ -11,15 +12,17 @@ import PlayerCardList from "./smallComponents/PlayerCardList";
 export default function ParticipantsTab(props) {
   const navigate = useNavigate();
   const {
-    tourName, 
-    tourDate, 
+    tourName,
+    tourDate,
     tourGameName,
-    tourCategory, 
-    tourDescription, 
+    tourCategory,
+    tourDescription,
     tourParticipants, setTourParticipants,
-    tourMatches, 
+    tourMatches,
     tourPlayerNum, setTourPlayerNum,
   } = useContext(CreateTournamentContext);
+
+  const { userId } = useContext(AuthContext);
 
   const { displayError } = useContext(ErrorContext);
 
@@ -68,6 +71,12 @@ export default function ParticipantsTab(props) {
   }, [tourParticipants]);
 
   const handleButtonGenerate = () => {
+    // Validation for logged in user
+    if (userId === null) {
+      props.setTabIndex(0);
+      navigate(`/login`);
+      return displayError('Need to log in for tournament creation');
+    }
 
     // Validation for any fields from Tournament Tab
     if (tourName === '') {
@@ -85,8 +94,9 @@ export default function ParticipantsTab(props) {
       return displayError('Need more participants');
     }
 
+
     const requestBody = {
-      "organizer_id": 1, //change to current user from AuthProvider
+      "organizer_id": userId, //change to current user from AuthProvider
       "category_id": tourCategory,
       "name": tourName,
       "start_date": formatDateOfBirth(tourDate),
