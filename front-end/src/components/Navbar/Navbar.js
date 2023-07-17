@@ -63,7 +63,7 @@ function Navbar() {
     }
 
     if (setting === 'Dashboard') {
-      navigate(`/users/${userId}/dashboard`)
+      navigate(`/users/${userId}/dashboard`);
     }
 
     if (setting === 'Logout') {
@@ -84,18 +84,18 @@ function Navbar() {
           <EmojiEventsIcon color="secondary" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link to='/'>
             <Typography
-            variant="h1"
-            noWrap
-            color="secondary"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontSize: '2rem',
-              fontWeight: 700,
-              letterSpacing: '.2rem',
-              textDecoration: 'none',
-            }}>
-            GAMEGRIDDER
+              variant="h1"
+              noWrap
+              color="secondary"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontSize: '2rem',
+                fontWeight: 700,
+                letterSpacing: '.2rem',
+                textDecoration: 'none',
+              }}>
+              GAMEGRIDDER
             </Typography>
           </Link>
 
@@ -138,16 +138,16 @@ function Navbar() {
           <EmojiEventsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Link to='/'>
             <Typography
-            variant="h5"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'Bebas Neue',
-              fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'inherit',
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'Bebas Neue',
+                fontWeight: 700,
+                letterSpacing: '.2rem',
+                color: 'inherit',
               }}>
               GG
             </Typography>
@@ -181,7 +181,7 @@ function Navbar() {
                     <MenuItem key={option} onClick={handleCloseTournamentMenu}>
                       <Link to={`/tournaments/${option}`}>
                         <Typography textAlign="center">
-                            {option}
+                          {option}
                         </Typography>
                       </Link>
                     </MenuItem>
@@ -189,6 +189,14 @@ function Navbar() {
                 </Menu>
               </div>
             ))}
+            <div key='hallOfFame'>
+              <Link to='/rankings'>
+                <Button
+                  sx={{ my: 2, fontSize: '1.25rem', color: 'primary.contrastText', display: 'block' }}>
+                  Hall Of Fame
+                </Button>
+              </Link>
+            </div>
           </Box>
 
           {auth ?
