@@ -13,6 +13,7 @@
   .tournament-stats{
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .tournament-info{
@@ -86,11 +87,18 @@
 
 .split {display:block;float:left;display: -webkit-box;display: -moz-box;display: -ms-flexbox;display: -webkit-flex;display:flex;width: 100%;-webkit-flex-direction:row;-moz-flex-direction:row;flex-direction:row;}
 .round {display:block;float:left;display: -webkit-box;display: -moz-box;display: -ms-flexbox;display: -webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;width:100%;}
-// .split-one .round {margin: 0 2.5% 0 0;}
-// .split-two .round {margin: 0 0 0 2.5%;}
 
 .score {font-size: 11px;text-transform: uppercase;float: right;color: #2C7399;font-weight: bold;font-family: v.$secondary-font ;position: absolute;right: 5px;}
-.team {padding: 0 5px;margin: 3px 0;height: 25px; line-height: 25px;white-space: nowrap; overflow: hidden;position: relative;}
+.team {
+  padding: 0 5px;
+  margin: 3px 0;
+  height: 25px;
+  line-height: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
 .matchup {font-family: v.$secondary-font;}
 .round-details {font-family: v.$secondary-font; font-size: 20px; color: #FFFFFF; text-transform: uppercase;text-align: center; margin-bottom: 16px;}
 .current li {opacity: 1;}
