@@ -12,20 +12,20 @@ export default function UserSearchField(props) {
   const {usersIds, setUsersIds} = React.useContext(CreateTournamentContext);
 
   const fetchUsers = async () => {
-    // requires revision to get only the user names and not the complete users
-    const usersData = await axios.get("/users");
-    const userTags = usersData.data.reduce((acc, obj) => {
-      if (obj.hasOwnProperty('user_name')) {
-        const { id, user_name } = obj;
-        // fill the userNames array with the user tags
-        acc.push('@' + user_name);
-        // fill the usersIds object with the user ids key value pairs
-        setUsersIds(prevState => ({ ...prevState, [user_name]: id }));
-      }
-      return acc;
-    }, []);
-    setUserTags(userTags);
-    
+    try {
+      const usersData = await axios.get("/users");
+      const userTags = usersData.data.reduce((acc, obj) => {
+        if (obj.hasOwnProperty("user_name")) {
+          const { id, user_name } = obj;
+          acc.push("@" + user_name);
+          setUsersIds((prevState) => ({ ...prevState, [user_name]: id }));
+        }
+        return acc;
+      }, []);
+      setUserTags(userTags);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
   };
 
   React.useEffect(() => {

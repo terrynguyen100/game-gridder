@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, cloneElement } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -30,7 +30,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
+  () => ({
     width: 65,
     flexShrink: 0,
     whiteSpace: 'nowrap',
@@ -39,9 +39,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const [tabIndex, setTabIndex] = useState(null);
+  const [open, setOpen] = useState(true);
+  const [tabIndex, setTabIndex] = useState(0);
   const [iconColors, setIconColors] = useState(Array(5).fill('white'));
   const { tourPlayerNum, setTourPlayerNum, } = useContext(CreateTournamentContext);
 
@@ -49,8 +48,8 @@ export default function MiniDrawer() {
     { icon: <EmojiEventsIcon fontSize='large' />, index: 0 },
     { icon: <GroupsIcon fontSize='large' />, index: 1 },
     { icon: <ColorLensIcon fontSize='large' />, index: 2 },
-    { icon: <SettingsIcon fontSize='large' />, index: 3 },
-    { icon: <PrintIcon fontSize='large' />, index: 4 },
+    // { icon: <SettingsIcon fontSize='large' />, index: 3 },
+    // { icon: <PrintIcon fontSize='large' />, index: 4 },
   ];
 
   const listItems = icons.map(({ icon, index }) => (

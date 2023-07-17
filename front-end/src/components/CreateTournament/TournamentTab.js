@@ -18,16 +18,22 @@ const TournamentTab = (props) => {
   } = useContext(CreateTournamentContext);
 
   const spacingItems = 1;
+  const fetchCategories = async () => {
+    try {
+      const categoriesData = await axios.get("/categories");
+      setCategories(categoriesData.data);
+    } catch (error) {
+      // Handle the error
+      console.error("Error fetching categories:", error);
+      // Display an error message to the user or perform any other error handling logic
+    }
+  };
 
   useEffect(() => {
     fetchCategories();
     setTourDate(dayjs());
   }, []);
 
-  const fetchCategories = async () => {
-    const categoriesData = await axios.get("/categories")
-    setCategories(categoriesData.data)
-  }
 
   return (
     <Box sx={{
@@ -62,8 +68,8 @@ const TournamentTab = (props) => {
             <LockIcon />
           </MenuItem>
           <MenuItem disabled value={'roundRobin'} sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography>Round Robin </Typography>
-            <LockIcon />
+          <Typography>Round Robin </Typography>
+          <LockIcon />
           </MenuItem>
 
         </Select>
