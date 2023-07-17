@@ -4,9 +4,8 @@ export const AuthContext = createContext();
 
 export default function AuthProvider(props) {
   const [auth, setAuth] = useState(false);
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(null);
+  const [avatarURL, setAvatarURL] = useState(null);
 
   const login = (userId) => {
     setUserId(userId);
@@ -18,7 +17,7 @@ export default function AuthProvider(props) {
     setAuth(false);
   }
 
-  const value = { auth, userId, login, logout };
+  const value = { auth, userId, avatarURL, setAvatarURL, login, logout };
 
   return (
     <AuthContext.Provider value={value}>

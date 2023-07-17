@@ -21,13 +21,12 @@ const tournamentOptions = ['Create', 'View'];
 const settings = ['Profile', 'Dashboard', 'Logout'];
 
 function Navbar() {
-  const { auth, logout, userId } = useContext(AuthContext);
+  const { auth, logout, userId, avatarURL, setAvatarURL } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElTournament, setAnchorElTournament] = useState(null);
-  const [avatarURL, setAvatarURL] = useState(null);
 
   useEffect(() => {
     if (userId) {
