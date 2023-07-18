@@ -80,7 +80,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                    Number(tournament.matches[i].players[0].score) > Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                       
@@ -99,7 +99,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                               <Card className="team team-bottom" style={{
                                 display: 'flex', alignItems: 'center',
                                 backgroundColor:
-                                  tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                Number(tournament.matches[i].players[0].score) < Number(tournament.matches[i].players[1].score)
                                     ? '#fcca46'
                                     : '',
                               }}>
@@ -172,7 +172,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) > Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
@@ -190,7 +190,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) < Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
@@ -269,7 +269,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) > Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
@@ -287,7 +287,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) < Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
@@ -383,7 +383,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) > Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
@@ -401,7 +401,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
-                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                  Number(tournament.matches[i].players[0].score) < Number(tournament.matches[i].players[1].score)
                                       ? '#fcca46'
                                       : '',
                                 }}>
