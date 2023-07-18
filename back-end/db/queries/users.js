@@ -43,7 +43,7 @@ const getUserByUserName = (userName) => {
 //Get top 10 users ranked by wins
 const getTop10Users = () => {
   const query = `
-    SELECT RANK() OVER(ORDER BY wins DESC), user_name, wins
+    SELECT RANK() OVER(ORDER BY wins DESC), user_name, wins, profile_img
     FROM users 
     LIMIT 10;`
   
