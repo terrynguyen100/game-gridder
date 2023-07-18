@@ -43,6 +43,7 @@ const TournamentTab = (props) => {
       width: '230px',
     }}
     >
+      <Typography variant="h6" sx={{ marginBottom: 2 , textAlign: "center"}}  color="primary">Tournament Info</Typography>
       <TextField
         label="Tournament Name"
         value={tourName}
@@ -100,6 +101,7 @@ const TournamentTab = (props) => {
 
       <DatePicker
         sx={{ width: '100%', marginBottom: spacingItems }}
+        label="Start Date"
         value={tourDate}
         defaultValue={dayjs()}
         onChange={(newValue) => setTourDate(newValue)}
