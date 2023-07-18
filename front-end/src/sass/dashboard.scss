@@ -13,15 +13,12 @@
     }
 }
 
-.card-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .share-icon {
   margin: 0.25rem 0.5rem;
 }
 
-.share-icons {
+.tournament {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
