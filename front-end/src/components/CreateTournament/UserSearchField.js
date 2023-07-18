@@ -75,7 +75,7 @@ export default function UserSearchField(props) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Type @ for user"
+          label="Add Player"
           InputProps={{
             ...params.InputProps,
             type: 'search',
