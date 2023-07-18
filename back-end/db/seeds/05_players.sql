@@ -50,7 +50,7 @@ INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 21, 'Matt
 INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 21, 'DreamTeam85', '2');
 
 INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 22, 'LeroyJenkins', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 22, 'MatthewMartinez', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 22, 'MatthewMartinez', '2');
 
 -- Tournament 3
 
