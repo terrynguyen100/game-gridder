@@ -5,7 +5,7 @@ import straight_line from './svg_files/straight_line';
 import BracketGridStyle from './helpers/bracketGridStyle';
 import { useState, useEffect } from 'react';
 import { generateTemplateAreas } from './helpers/helpers';
-import { Avatar, TextField } from '@mui/material';
+import { Avatar, Card, TextField } from '@mui/material';
 
 const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
 
@@ -76,13 +76,15 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                           {tournament ?
                             // For viewing tournament
                             <div key={i}>
-                              <li className="team team-top" style={{
-                                display: 'flex', alignItems: 'center',
-                                backgroundColor:
-                                  tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
-                                    ? '#fcca46'
-                                    : '',
-                              }}>
+                              <Card className="team team-top"
+                                style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                      
+                                }}>
                                 <Avatar
                                   src={tournament?.matches[i]?.players[0]?.profile_img}
                                   sx={{
@@ -93,8 +95,8 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <span className="score">
                                   {tournament?.matches[i]?.players[0]?.score}
                                 </span>
-                              </li>
-                              <li className="team team-bottom" style={{
+                              </Card>
+                              <Card className="team team-bottom" style={{
                                 display: 'flex', alignItems: 'center',
                                 backgroundColor:
                                   tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
@@ -111,12 +113,12 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 <span className="score">
                                   {tournament?.matches[i]?.players[1]?.score}
                                 </span>
-                              </li>
+                              </Card>
                             </div>
                             :
                             // For creating tournament
                             <div key={i}>
-                              <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                              <Card className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Avatar
                                   src={matchesObj[i]?.players[0]?.profile_img}
                                   sx={{
@@ -124,14 +126,14 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   }}
                                 />
                                 {matchesObj[i]?.players[0]?.player_name}
-                              </li>
-                              <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                              </Card>
+                              <Card className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
                                 <Avatar
                                   src={matchesObj[i]?.players[1]?.profile_img}
                                   sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                 />
                                 {matchesObj[i]?.players[1]?.player_name}
-                              </li>
+                              </Card>
                             </div>
                           }
 
@@ -167,7 +169,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{
+                                <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
@@ -184,8 +186,8 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   <span className="score">
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
-                                </li>
-                                <li className="team team-bottom" style={{
+                                </Card>
+                                <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
@@ -201,25 +203,25 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   {tournament?.matches[i]?.players[1]?.player_name}
                                   <span className="score">
                                     {tournament?.matches[i]?.players[1]?.score}
-                                  </span></li>
+                                  </span></Card>
                               </div>
                               :
                               // For creating tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <Card className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[0]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[0]?.player_name}
-                                </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                </Card>
+                                <Card className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[1]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[1]?.player_name}
-                                </li>
+                                </Card>
                               </div>
                             }
                           </ul>
@@ -264,7 +266,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{
+                                <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
@@ -281,8 +283,8 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   <span className="score">
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
-                                </li>
-                                <li className="team team-bottom" style={{
+                                </Card>
+                                <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
@@ -298,25 +300,25 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   {tournament?.matches[i]?.players[1]?.player_name}
                                   <span className="score">
                                     {tournament?.matches[i]?.players[1]?.score}
-                                  </span></li>
+                                  </span></Card>
                               </div>
                               :
                               // For creating tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <Card className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[0]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[0]?.player_name}
-                                </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                </Card>
+                                <Card className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[1]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[1]?.player_name}
-                                </li>
+                                </Card>
                               </div>
                             }
                           </ul>
@@ -378,7 +380,7 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{
+                                <Card className="team team-top" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
@@ -395,8 +397,8 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   <span className="score">
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
-                                </li>
-                                <li className="team team-bottom" style={{
+                                </Card>
+                                <Card className="team team-bottom" style={{
                                   display: 'flex', alignItems: 'center',
                                   backgroundColor:
                                     tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
@@ -412,25 +414,25 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   {tournament?.matches[i]?.players[1]?.player_name}
                                   <span className="score">
                                     {tournament?.matches[i]?.players[1]?.score}
-                                  </span></li>
+                                  </span></Card>
                               </div>
                               :
                               // For creating tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <Card className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[0]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[0]?.player_name}
-                                </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                </Card>
+                                <Card className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
                                   <Avatar
                                     src={matchesObj[i]?.players[1]?.profile_img}
                                     sx={{ height: '15px', width: '15px', marginRight: '5px', border: '0.5px solid black' }}
                                   />
                                   {matchesObj[i]?.players[1]?.player_name}
-                                </li>
+                                </Card>
                               </div>
                             }
                           </ul>
