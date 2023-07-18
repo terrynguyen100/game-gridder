@@ -1,0 +1,7 @@
+@use './utilities/variables' as v;
+
+.header {
+  font-family: v.$main-font;
+  color: v.$third-color;
+  font-size: 1.5rem;
+}

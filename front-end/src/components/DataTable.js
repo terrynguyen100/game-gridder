@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
+import "../sass/datatable.scss";
 
 export default function DataTable() {
   const [data, setData] = useState([]);
 
   const columns = [
-    { field: 'rank', headerName: 'Rank', type: 'number', width: 70, headerAlign: 'center' },
-    { field: 'user_name', headerName: 'Username', width: 200, headerAlign: 'center' },
-    { field: 'wins', headerName: 'Total wins', type: 'number', width: 130, headerAlign: 'right' },
+    { field: 'rank', headerName: 'Rank', type: 'number', flex: 1, headerAlign: 'center', align: 'center', headerClassName: 'header' },
+    { field: 'user_name', headerName: 'Username', flex: 3, headerAlign: 'center', align: 'center', headerClassName: 'header' },
+    { field: 'wins', headerName: 'Total wins', type: 'number', flex: 1, headerAlign: 'center', align: 'center', headerClassName: 'header' },
   ];
   
   const rows = data;
@@ -33,7 +34,7 @@ export default function DataTable() {
           },
         }}
         pageSizeOptions={[5, 10]}
-        sx={{border: 2, borderColor: 'white', color: 'primary.contrastText'}}
+        sx={{border: 2, borderColor: 'white'}}
       />
     </div>
   );

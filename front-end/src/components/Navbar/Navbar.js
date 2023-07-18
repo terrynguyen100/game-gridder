@@ -180,7 +180,7 @@ function Navbar() {
                   {tournamentOptions.map((option) => (
                     <MenuItem key={option} onClick={handleCloseTournamentMenu}>
                       <Link to={`/tournaments/${option}`}>
-                        <Typography textAlign="center">
+                        <Typography textAlign="center" color="text.primary">
                           {option}
                         </Typography>
                       </Link>

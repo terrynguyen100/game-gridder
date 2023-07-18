@@ -32,6 +32,13 @@ function App() {
       secondary: {
         main: '#fcca46',
       },
+      text: {
+        primary: '#fff'
+      }, 
+      background: {
+        paper: '#121212',
+        default: '#121212'
+      }
     },
     typography: {
       fontFamily: 'Titillium Web',
@@ -57,6 +64,11 @@ function App() {
         fontFamily: 'Titillium Web',
       },
     },
+    components: {
+      MuiTableFooter: {
+        color: 'white',
+      }
+    }
   });
 
   return (
