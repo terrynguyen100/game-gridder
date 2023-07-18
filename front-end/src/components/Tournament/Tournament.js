@@ -10,10 +10,12 @@ import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
 import Bracket from './Bracket';
 import EditBracket from './EditBracket';
+import { Box } from "@mui/material";
+import SocialsBox from './SocialsBox';
+import ShareButtonsTournament from '../Tournaments/ShareButtonsTournament';
 import { AuthContext } from '../../providers/AuthProvider';
 import { AddToCalendarButton } from 'add-to-calendar-button-react';
 import "./../../sass/tournament.scss"
-
 
 const Tournament = () => {
   const [tournament, setTournament] = useState(null);
@@ -60,6 +62,8 @@ const Tournament = () => {
     setEditMode(prev => !prev)
   }
 
+  console.log(tournament)
+
   if (tournament !== null) {
   return (
     <div key={tournament.id}>
@@ -79,7 +83,7 @@ const Tournament = () => {
               <VideogameAssetIcon sx={{mx: 1.5}}/>
               <span>{tournament.game_name}</span>
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
+            <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF", marginRight:"1rem"}}>
               <CalendarMonthIcon sx={{mx: 1.5}}/> 
               <span>{tournamentDate}</span>
             </Typography>
@@ -93,8 +97,11 @@ const Tournament = () => {
               timeZone="America/Los_Angeles"
               buttonStyle="round"
               styleLight="--btn-background: #BB0C05; --btn-text: #fff;"
-              size="4"              
+              size="4"          
             ></AddToCalendarButton>
+            <Box className="filter-box" sx={{ display: { xs: 'none', md: 'flex' }, padding: "0", margin: "0", }}>
+              <SocialsBox tournament={tournament}/>
+            </Box>
           </div>
           <div>
             {organizerLoggedIn && 
