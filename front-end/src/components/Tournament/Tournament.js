@@ -62,8 +62,6 @@ const Tournament = () => {
     setEditMode(prev => !prev)
   }
 
-  console.log(tournament)
-
   if (tournament !== null) {
   return (
     <div key={tournament.id}>
