@@ -46,11 +46,11 @@ INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 19, 'Joh
 
 INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 20, 'LeroyJenkins', '3');
 INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 20, 'Mario', '2');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 21, 'Superdude5', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 21, 'JohnnyBBad', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 21, 'MatthewMartinez', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 21, 'DreamTeam85', '2');
 
 INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 22, 'LeroyJenkins', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 22, 'Superdude5', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 22, 'MatthewMartinez', '2');
 
 -- Tournament 3
 
