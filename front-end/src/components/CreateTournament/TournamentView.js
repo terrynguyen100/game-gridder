@@ -74,7 +74,6 @@ const TournamentView = () => {
       <Box sx={{
         minWidth: '100%',
         height: '80vh',
-        border: '1px solid black',
         overflow: 'auto',
       }}>
 
