@@ -21,9 +21,6 @@ const HallOfFame = () => {
       display='flex'
       flexDirection='column'
       alignItems='center'
-      sx={{
-        bgcolor: 'black',
-      }}
     >
       <Container
         sx={{
