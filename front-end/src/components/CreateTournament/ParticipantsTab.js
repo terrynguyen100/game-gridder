@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Button, Select, MenuItem, InputLabel, FormControl, Box } from "@mui/material";
+import { Button, Select, MenuItem, InputLabel, FormControl, Box, Typography } from "@mui/material";
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
@@ -108,7 +108,6 @@ export default function ParticipantsTab(props) {
     };
     axios.post('/tournaments/create', requestBody)
       .then(response => {
-        console.log(response.data);
         navigate(`/tournaments/${response.data.id}`);
       })
       .catch(error => {
@@ -154,10 +153,10 @@ export default function ParticipantsTab(props) {
       marginLeft: 2,
       marginRight: 2,
       marginTop: 12,
-      textAlign: 'center',
       width: '230px',
     }}
     >
+      <Typography variant="h6" sx={{ marginBottom: 2, textAlign: "center" }} color="primary">Players Info</Typography>
       <FormControl fullWidth sx={{ marginBottom: spacingItems }}>
         <InputLabel id="type-select-label">Number of Players</InputLabel>
         <Select
@@ -166,6 +165,7 @@ export default function ParticipantsTab(props) {
           value={tourPlayerNum}
           label="Number of Players"
           onChange={(event) => { onChangePlayerNum(event.target.value) }}
+          sx={{textAlign: "center" }}
         >
           <MenuItem disabled value='0'></MenuItem>
           {numberOfParticipantsOptions.map((option, index) => {
@@ -177,6 +177,7 @@ export default function ParticipantsTab(props) {
       <UserSearchField
         addTourParticipant={addTourParticipant}
       ></UserSearchField>
+      <Typography variant="caption" sx={{ }}>Type @ to add a user.</Typography>
 
       <PlayerCardList
         tourParticipants={tourParticipants}
