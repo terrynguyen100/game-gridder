@@ -75,7 +75,7 @@ const Tournament = () => {
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
               <EmojiEventsIcon sx={{ mx: 1.5 }} />
-              <span>{numOfPlayers}</span>
+              <span>Single Elimination</span>
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
               <VideogameAssetIcon sx={{mx: 1.5}}/>
