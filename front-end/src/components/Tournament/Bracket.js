@@ -76,7 +76,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                           {tournament ?
                             // For viewing tournament
                             <div key={i}>
-                              <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                              <li className="team team-top" style={{
+                                display: 'flex', alignItems: 'center',
+                                backgroundColor:
+                                  tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                    ? '#fcca46'
+                                    : '',
+                              }}>
                                 <Avatar
                                   src={tournament?.matches[i]?.players[0]?.profile_img}
                                   sx={{
@@ -88,7 +94,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                   {tournament?.matches[i]?.players[0]?.score}
                                 </span>
                               </li>
-                              <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                              <li className="team team-bottom" style={{
+                                display: 'flex', alignItems: 'center',
+                                backgroundColor:
+                                  tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                    ? '#fcca46'
+                                    : '',
+                              }}>
                                 <Avatar
                                   src={tournament?.matches[i]?.players[1]?.profile_img}
                                   sx={{
@@ -98,7 +110,8 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                 {tournament?.matches[i]?.players[1]?.player_name}
                                 <span className="score">
                                   {tournament?.matches[i]?.players[1]?.score}
-                                </span></li>
+                                </span>
+                              </li>
                             </div>
                             :
                             // For creating tournament
@@ -154,7 +167,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-top" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[0]?.profile_img}
                                     sx={{
@@ -166,7 +185,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
                                 </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-bottom" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[1]?.profile_img}
                                     sx={{
@@ -239,7 +264,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-top" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[0]?.profile_img}
                                     sx={{
@@ -251,7 +282,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
                                 </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-bottom" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[1]?.profile_img}
                                     sx={{
@@ -341,7 +378,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                             {tournament ?
                               // For viewing tournament
                               <div key={i}>
-                                <li className="team team-top" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-top" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score > tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[0]?.profile_img}
                                     sx={{
@@ -353,7 +396,13 @@ const Bracket = ({ numOfPlayers, tournament, matchesObj }) => {
                                     {tournament?.matches[i]?.players[0]?.score}
                                   </span>
                                 </li>
-                                <li className="team team-bottom" style={{ display: 'flex', alignItems: 'center' }}>
+                                <li className="team team-bottom" style={{
+                                  display: 'flex', alignItems: 'center',
+                                  backgroundColor:
+                                    tournament.matches[i].players[0].score < tournament.matches[i].players[1].score
+                                      ? '#fcca46'
+                                      : '',
+                                }}>
                                   <Avatar
                                     src={tournament?.matches[i]?.players[1]?.profile_img}
                                     sx={{
