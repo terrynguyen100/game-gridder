@@ -40,6 +40,18 @@ const getUserByUserName = (userName) => {
     .catch(err => console.log(err.message));
 };
 
+//Get top 10 users ranked by wins
+const getTop10Users = () => {
+  const query = `
+    SELECT RANK() OVER(ORDER BY wins DESC), user_name, wins
+    FROM users 
+    LIMIT 10;`
+  
+  return db.query(query)
+    .then(data => data.rows)
+    .catch(err => console.log(err.message));
+}
+
 
 //---------------------------------------------INSERT QUERIES---------------------------------------
 // Add a new user.
@@ -85,6 +97,7 @@ module.exports = {
   getUserById,
   getUserByLogin,
   getUserByUserName,
+  getTop10Users,
   addUser,
   updateUserImage,
   deleteUser

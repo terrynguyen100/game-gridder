@@ -9,13 +9,16 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
 import Bracket from './Bracket';
-import { AuthContext } from '../../providers/AuthProvider';
-import "./../../sass/tournament.scss"
 import EditBracket from './EditBracket';
+import { AuthContext } from '../../providers/AuthProvider';
+import { AddToCalendarButton } from 'add-to-calendar-button-react';
+import "./../../sass/tournament.scss"
+
 
 const Tournament = () => {
   const [tournament, setTournament] = useState(null);
   const [tournamentDate, setTournamentDate] = useState("");
+  const [tournamentTime, setTournamentTime] = useState("")
   const [numOfPlayers, setNumOfPlayers] = useState(0);
   const [organizerLoggedIn, setOrganizerLoggedIn] = useState(false)
   const [editMode, setEditMode] = useState(false)
@@ -42,7 +45,8 @@ const Tournament = () => {
         }, [])
         setNumOfPlayers(getPlayerNums.length);
         
-        setTournamentDate(`${new Date(tempData.data.start_date).toString().slice(0, 16)} at ${new Date(tempData.data.start_date).toString().slice(16, 28)}`)
+        setTournamentDate(`${new Date(tempData.data.start_date).toString().slice(0, 16)}`)
+        setTournamentTime(`${new Date(tempData.data.start_date).toString().slice(16, 28)}`)
 
         if(userId) checkIfUserIsOrganizer()
   }
@@ -76,9 +80,21 @@ const Tournament = () => {
               <span>{tournament.game_name}</span>
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{display: "flex", alignItems: "center", color: "#FFF"}}>
-            <CalendarMonthIcon sx={{mx: 1.5}}/> 
+              <CalendarMonthIcon sx={{mx: 1.5}}/> 
               <span>{tournamentDate}</span>
             </Typography>
+            <AddToCalendarButton
+              name={tournament.name}
+              label=""
+              description={tournament.description}
+              options={['Apple','Google']}
+              hideTextLabelButton
+              startDate={tournament.start_date.slice(0, 10)}
+              timeZone="America/Los_Angeles"
+              buttonStyle="round"
+              styleLight="--btn-background: #BB0C05; --btn-text: #fff;"
+              size="4"              
+            ></AddToCalendarButton>
           </div>
           <div>
             {organizerLoggedIn && 

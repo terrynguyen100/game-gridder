@@ -17,6 +17,7 @@ import Tournament from './components/Tournament/Tournament';
 import { ErrorContext } from './providers/ErrorProvider';
 import { AuthContext } from './providers/AuthProvider';
 import { ThemeProvider, createTheme } from '@mui/material';
+import HallOfFame from './components/HallOfFame';
 
 function App() {
   const { userId } = useContext(AuthContext);
@@ -31,6 +32,13 @@ function App() {
       secondary: {
         main: '#fcca46',
       },
+      text: {
+        primary: '#fff'
+      }, 
+      background: {
+        paper: '#121212',
+        default: '#121212'
+      }
     },
     typography: {
       fontFamily: 'Titillium Web',
@@ -56,6 +64,11 @@ function App() {
         fontFamily: 'Titillium Web',
       },
     },
+    components: {
+      MuiTableFooter: {
+        color: 'white',
+      }
+    }
   });
 
   return (
@@ -68,6 +81,7 @@ function App() {
               <Route path="/*" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/rankings" element={<HallOfFame />} />
               <Route path={`/users/${userId}/profile`} element={<UserProfile />} />
               <Route path={`/users/${userId}/dashboard`} element={<Dashboard />} />
               <Route path="/tournaments/Create" element={<CreateTournament />} />

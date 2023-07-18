@@ -10,6 +10,7 @@ const {
   addUser,
   updateUserImage,
   deleteUser,
+  getTop10Users,
 } = require('../db/queries/users.js');
 
 // ---- Routes -----
@@ -25,6 +26,18 @@ router.get('/', (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     });
 });
+
+// GET top 10 users ranked by most wins
+router.get('/top', (req, res) => {
+  getTop10Users()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(error => {
+      console.error('Error fetching user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+})
 
 // GET a user by their id
 router.get('/:id', (req, res) => {
