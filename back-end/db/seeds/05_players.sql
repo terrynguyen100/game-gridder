@@ -18,39 +18,39 @@ INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 7, 'Micha
 
 -- Tournament 2
 
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 8, 'John Doe', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (2, 8, 'Jane Smith', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (3, 9, 'David Johnson', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (4, 9, 'Sarah Williams', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 10, 'Michael Brown', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (6, 10, 'Emily Davis', '0');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (7, 11, 'Daniel Wilson', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (8, 11, 'Olivia Anderson', '2');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 12, 'Matthew Martinez', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (10, 12, 'Sophia Thompson', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (11, 13, 'Benjamin Harris', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 13, 'Ava Clark', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 14, 'Jacob Young', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (14, 14, 'Mia Lee', '0');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 15, 'William Garcia', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (16, 15, 'AbigailMartin', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 8, 'LeroyJenkins', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (2, 8, 'Peaches', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (3, 9, 'MonkeyFuzz87', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (4, 9, 'BruceWayne', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 10, 'Mario', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (6, 10, 'Bows3r', '0');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (7, 11, 'JustAHarmlessPotato', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (8, 11, 'HeresWonderwall', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 12, 'MatthewMartinez', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (10, 12, 'DoraTheDestroya', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (11, 13, 'MomsSpaghetti', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 13, 'Superdude5', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 14, 'DreamTeam85', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (14, 14, 'UnfriendlyFire', '0');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 15, 'JohnnyBBad', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (16, 15, 'GMaGamer0', '2');
 
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 16, 'John Doe', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (4, 16, 'Sarah Williams', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 17, 'Michael Brown', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (7, 17, 'Daniel Wilson', '0');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 18, 'Matthew Martinez', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 18, 'Ava Clark', '1');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 19, 'Jacob Young', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 19, 'Daniel Wilson', '0');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 16, 'LeroyJenkins', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (4, 16, 'BruceWayne', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 17, 'Mario', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (7, 17, 'JustAHarmlessPotato', '0');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 18, 'MatthewMartinez', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 18, 'Superdude5', '1');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 19, 'DreamTeam85', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 19, 'JohnnyBBad', '0');
 
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 20, 'John Doe', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 20, 'Michael Brown', '2');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 21, 'Ava Clark', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (15, 21, 'William Garcia', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 20, 'LeroyJenkins', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (5, 20, 'Mario', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 21, 'MatthewMartinez', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (13, 21, 'DreamTeam85', '2');
 
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 22, 'John Doe', '3');
-INSERT INTO players (user_id, match_id, player_name, score) VALUES (12, 22, 'Ava Clark', '2');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (1, 22, 'LeroyJenkins', '3');
+INSERT INTO players (user_id, match_id, player_name, score) VALUES (9, 22, 'MatthewMartinez', '2');
 
 -- Tournament 3
 
