@@ -23,7 +23,7 @@ export default function DataTable() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '100%', backgroundColor: '#aaa', borderRadius: '10px' }}>
       <DataGrid
         rows={rows}
         getRowId={(row) => row.user_name}
@@ -34,7 +34,7 @@ export default function DataTable() {
           },
         }}
         pageSizeOptions={[5, 10]}
-        sx={{border: 2, borderColor: 'white'}}
+        sx={{border: 2, borderColor: 'primary.main', borderRadius: '10px'}}
       />
     </div>
   );
