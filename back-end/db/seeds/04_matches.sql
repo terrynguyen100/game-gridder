@@ -25,3 +25,79 @@ INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VAL
 INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (3, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
 INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (3, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
 INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (3, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (4, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (5, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '14:00:00', '2023-07-10', 'Stadium A', 'Note: Match postponed to later date');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '16:30:00', '2023-07-12', 'Stadium B', 'Note: No spectators allowed');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '10:00:00', '2023-07-15', 'Stadium C', 'Note: Match rescheduled due to weather conditions');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '19:45:00', '2023-07-18', 'Stadium D', 'Note: VIP guests in attendance');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '14:30:00', '2023-07-20', 'Stadium E', 'Note: Match to be broadcasted live');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '17:15:00', '2023-07-23', 'Stadium F', 'Note: Limited parking available');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (6, '20:00:00', '2023-07-25', 'Stadium G', 'Note: Match expected to be highly competitive');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (7, '14:30:00', '2023-07-20', 'Stadium E', 'Note: Match to be broadcasted live');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (7, '17:15:00', '2023-07-23', 'Stadium F', 'Note: Limited parking available');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (7, '20:00:00', '2023-07-25', 'Stadium G', 'Note: Match expected to be highly competitive');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '14:00:00', '2023-07-10', 'Stadium A', 'Note: Match postponed to later date');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '16:30:00', '2023-07-12', 'Stadium B', 'Note: No spectators allowed');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '10:00:00', '2023-07-15', 'Stadium C', 'Note: Match rescheduled due to weather conditions');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '19:45:00', '2023-07-18', 'Stadium D', 'Note: VIP guests in attendance');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '14:30:00', '2023-07-20', 'Stadium E', 'Note: Match to be broadcasted live');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '17:15:00', '2023-07-23', 'Stadium F', 'Note: Limited parking available');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (8, '20:00:00', '2023-07-25', 'Stadium G', 'Note: Match expected to be highly competitive');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '14:00:00', '2023-07-10', 'Stadium A', 'Note: Match postponed to later date');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '16:30:00', '2023-07-12', 'Stadium B', 'Note: No spectators allowed');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '10:00:00', '2023-07-15', 'Stadium C', 'Note: Match rescheduled due to weather conditions');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '19:45:00', '2023-07-18', 'Stadium D', 'Note: VIP guests in attendance');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '14:30:00', '2023-07-20', 'Stadium E', 'Note: Match to be broadcasted live');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '17:15:00', '2023-07-23', 'Stadium F', 'Note: Limited parking available');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (9, '20:00:00', '2023-07-25', 'Stadium G', 'Note: Match expected to be highly competitive');
+
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '11:30:00', '2023-07-28', 'Stadium H', 'Note: Match to be played on artificial turf');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '15:45:00', '2023-07-31', 'Stadium I', 'Note: Match in support of charity');
+INSERT INTO matches (tournament_id, start_time, start_date, location, notes) VALUES (10, '18:30:00', '2023-08-03', 'Stadium J', 'Note: Tickets sold out');
