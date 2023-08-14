@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 import "../sass/datatable.scss";
 
 export default function DataTable({data}) {
-  
-
   const columns = [
     { field: 'rank', headerName: 'Rank', type: 'number', flex: 1, headerAlign: 'center', align: 'center', headerClassName: 'header' },
     { field: 'user_name', headerName: 'Username', flex: 3, headerAlign: 'center', align: 'center', headerClassName: 'header' },
@@ -13,8 +9,6 @@ export default function DataTable({data}) {
   ];
   
   const rows = data;
-
-
 
   return (
     <div style={{ height: 400, backgroundColor: '#aaa', borderRadius: '10px', width: '70%' }}>

@@ -9,7 +9,6 @@ import UserProfile from './components/UserProfile';
 import Dashboard from './components/Dashboard';
 import CreateTournament from './components/CreateTournament/CreateTournament';
 import Error from './components/Error';
-
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Tournaments from './components/Tournaments/Tournaments';
