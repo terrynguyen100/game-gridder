@@ -5,12 +5,16 @@ import axios from 'axios';
 import { CreateTournamentContext } from "../../providers/CreateTournamentProvider";
 
 export default function UserSearchField(props) {
+  // State variables for user tags, options, selected value, and input value
   const [userTags, setUserTags] = React.useState([]);
-  const [options, setOptions] = React.useState([]);
+  const [options, setOptions] = React.useState([]); //Options are the user tags that are displayed in the dropdown
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
-  const {usersIds, setUsersIds} = React.useContext(CreateTournamentContext);
 
+  // Accessing the context from CreateTournamentProvider
+  const { usersIds, setUsersIds } = React.useContext(CreateTournamentContext);
+
+  // Fetches users from the server and sets user tags and context data
   const fetchUsers = async () => {
     try {
       const usersData = await axios.get("/users");
@@ -28,26 +32,26 @@ export default function UserSearchField(props) {
     }
   };
 
+  // Fetch users when the component mounts
   React.useEffect(() => {
     fetchUsers();
   }, []);
 
+  // Updates the options based on the input value
   React.useEffect(() => {
     if (inputValue?.startsWith('@')) {
       setOptions(userTags);
-    }
-    else {
+    } else {
       setOptions([]);
     }
   }, [inputValue]);
 
-
+  // Handles the 'Enter' key press to add participants
   const handleEnter = (paramsInput) => {
     const isExisted = userTags.includes(paramsInput);
     if (paramsInput.startsWith('@') && isExisted) {
       props.addTourParticipant(paramsInput);
-    } 
-    else if (!paramsInput.startsWith('@') && paramsInput === inputValue) {
+    } else if (!paramsInput.startsWith('@') && paramsInput === inputValue) {
       props.addTourParticipant(paramsInput);
     }
 
@@ -55,8 +59,9 @@ export default function UserSearchField(props) {
   };
 
   return (
+    // Autocomplete component for user search field
     <Autocomplete
-      sx={{ width: '100%'}}
+      sx={{ width: '100%' }}
       selectOnFocus={true}
       clearOnBlur={true}
       freeSolo={true}
@@ -72,6 +77,7 @@ export default function UserSearchField(props) {
         setInputValue(newValue);
       }}
 
+      // Renders the input field with specific properties
       renderInput={(params) => (
         <TextField
           {...params}
@@ -84,11 +90,9 @@ export default function UserSearchField(props) {
             if (event.key === 'Enter') {
               handleEnter(params.inputProps.value);
             }
-          }
-          }
+          }}
         />
       )}
     />
   );
 }
-
