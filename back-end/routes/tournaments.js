@@ -7,12 +7,9 @@ const { getTournaments,
   getTournamentById,
   getTournamentsByCategory,
   getTournamentsByOrganizerId,
-  getTournamentsByName,
-  getTournamentsByNameOrCategory,
   addTournament,
   updateTournament,
   deleteTournament,
-  getCompleteTournamentById,
 } = require('../db/queries/tournaments.js');
 
 const { getMatchesByTournamentId,
